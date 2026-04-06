@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/api/account/(.*)", "destination": "/api/account/$1" },
+    { "source": "/api/summoner/(.*)", "destination": "/api/summoner/$1" },
+    { "source": "/api/ranked/(.*)", "destination": "/api/ranked/$1" },
+    { "source": "/api/mastery/(.*)", "destination": "/api/mastery/$1" },
+    { "source": "/api/ai", "destination": "/api/ai" }
+  ]
+}
