@@ -44,6 +44,19 @@ body{background:var(--void);color:var(--text);font-family:'Crimson Pro',serif;mi
 .sword-deco{position:absolute;opacity:0.03;animation:swordFloat 15s ease-in-out infinite alternate}
 @keyframes swordFloat{0%{transform:translateY(0) rotate(var(--rot))}100%{transform:translateY(20px) rotate(calc(var(--rot) + 5deg))}}
 
+/* ENERGY LINES */
+.energy-lines{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.e-line{position:absolute;width:1px;background:linear-gradient(180deg,transparent,var(--line-color),transparent);opacity:0;animation:lineFloat var(--dur) ease-in-out infinite}
+@keyframes lineFloat{0%{opacity:0;transform:translateY(100vh)}20%{opacity:var(--line-op)}80%{opacity:var(--line-op)}100%{opacity:0;transform:translateY(-100vh)}}
+
+/* FLOATING FRAGMENTS */
+.fragments{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.frag{position:absolute;border:1px solid;opacity:0;animation:fragDrift var(--fdur) ease-in-out infinite}
+.frag.diamond{width:10px;height:10px;transform:rotate(45deg)}
+.frag.tri{width:0;height:0;border:6px solid transparent;border-bottom-color:var(--frag-color);background:none}
+.frag.line{width:30px;height:1px;border:none;background:var(--frag-color)}
+@keyframes fragDrift{0%{opacity:0;transform:translate(0,0) rotate(var(--frot,45deg))}15%{opacity:var(--fop)}85%{opacity:var(--fop)}100%{opacity:0;transform:translate(var(--fdx,30px),var(--fdy,-60px)) rotate(calc(var(--frot,45deg) + 90deg))}}
+
 /* SCROLL REVEAL */
 .reveal{opacity:0;transform:translateY(40px);transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),transform 0.9s cubic-bezier(0.16,1,0.3,1)}
 .reveal.from-left{transform:translateX(-60px)}
@@ -181,13 +194,9 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem
 .features-desc{color:var(--muted);font-style:italic;line-height:1.8;font-size:0.92rem}
 
 .features-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
-.feat-card{background:linear-gradient(160deg,rgba(22,14,42,0.6),rgba(10,5,20,0.85));border:1px solid transparent;border-radius:8px;padding:1.6rem;transition:all 0.4s;position:relative;overflow:hidden;background-clip:padding-box}
+.feat-card{background:linear-gradient(160deg,rgba(22,14,42,0.6),rgba(10,5,20,0.85));border:1px solid var(--border);border-radius:8px;padding:1.6rem;transition:all 0.4s;position:relative;overflow:hidden}
 .feat-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,transparent,var(--accent-color,var(--violet)),transparent);opacity:0.5}
-.feat-card::after{content:'';position:absolute;inset:-1px;border-radius:9px;background:linear-gradient(var(--glow-angle,135deg),transparent 30%,var(--accent-color,var(--violet)) 50%,transparent 70%);opacity:0.25;z-index:-1;animation:glowRotate 4s linear infinite;transition:opacity 0.4s}
-@keyframes glowRotate{0%{--glow-angle:0deg}100%{--glow-angle:360deg}}
-@property --glow-angle{syntax:"<angle>";initial-value:0deg;inherits:false}
-.feat-card:hover{transform:translateY(-6px);box-shadow:0 15px 40px rgba(124,58,237,0.15)}
-.feat-card:hover::after{opacity:0.5}
+.feat-card:hover{border-color:var(--borderv);transform:translateY(-6px);box-shadow:0 15px 40px rgba(124,58,237,0.1)}
 .feat-card:nth-child(even){transform:translateY(40px)}
 .feat-card:nth-child(even).visible{transform:translateY(40px)}
 .feat-card:nth-child(even):hover{transform:translateY(34px)}
@@ -261,6 +270,28 @@ footer p{font-style:italic;opacity:0.4;color:var(--muted);font-size:0.72rem;line
   <div class="rune-ring rr1"></div><div class="rune-ring rr2"></div><div class="rune-ring rr3"></div><div class="rune-ring rr4"></div>
   <svg class="sword-deco" style="--rot:35deg;width:250px;height:250px;top:8%;right:3%" viewBox="0 0 100 300"><path d="M50 8 L57 140 L50 292 L43 140 Z" fill="rgba(201,168,76,0.7)" stroke="rgba(201,168,76,0.15)" stroke-width="0.5"/><rect x="32" y="133" width="36" height="7" rx="1" fill="rgba(168,85,247,0.6)"/></svg>
   <svg class="sword-deco" style="--rot:-20deg;width:180px;height:180px;bottom:15%;left:2%" viewBox="0 0 100 300"><path d="M50 8 L57 140 L50 292 L43 140 Z" fill="rgba(168,85,247,0.6)" stroke="rgba(168,85,247,0.15)" stroke-width="0.5"/><rect x="32" y="133" width="36" height="7" rx="1" fill="rgba(201,168,76,0.6)"/></svg>
+</div>
+
+<!-- ENERGY LINES -->
+<div class="energy-lines">
+  <div class="e-line" style="--line-color:rgba(168,85,247,0.12);--line-op:0.12;--dur:12s;left:8%;height:40%;animation-delay:0s"></div>
+  <div class="e-line" style="--line-color:rgba(201,168,76,0.08);--line-op:0.08;--dur:16s;left:25%;height:55%;animation-delay:-4s"></div>
+  <div class="e-line" style="--line-color:rgba(168,85,247,0.1);--line-op:0.1;--dur:14s;left:52%;height:35%;animation-delay:-7s"></div>
+  <div class="e-line" style="--line-color:rgba(201,168,76,0.06);--line-op:0.06;--dur:18s;left:73%;height:50%;animation-delay:-2s"></div>
+  <div class="e-line" style="--line-color:rgba(168,85,247,0.09);--line-op:0.09;--dur:13s;left:91%;height:45%;animation-delay:-9s"></div>
+  <div class="e-line" style="--line-color:rgba(201,168,76,0.07);--line-op:0.07;--dur:20s;left:38%;height:60%;animation-delay:-12s"></div>
+</div>
+
+<!-- FLOATING FRAGMENTS -->
+<div class="fragments">
+  <div class="frag diamond" style="--frag-color:rgba(201,168,76,0.15);--fop:0.15;--fdur:18s;--fdx:40px;--fdy:-80px;--frot:45deg;top:15%;left:12%;animation-delay:0s"></div>
+  <div class="frag diamond" style="--frag-color:rgba(168,85,247,0.12);--fop:0.12;--fdur:22s;--fdx:-30px;--fdy:-60px;--frot:45deg;top:45%;right:8%;animation-delay:-5s"></div>
+  <div class="frag line" style="--frag-color:rgba(201,168,76,0.1);--fop:0.1;--fdur:15s;--fdx:50px;--fdy:-40px;--frot:20deg;top:30%;left:5%;animation-delay:-3s"></div>
+  <div class="frag line" style="--frag-color:rgba(168,85,247,0.08);--fop:0.08;--fdur:19s;--fdx:-40px;--fdy:-70px;--frot:-15deg;top:60%;right:15%;animation-delay:-8s"></div>
+  <div class="frag tri" style="--frag-color:rgba(168,85,247,0.1);--fop:0.1;--fdur:20s;--fdx:25px;--fdy:-50px;--frot:0deg;top:75%;left:20%;animation-delay:-11s"></div>
+  <div class="frag diamond" style="--frag-color:rgba(201,168,76,0.1);--fop:0.1;--fdur:25s;--fdx:-20px;--fdy:-90px;--frot:45deg;top:85%;left:60%;animation-delay:-6s"></div>
+  <div class="frag line" style="--frag-color:rgba(201,168,76,0.07);--fop:0.07;--fdur:17s;--fdx:35px;--fdy:-55px;--frot:30deg;top:10%;right:25%;animation-delay:-14s"></div>
+  <div class="frag tri" style="--frag-color:rgba(201,168,76,0.09);--fop:0.09;--fdur:23s;--fdx:-35px;--fdy:-65px;--frot:0deg;top:50%;left:45%;animation-delay:-2s"></div>
 </div>
 
 <!-- NAV -->
