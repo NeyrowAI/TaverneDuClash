@@ -8,8 +8,9 @@ export default async function handler(req, res) {
   const apiKey = process.env.RIOT_API_KEY;
   if (!apiKey) return res.status(500).json({ error: 'RIOT_API_KEY not configured' });
 
-  const parts = req.query.path || [];
-  // parts example: ['account', 'by-riot-id', 'Theelk', 'EUW']
+  // Parse the path from the URL: /api/riot?path=account/by-riot-id/Name/Tag
+  const rawPath = req.query.path || '';
+  const parts = rawPath.split('/').filter(Boolean);
   const type = parts[0];
   let riotUrl = '';
 
@@ -24,7 +25,7 @@ export default async function handler(req, res) {
   } else if (type === 'mastery' && parts[1] === 'by-puuid' && parts[2]) {
     riotUrl = `https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/${parts[2]}/top?count=5`;
   } else {
-    return res.status(404).json({ error: 'Unknown route', path: parts });
+    return res.status(404).json({ error: 'Unknown route', path: parts, rawPath });
   }
 
   try {
