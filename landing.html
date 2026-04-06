@@ -109,7 +109,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem
 
 /* HERO RIGHT — PREVIEW CAROUSEL */
 .hero-right{position:relative;display:flex;justify-content:center}
-.preview-card{width:100%;max-width:900px;aspect-ratio:16/10;border-radius:10px;overflow:hidden;position:relative;border:1px solid rgba(201,168,76,0.15);box-shadow:0 20px 60px rgba(124,58,237,0.15),0 8px 25px rgba(0,0,0,0.4)}
+.preview-card{width:100%;max-width:750px;aspect-ratio:16/11;border-radius:10px;overflow:hidden;position:relative;border:1px solid rgba(201,168,76,0.15);box-shadow:0 20px 60px rgba(124,58,237,0.15),0 8px 25px rgba(0,0,0,0.4)}
 
 /* Carousel slides */
 .carousel-container{position:relative;width:100%;height:100%}
@@ -127,12 +127,12 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem
 .draft-timer-fill{width:65%;height:100%;border-radius:2px;background:linear-gradient(90deg,var(--gold),var(--red))}
 .draft-body{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);flex:1;padding:0.6rem 0.4rem;position:relative;z-index:1;gap:0}
 .draft-team{display:flex;flex-direction:column;gap:0.3rem}
-.draft-pick{display:flex;align-items:center;gap:0.6rem;padding:0.4rem 0.6rem;background:linear-gradient(90deg,rgba(1,10,19,0.85),rgba(1,10,19,0.5));border-radius:2px;border-left:3px solid transparent;min-height:48px;transition:all 0.3s}
+.draft-pick{display:flex;align-items:center;gap:0.6rem;padding:0.5rem 0.7rem;background:linear-gradient(90deg,rgba(1,10,19,0.85),rgba(1,10,19,0.5));border-radius:2px;border-left:3px solid transparent;min-height:54px;transition:all 0.3s}
 .draft-pick.our{border-left-color:rgba(30,90,160,0.5)}
 .draft-pick.our.active{border-left-color:#1e90ff;background:linear-gradient(90deg,rgba(30,90,160,0.15),rgba(1,10,19,0.6));box-shadow:inset 0 0 20px rgba(30,90,160,0.05)}
 .draft-pick.enemy{border-left:none;border-right:3px solid rgba(160,30,30,0.4);flex-direction:row-reverse;text-align:right;background:linear-gradient(270deg,rgba(1,10,19,0.85),rgba(1,10,19,0.5))}
 .draft-pick.enemy.active{border-right-color:#c0392b;background:linear-gradient(270deg,rgba(160,30,30,0.12),rgba(1,10,19,0.6))}
-.draft-pick-img{width:40px;height:40px;border-radius:4px;object-fit:cover;flex-shrink:0}
+.draft-pick-img{width:44px;height:44px;border-radius:4px;object-fit:cover;flex-shrink:0}
 .draft-pick.our .draft-pick-img{border:2px solid rgba(30,90,160,0.4)}
 .draft-pick.our.active .draft-pick-img{border-color:rgba(30,144,255,0.7);box-shadow:0 0 8px rgba(30,144,255,0.2)}
 .draft-pick.enemy .draft-pick-img{border:2px solid rgba(160,30,30,0.35)}
@@ -148,21 +148,21 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem
 .draft-bottom span{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.1em;color:#5d6d7e}
 
 /* Slide 2: Scout */
-.scout-slide{padding:1.2rem;background:linear-gradient(160deg,#0a0614 0%,#120a22 40%,#0d0516 100%)!important;position:relative;overflow:hidden}
+.scout-slide{padding:1.5rem;background:linear-gradient(160deg,#0f0820 0%,#1a0e30 40%,#120822 100%)!important;position:relative;overflow:hidden}
 .scout-slide::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 80%,rgba(255,107,107,0.06),transparent 60%);pointer-events:none;z-index:0}
 .scout-slide::after{content:'';position:absolute;bottom:0;right:0;width:60%;height:60%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='80' stroke='%23ff6b6b' stroke-width='0.3' fill='none' opacity='0.08' stroke-dasharray='8 4'/%3E%3Ccircle cx='100' cy='100' r='55' stroke='%23ff6b6b' stroke-width='0.2' fill='none' opacity='0.05'/%3E%3Cline x1='20' y1='100' x2='180' y2='100' stroke='%23ff6b6b' stroke-width='0.15' opacity='0.04'/%3E%3Cline x1='100' y1='20' x2='100' y2='180' stroke='%23ff6b6b' stroke-width='0.15' opacity='0.04'/%3E%3C/svg%3E") no-repeat center;opacity:0.5;pointer-events:none;z-index:0}
 .scout-slide>*{position:relative;z-index:1}
 .scout-slide-title{font-family:'Cinzel',serif;font-size:0.85rem;color:var(--red);letter-spacing:0.1em;margin-bottom:0.8rem;display:flex;align-items:center;gap:0.5rem}
 .scout-slide-desc{color:var(--muted);font-size:0.78rem;font-style:italic;margin-bottom:1rem;line-height:1.6}
 .scout-slide-inputs{display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1rem}
-.scout-slide-input{background:rgba(7,3,15,0.7);border:1px solid rgba(255,107,107,0.15);color:var(--text);padding:0.45rem 0.7rem;font-family:'Crimson Pro',serif;font-size:0.8rem;border-radius:3px}
+.scout-slide-input{background:rgba(20,10,35,0.8);border:1px solid rgba(255,107,107,0.25);color:var(--text);padding:0.55rem 0.8rem;font-family:'Crimson Pro',serif;font-size:0.85rem;border-radius:3px}
 .scout-slide-results{display:flex;gap:0.5rem;flex-wrap:wrap}
 .scout-slide-champ{width:32px;height:32px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(255,107,107,0.25)}
 .scout-ban-tag{display:inline-flex;align-items:center;gap:0.3rem;padding:0.2rem 0.5rem;background:rgba(255,107,107,0.07);border:1px solid rgba(255,107,107,0.2);border-radius:3px;font-size:0.65rem;color:#ff9090;margin-top:0.5rem}
 .scout-ban-tag img{width:18px;height:18px;border-radius:50%;object-fit:cover}
 
 /* Slide 3: Chat NEROBOT */
-.chat-slide{display:flex;flex-direction:column;height:100%;position:relative;overflow:hidden}
+.chat-slide{display:flex;flex-direction:column;height:100%;position:relative;overflow:hidden;background:linear-gradient(160deg,#0f0820,#1a0e30,#0d0818)!important}
 .chat-slide .chat-bg-blitz{position:absolute;bottom:-5%;right:-5%;width:50%;opacity:0.12;pointer-events:none;filter:grayscale(0.2) brightness(0.6);z-index:0}
 .chat-slide>*{position:relative;z-index:1}
 .chat-header{padding:0.7rem 1rem;border-bottom:1px solid var(--border);background:rgba(22,12,40,0.8);display:flex;align-items:center;gap:0.6rem}
@@ -170,7 +170,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem
 .chat-header-name{font-family:'Cinzel',serif;font-size:0.75rem;color:var(--gold)}
 .chat-header-status{font-size:0.6rem;color:var(--green);font-style:italic}
 .chat-msgs{flex:1;padding:0.8rem;display:flex;flex-direction:column;gap:0.5rem;overflow:hidden}
-.chat-msg{max-width:82%;padding:0.5rem 0.75rem;font-size:0.78rem;line-height:1.5;border-radius:8px}
+.chat-msg{max-width:85%;padding:0.6rem 0.85rem;font-size:0.85rem;line-height:1.6;border-radius:8px}
 .chat-msg.user{align-self:flex-end;background:rgba(61,26,110,0.6);border:1px solid rgba(168,85,247,0.25);color:var(--text);border-radius:8px 8px 2px 8px}
 .chat-msg.bot{align-self:flex-start;background:rgba(20,10,38,0.85);border:1px solid var(--border);color:var(--text);border-radius:8px 8px 8px 2px}
 .chat-msg.bot .sender{font-family:'Cinzel',serif;font-size:0.5rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.15rem}
@@ -306,7 +306,7 @@ footer p{font-style:italic;opacity:0.4;color:var(--muted);font-size:0.72rem;line
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="/"><img src="/logo.png" alt="Logo"><em>Taverne</em><strong>DuClash</strong></a>
+  <a class="nav-logo" href="/"><img src="/logo.png" alt="Logo"><em>Taverne</em> <strong>Du Clash</strong></a>
   <ul class="nav-links">
     <li><a href="#features">Fonctionnalites</a></li>
     <li><a href="#waitlist">Rejoindre</a></li>
@@ -356,8 +356,8 @@ footer p{font-style:italic;opacity:0.4;color:var(--muted);font-size:0.72rem;line
             <div class="draft-team" id="draftEnemy"></div>
           </div>
           <div class="draft-bottom">
-            <span>5v5</span>
-            <span>RANKED SOLO/DUO</span>
+            <span>5v5 CLASH</span>
+            <span>TAVERNE DU CLASH</span>
           </div>
         </div>
 
@@ -486,7 +486,7 @@ footer p{font-style:italic;opacity:0.4;color:var(--muted);font-size:0.72rem;line
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo"><em>Taverne</em><strong>DuClash</strong></div>
+  <div class="footer-logo"><em>Taverne</em> <strong>Du Clash</strong></div>
   <p>Construit avec l'API Riot Games<br><em>TaverneDuClash n'est pas affilie a Riot Games.</em></p>
   <div class="footer-links">
     <a href="https://discord.gg/axgmKnGPw" target="_blank">Discord</a>
