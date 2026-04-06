@@ -118,7 +118,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem
 
 /* Slide 1: Draft — LoL style */
 .draft-slide{position:relative;background:#010a13!important}
-.draft-slide .map-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:45%;opacity:0.3;pointer-events:none;z-index:0;filter:brightness(0.7) saturate(0.8)}
+.draft-slide .map-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:35%;opacity:0.25;pointer-events:none;z-index:0;filter:brightness(0.7) saturate(0.8)}
 .draft-header{background:linear-gradient(90deg,rgba(10,30,50,0.9),rgba(201,168,76,0.12),rgba(10,30,50,0.9));padding:0.55rem;text-align:center;border-bottom:1px solid rgba(201,168,76,0.15);position:relative;z-index:1}
 .draft-header span{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.25em;color:var(--gold);text-transform:uppercase}
 .draft-timer{text-align:center;padding:0.5rem 0 0.3rem;position:relative;z-index:1}
@@ -149,8 +149,9 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem
 
 /* Slide 2: Scout */
 .scout-slide{padding:1.2rem;background:linear-gradient(160deg,#0a0614 0%,#120a22 40%,#0d0516 100%)!important;position:relative;overflow:hidden}
-.scout-slide::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 80%,rgba(255,107,107,0.06),transparent 60%);pointer-events:none}
-.scout-slide::after{content:'';position:absolute;bottom:0;right:0;width:60%;height:60%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='80' stroke='%23ff6b6b' stroke-width='0.3' fill='none' opacity='0.08' stroke-dasharray='8 4'/%3E%3Ccircle cx='100' cy='100' r='55' stroke='%23ff6b6b' stroke-width='0.2' fill='none' opacity='0.05'/%3E%3Cline x1='20' y1='100' x2='180' y2='100' stroke='%23ff6b6b' stroke-width='0.15' opacity='0.04'/%3E%3Cline x1='100' y1='20' x2='100' y2='180' stroke='%23ff6b6b' stroke-width='0.15' opacity='0.04'/%3E%3C/svg%3E") no-repeat center;opacity:0.5;pointer-events:none}
+.scout-slide::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 80%,rgba(255,107,107,0.06),transparent 60%);pointer-events:none;z-index:0}
+.scout-slide::after{content:'';position:absolute;bottom:0;right:0;width:60%;height:60%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='80' stroke='%23ff6b6b' stroke-width='0.3' fill='none' opacity='0.08' stroke-dasharray='8 4'/%3E%3Ccircle cx='100' cy='100' r='55' stroke='%23ff6b6b' stroke-width='0.2' fill='none' opacity='0.05'/%3E%3Cline x1='20' y1='100' x2='180' y2='100' stroke='%23ff6b6b' stroke-width='0.15' opacity='0.04'/%3E%3Cline x1='100' y1='20' x2='100' y2='180' stroke='%23ff6b6b' stroke-width='0.15' opacity='0.04'/%3E%3C/svg%3E") no-repeat center;opacity:0.5;pointer-events:none;z-index:0}
+.scout-slide>*{position:relative;z-index:1}
 .scout-slide-title{font-family:'Cinzel',serif;font-size:0.85rem;color:var(--red);letter-spacing:0.1em;margin-bottom:0.8rem;display:flex;align-items:center;gap:0.5rem}
 .scout-slide-desc{color:var(--muted);font-size:0.78rem;font-style:italic;margin-bottom:1rem;line-height:1.6}
 .scout-slide-inputs{display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1rem}
@@ -162,7 +163,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem
 
 /* Slide 3: Chat NEROBOT */
 .chat-slide{display:flex;flex-direction:column;height:100%;position:relative;overflow:hidden}
-.chat-slide .chat-bg-blitz{position:absolute;bottom:-10%;right:-5%;width:55%;opacity:0.06;pointer-events:none;filter:grayscale(0.3)}
+.chat-slide .chat-bg-blitz{position:absolute;bottom:-5%;right:-5%;width:50%;opacity:0.12;pointer-events:none;filter:grayscale(0.2) brightness(0.6);z-index:0}
+.chat-slide>*{position:relative;z-index:1}
 .chat-header{padding:0.7rem 1rem;border-bottom:1px solid var(--border);background:rgba(22,12,40,0.8);display:flex;align-items:center;gap:0.6rem}
 .chat-header-avatar{width:30px;height:30px;border-radius:50%;object-fit:cover;border:1.5px solid var(--gold)}
 .chat-header-name{font-family:'Cinzel',serif;font-size:0.75rem;color:var(--gold)}
