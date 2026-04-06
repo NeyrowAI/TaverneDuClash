@@ -413,7 +413,35 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);text-align:center;
 .footer-logo{font-family:'Cinzel',serif;font-size:0.88rem;color:var(--gold);letter-spacing:0.2em;margin-bottom:0.35rem}
 footer p{font-style:italic;opacity:0.45;line-height:1.8}
 
+/* CLASH PARTICIPATION */
+.clash-spots{text-align:center;margin-bottom:2.5rem}
+.clash-spots-num{font-family:'Cinzel',serif;font-size:3.5rem;font-weight:900;background:linear-gradient(135deg,var(--gl),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1}
+.clash-spots-label{font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;margin-top:0.2rem}
+.clash-spots.full .clash-spots-num{background:linear-gradient(135deg,var(--green),#50c878);-webkit-background-clip:text;background-clip:text}
+
+.clash-roles{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;max-width:800px;margin:0 auto 3rem}
+.clash-role-slot{background:linear-gradient(160deg,rgba(26,16,48,0.95),rgba(14,8,24,0.98));border:1px solid var(--border);border-radius:6px;padding:1.3rem 0.8rem;text-align:center;transition:all 0.3s;position:relative}
+.clash-role-slot.filled{border-color:rgba(80,200,120,0.4);box-shadow:0 0 20px rgba(80,200,120,0.08)}
+.clash-role-slot.empty{border-color:rgba(168,85,247,0.15)}
+.clash-role-slot img{width:36px;height:36px;object-fit:contain;filter:brightness(0.85) sepia(0.3) hue-rotate(220deg) saturate(2);margin-bottom:0.5rem}
+.clash-role-slot.filled img{filter:brightness(1) sepia(0.2) hue-rotate(80deg) saturate(1.5)}
+.clash-role-name{font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.1em;color:var(--gold);text-transform:uppercase;margin-bottom:0.4rem}
+.clash-role-player{font-family:'Cinzel',serif;font-size:0.82rem;color:var(--muted);font-style:italic}
+.clash-role-slot.filled .clash-role-player{color:var(--green);font-style:normal;font-weight:600}
+
+.clash-roster{max-width:500px;margin:0 auto;background:rgba(14,8,24,0.65);border:1px solid var(--border);border-radius:6px;padding:1.5rem}
+.clash-roster-title{font-family:'Cinzel',serif;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;text-align:center}
+.clash-roster-list{display:flex;flex-direction:column;gap:0.5rem}
+.clash-player-row{display:flex;align-items:center;gap:0.7rem;padding:0.5rem 0.7rem;background:rgba(7,3,15,0.4);border-radius:3px;border:1px solid rgba(168,85,247,0.06)}
+.clash-player-name{font-family:'Cinzel',serif;font-size:0.82rem;color:var(--text);flex:1}
+.clash-player-role{font-size:0.7rem;color:var(--violet);font-family:'Cinzel',serif}
+.clash-status{font-size:0.6rem;flex-shrink:0}
+.clash-status.confirmed{color:var(--green)}
+.clash-status.declined{color:var(--red)}
+.clash-status.pending{color:var(--muted);animation:pulse 1.5s ease-in-out infinite}
+
 @media(max-width:900px){
+  .clash-roles{grid-template-columns:repeat(3,1fr)}
   nav{padding:0.9rem 1.2rem}
   .nav-links{display:none}
   .draft-cols{grid-template-columns:1fr;gap:0.8rem}
@@ -527,6 +555,7 @@ footer p{font-style:italic;opacity:0.45;line-height:1.8}
     <li><a href="#" onclick="showPage('home')" id="nav-home" class="active">Accueil</a></li>
     <li><a href="#" onclick="showPage('roster')" id="nav-roster">Roster</a></li>
     <li><a href="#" onclick="showPage('draft')" id="nav-draft">Draft</a></li>
+    <li><a href="#" onclick="showPage('clash')" id="nav-clash">Clash</a></li>
     <li><a href="#" onclick="showPage('features')" id="nav-features">Fonctionnalités</a></li>
   </ul>
   <a class="nav-discord" href="https://discord.gg/axgmKnGPw" target="_blank" rel="noopener">
@@ -741,6 +770,66 @@ footer p{font-style:italic;opacity:0.45;line-height:1.8}
       <div class="feat-card reveal reveal-delay-2"><span class="feat-icon">💾</span><h3 class="feat-title">Sauvegarder les Drafts</h3><p class="feat-desc">Sauvegarde tes drafts en local pour les retrouver facilement, comparer et préparer tes prochains Clash.</p></div>
       <div class="feat-card reveal reveal-delay-3"><span class="feat-icon">🔮</span><h3 class="feat-title">Analyseur de Comp</h3><p class="feat-desc">Score de synergie en temps réel, détection du style de comp (engage, poke, protect) et analyse des forces/faiblesses.</p></div>
     </div>
+    <footer style="margin-top:4rem">
+      <div class="footer-logo">TaverneDuClash</div>
+      <p>Construit avec l'API Riot Games<br><em>TaverneDuClash n'est pas affilié à Riot Games.</em></p>
+    </footer>
+  </section>
+</div>
+
+<!-- PAGE: CLASH PARTICIPATION -->
+<div class="page" id="page-clash">
+  <section class="sec">
+    <div class="sec-header">
+      <p class="sec-eye reveal">Prochain Clash</p>
+      <h2 class="sec-title reveal reveal-delay-1" id="clashPageName">Chargement...</h2>
+      <div class="sec-line reveal reveal-delay-2"></div>
+      <p class="sec-desc reveal reveal-delay-3" id="clashPageDate"></p>
+    </div>
+
+    <!-- Compteur de places -->
+    <div class="clash-spots reveal reveal-delay-1" id="clashSpots">
+      <div class="clash-spots-num" id="clashSpotsNum">-</div>
+      <div class="clash-spots-label">places restantes</div>
+    </div>
+
+    <!-- Grille des rôles -->
+    <div class="clash-roles reveal reveal-delay-2" id="clashRoles">
+      <div class="clash-role-slot" data-role="Top">
+        <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-top.png" alt="Top">
+        <div class="clash-role-name">Top</div>
+        <div class="clash-role-player" id="crTop">En attente</div>
+      </div>
+      <div class="clash-role-slot" data-role="Jungle">
+        <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-jungle.png" alt="Jungle">
+        <div class="clash-role-name">Jungle</div>
+        <div class="clash-role-player" id="crJungle">En attente</div>
+      </div>
+      <div class="clash-role-slot" data-role="Mid">
+        <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-middle.png" alt="Mid">
+        <div class="clash-role-name">Mid</div>
+        <div class="clash-role-player" id="crMid">En attente</div>
+      </div>
+      <div class="clash-role-slot" data-role="ADC">
+        <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-bottom.png" alt="ADC">
+        <div class="clash-role-name">ADC</div>
+        <div class="clash-role-player" id="crADC">En attente</div>
+      </div>
+      <div class="clash-role-slot" data-role="Support">
+        <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-utility.png" alt="Support">
+        <div class="clash-role-name">Support</div>
+        <div class="clash-role-player" id="crSupport">En attente</div>
+      </div>
+    </div>
+
+    <!-- Liste des joueurs -->
+    <div class="clash-roster reveal reveal-delay-3">
+      <div class="clash-roster-title">Statut des joueurs</div>
+      <div class="clash-roster-list" id="clashRosterList">
+        <div class="clash-player-row"><span class="clash-status pending">&#9679;</span><span>Chargement...</span></div>
+      </div>
+    </div>
+
     <footer style="margin-top:4rem">
       <div class="footer-logo">TaverneDuClash</div>
       <p>Construit avec l'API Riot Games<br><em>TaverneDuClash n'est pas affilié à Riot Games.</em></p>
@@ -1551,6 +1640,58 @@ function toggleMusic(){
   else{if(audioEl)audioEl.play().catch(()=>{});btn.textContent='🔊';eq.classList.remove('paused');}
 }
 
+// ── CLASH PARTICIPATION ──
+async function loadClashParticipation(){
+  try{
+    const d=await fetch('/api/clash-participation').then(r=>r.json());
+    // Titre
+    const nameEl=document.getElementById('clashPageName');
+    const dateEl=document.getElementById('clashPageDate');
+    if(d.clashName){
+      nameEl.textContent=d.clashName;
+      const cd=new Date(d.clashDate);
+      dateEl.textContent=cd.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
+    } else {
+      nameEl.textContent='Aucun Clash prévu';
+      dateEl.textContent='';
+    }
+    // Places
+    const spotsWrap=document.getElementById('clashSpots');
+    const spotsNum=document.getElementById('clashSpotsNum');
+    spotsNum.textContent=d.spotsLeft;
+    spotsWrap.className='clash-spots reveal visible'+(d.spotsLeft===0?' full':'');
+    // Rôles
+    ['Top','Jungle','Mid','ADC','Support'].forEach(role=>{
+      const el=document.getElementById('cr'+role);
+      const slot=el?.closest('.clash-role-slot');
+      if(d.rolesFilled[role]){
+        el.textContent=d.rolesFilled[role];
+        slot?.classList.add('filled');
+        slot?.classList.remove('empty');
+      } else {
+        el.textContent='En attente';
+        slot?.classList.remove('filled');
+        slot?.classList.add('empty');
+      }
+    });
+    // Liste joueurs
+    const list=document.getElementById('clashRosterList');
+    const all=[
+      ...d.participants.map(p=>({...p,order:0})),
+      ...d.pending.map(p=>({...p,order:1})),
+      ...d.declined.map(p=>({...p,order:2}))
+    ].sort((a,b)=>a.order-b.order);
+    list.innerHTML=all.map(p=>{
+      const icon=p.status==='confirmed'?'&#10003;':p.status==='declined'?'&#10007;':'&#9679;';
+      const roleText=p.role?`<span class="clash-player-role">${p.role}</span>`:'';
+      const statusText=p.status==='confirmed'?'Confirmé':p.status==='declined'?'Décliné':'En attente';
+      return `<div class="clash-player-row"><span class="clash-status ${p.status}">${icon}</span><span class="clash-player-name">${p.name}</span>${roleText}<span style="font-size:0.62rem;color:var(--muted);font-style:italic">${statusText}</span></div>`;
+    }).join('');
+  }catch(e){
+    console.error('Clash participation load fail',e);
+  }
+}
+
 // ── INIT ──
 document.addEventListener('DOMContentLoaded',async()=>{
   initParticles();
@@ -1567,6 +1708,8 @@ document.addEventListener('DOMContentLoaded',async()=>{
   loadAllPlayers();
   loadDiscord();
   renderBans();
+  loadClashParticipation();
+  setInterval(loadClashParticipation,30000);
 });
 </script>
 </body>
