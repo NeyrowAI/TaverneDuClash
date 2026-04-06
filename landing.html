@@ -93,12 +93,12 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem
 
 /* HERO RIGHT — PREVIEW CAROUSEL */
 .hero-right{position:relative;display:flex;justify-content:center}
-.preview-card{width:100%;max-width:530px;aspect-ratio:4/3;border-radius:10px;overflow:hidden;position:relative;border:1px solid rgba(201,168,76,0.15);box-shadow:0 20px 60px rgba(124,58,237,0.15),0 8px 25px rgba(0,0,0,0.4)}
+.preview-card{width:100%;max-width:680px;aspect-ratio:16/11;border-radius:10px;overflow:hidden;position:relative;border:1px solid rgba(201,168,76,0.15);box-shadow:0 20px 60px rgba(124,58,237,0.15),0 8px 25px rgba(0,0,0,0.4)}
 
 /* Carousel slides */
 .carousel-container{position:relative;width:100%;height:100%}
-.carousel-slide{position:absolute;inset:0;opacity:0;transition:opacity 1s ease;display:flex;flex-direction:column;background:rgba(5,3,12,0.98)}
-.carousel-slide.active{opacity:1}
+.carousel-slide{position:absolute;inset:0;opacity:0;transform:scale(0.97);transition:opacity 1.2s cubic-bezier(0.4,0,0.2,1),transform 1.2s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;background:rgba(5,3,12,0.98);pointer-events:none}
+.carousel-slide.active{opacity:1;transform:scale(1);pointer-events:auto}
 
 /* Slide 1: Draft */
 .draft-slide{position:relative}
@@ -181,13 +181,17 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem
 .features-desc{color:var(--muted);font-style:italic;line-height:1.8;font-size:0.92rem}
 
 .features-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
-.feat-card{background:linear-gradient(160deg,rgba(22,14,42,0.6),rgba(10,5,20,0.85));border:1px solid var(--border);border-radius:8px;padding:1.6rem;transition:all 0.35s;position:relative;overflow:hidden}
+.feat-card{background:linear-gradient(160deg,rgba(22,14,42,0.6),rgba(10,5,20,0.85));border:1px solid transparent;border-radius:8px;padding:1.6rem;transition:all 0.4s;position:relative;overflow:hidden;background-clip:padding-box}
 .feat-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,transparent,var(--accent-color,var(--violet)),transparent);opacity:0.5}
-.feat-card:hover{border-color:var(--borderv);transform:translateY(-4px);box-shadow:0 15px 40px rgba(124,58,237,0.12)}
+.feat-card::after{content:'';position:absolute;inset:-1px;border-radius:9px;background:linear-gradient(var(--glow-angle,135deg),transparent 30%,var(--accent-color,var(--violet)) 50%,transparent 70%);opacity:0.25;z-index:-1;animation:glowRotate 4s linear infinite;transition:opacity 0.4s}
+@keyframes glowRotate{0%{--glow-angle:0deg}100%{--glow-angle:360deg}}
+@property --glow-angle{syntax:"<angle>";initial-value:0deg;inherits:false}
+.feat-card:hover{transform:translateY(-6px);box-shadow:0 15px 40px rgba(124,58,237,0.15)}
+.feat-card:hover::after{opacity:0.5}
 .feat-card:nth-child(even){transform:translateY(40px)}
 .feat-card:nth-child(even).visible{transform:translateY(40px)}
-.feat-card:nth-child(even):hover{transform:translateY(36px)}
-.feat-icon{font-size:1.5rem;margin-bottom:0.6rem;display:block}
+.feat-card:nth-child(even):hover{transform:translateY(34px)}
+.feat-icon{width:36px;height:36px;margin-bottom:0.8rem;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(61,26,110,0.4),rgba(22,12,40,0.6));border:1px solid var(--accent-color,var(--violet));border-radius:8px;opacity:0.85}
 .feat-title{font-family:'Cinzel',serif;font-size:0.88rem;color:var(--gold);margin-bottom:0.5rem}
 .feat-desc{color:var(--muted);font-size:0.83rem;line-height:1.7;font-style:italic}
 
@@ -388,12 +392,30 @@ footer p{font-style:italic;opacity:0.4;color:var(--muted);font-size:0.72rem;line
   </div>
 
   <div class="features-grid">
-    <div class="feat-card reveal" style="--accent-color:var(--gold)"><span class="feat-icon">📊</span><h3 class="feat-title">Stats en Direct</h3><p class="feat-desc">Rang, winrate, LP et top 5 champions recuperes en temps reel via l'API Riot Games pour chaque joueur.</p></div>
-    <div class="feat-card reveal reveal-delay-1" style="--accent-color:var(--violet)"><span class="feat-icon">🤖</span><h3 class="feat-title">NEROBOT — Coach IA</h3><p class="feat-desc">Un coach virtuel specialise LoL qui reagit a chaque pick en temps reel. Conseils de matchup et de build.</p></div>
-    <div class="feat-card reveal reveal-delay-1" style="--accent-color:var(--gold)"><span class="feat-icon">⚔</span><h3 class="feat-title">Draft Intelligente</h3><p class="feat-desc">Analyse de composition, score de synergie, counterpicks et suggestions basees sur la maitrise des joueurs.</p></div>
-    <div class="feat-card reveal reveal-delay-2" style="--accent-color:var(--red)"><span class="feat-icon">🔍</span><h3 class="feat-title">Scout Ennemi</h3><p class="feat-desc">Analyse les champions favoris des adversaires et suggere les bans optimaux pour chaque Clash.</p></div>
-    <div class="feat-card reveal reveal-delay-2" style="--accent-color:var(--green)"><span class="feat-icon">📱</span><h3 class="feat-title">Rappels WhatsApp</h3><p class="feat-desc">Notifications automatiques 2 jours avant chaque Clash. Confirme ta participation et ton role directement.</p></div>
-    <div class="feat-card reveal reveal-delay-3" style="--accent-color:var(--gold)"><span class="feat-icon">🏆</span><h3 class="feat-title">German & Carry</h3><p class="feat-desc">Awards hebdomadaires : German de la semaine (pire KDA) et Carry de la semaine (meilleur KDA).</p></div>
+    <div class="feat-card reveal" style="--accent-color:var(--gold);transition-delay:0s">
+      <span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 4 5-9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <h3 class="feat-title">Stats en Direct</h3><p class="feat-desc">Rang, winrate, LP et top 5 champions recuperes en temps reel via l'API Riot Games pour chaque joueur.</p>
+    </div>
+    <div class="feat-card reveal" style="--accent-color:var(--violet);transition-delay:0.15s">
+      <span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M8 14h8l2 8H6l2-8z"/><path d="M9 4l1-2h4l1 2" stroke-linecap="round"/></svg></span>
+      <h3 class="feat-title">NEROBOT — Coach IA</h3><p class="feat-desc">Un coach virtuel specialise LoL qui reagit a chaque pick en temps reel. Conseils de matchup et de build.</p>
+    </div>
+    <div class="feat-card reveal" style="--accent-color:var(--gold);transition-delay:0.3s">
+      <span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M12 2L9 9H2l6 5-2 7 6-4 6 4-2-7 6-5h-7z" stroke-linejoin="round"/></svg></span>
+      <h3 class="feat-title">Draft Intelligente</h3><p class="feat-desc">Analyse de composition, score de synergie, counterpicks et suggestions basees sur la maitrise des joueurs.</p>
+    </div>
+    <div class="feat-card reveal" style="--accent-color:var(--red);transition-delay:0.45s">
+      <span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke-linecap="round"/></svg></span>
+      <h3 class="feat-title">Scout Ennemi</h3><p class="feat-desc">Analyse les champions favoris des adversaires et suggere les bans optimaux pour chaque Clash.</p>
+    </div>
+    <div class="feat-card reveal" style="--accent-color:var(--green);transition-delay:0.6s">
+      <span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.5"><path d="M15 17h5l-1.4-1.4A6.97 6.97 0 0020 12a8 8 0 10-16 0 8 8 0 004.6 7.3"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <h3 class="feat-title">Rappels WhatsApp</h3><p class="feat-desc">Notifications automatiques 2 jours avant chaque Clash. Confirme ta participation et ton role directement.</p>
+    </div>
+    <div class="feat-card reveal" style="--accent-color:var(--gold);transition-delay:0.75s">
+      <span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M12 2l3 6h6l-5 4 2 7-6-4-6 4 2-7-5-4h6z" stroke-linejoin="round"/><circle cx="12" cy="15" r="3"/></svg></span>
+      <h3 class="feat-title">German & Carry</h3><p class="feat-desc">Awards hebdomadaires : German de la semaine (pire KDA) et Carry de la semaine (meilleur KDA).</p>
+    </div>
   </div>
 </section>
 
