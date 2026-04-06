@@ -89,6 +89,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem
 @keyframes pulse-dot{0%,100%{opacity:0.7}50%{opacity:1}}
 .hero-badge span{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.25em;color:var(--violet);text-transform:uppercase}
 .hero h1{font-family:'Cinzel',serif;font-size:clamp(2.5rem,5.5vw,4.2rem);font-weight:900;line-height:1.08;margin-bottom:1.5rem}
+.epic-word{display:inline-block;opacity:0;transform:translateY(30px) scale(0.9);animation:epicReveal 0.7s cubic-bezier(0.16,1,0.3,1) forwards;animation-delay:calc(0.6s + var(--i) * 0.35s)}
+@keyframes epicReveal{0%{opacity:0;transform:translateY(30px) scale(0.9);filter:blur(8px)}60%{filter:blur(0)}100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
 .hero h1 .gold{background:linear-gradient(135deg,var(--gl),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero h1 .violet{background:linear-gradient(135deg,var(--violet),var(--pb),#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero-sub{font-size:1.05rem;color:var(--muted);line-height:1.9;margin-bottom:2rem;font-style:italic;max-width:440px}
@@ -317,7 +319,7 @@ footer p{font-style:italic;opacity:0.4;color:var(--muted);font-size:0.72rem;line
 <section class="hero">
   <div class="hero-left">
     <div class="hero-badge reveal"><div class="hero-badge-dot"></div><span>En developpement</span></div>
-    <h1 class="reveal reveal-delay-1"><span class="gold">DOMINE</span><br><span class="violet">CHAQUE DRAFT</span><br><span class="gold">CLASH</span></h1>
+    <h1 class="hero-title-epic"><span class="gold epic-word" style="--i:0">DOMINE</span><br><span class="violet epic-word" style="--i:1">CHAQUE</span> <span class="violet epic-word" style="--i:2">DRAFT</span><br><span class="gold epic-word" style="--i:3">CLASH</span></h1>
     <div class="hero-accent reveal reveal-delay-2"></div>
     <p class="hero-sub reveal reveal-delay-2">L'outil de draft ultime pour League of Legends Clash. Stats en direct, coach IA, scout ennemi et rappels WhatsApp.</p>
     <div class="hero-cta reveal reveal-delay-3">
