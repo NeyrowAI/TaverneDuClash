@@ -116,7 +116,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem
 
 /* Slide 1: Draft — LoL style */
 .draft-slide{position:relative;background:#010a13!important}
-.draft-slide .map-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:50%;opacity:0.25;pointer-events:none;z-index:0;filter:brightness(0.8)}
+.draft-slide .map-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80%;max-width:none;opacity:0.3;pointer-events:none;z-index:0;filter:brightness(0.7) saturate(0.8)}
 .draft-header{background:linear-gradient(90deg,rgba(10,30,50,0.9),rgba(201,168,76,0.12),rgba(10,30,50,0.9));padding:0.55rem;text-align:center;border-bottom:1px solid rgba(201,168,76,0.15);position:relative;z-index:1}
 .draft-header span{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.25em;color:var(--gold);text-transform:uppercase}
 .draft-timer{text-align:center;padding:0.5rem 0 0.3rem;position:relative;z-index:1}
@@ -337,7 +337,7 @@ footer p{font-style:italic;opacity:0.4;color:var(--muted);font-size:0.72rem;line
 
         <!-- SLIDE 1: Draft LoL style -->
         <div class="carousel-slide draft-slide active">
-          <img class="map-bg" src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-mini-regalia/summoners-rift.png" alt="" onerror="this.src='https://ddragon.leagueoflegends.com/cdn/img/maps/map11.png';this.onerror=null">
+          <img class="map-bg" src="/map.png" alt="Summoner's Rift">
           <div class="draft-header"><span>Draft en cours</span></div>
           <div class="draft-timer">
             <div class="draft-timer-num">26</div>
