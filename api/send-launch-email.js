@@ -8,41 +8,74 @@ const CORS_HEADERS = {
 };
 
 function buildEmailHtml(siteUrl, recipientEmail) {
+  const registerUrl = `${siteUrl}/register.html?email=${encodeURIComponent(recipientEmail)}`;
   return `<!DOCTYPE html>
 <html lang="fr">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
-<body style="margin:0;padding:0;background-color:#07030f;font-family:'Segoe UI',Arial,sans-serif;">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#07030f;">
+<body style="margin:0;padding:0;background-color:#0e0818;font-family:'Segoe UI',Arial,sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#0e0818;">
     <tr><td align="center" style="padding:40px 20px;">
-      <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="background-color:#0f0a1a;border-radius:12px;border:1px solid #1a1228;">
-        <!-- Logo -->
-        <tr><td align="center" style="padding:40px 40px 20px;">
-          <img src="${siteUrl}/logox.png" alt="TaverneDuClash" width="180" style="display:block;max-width:180px;height:auto;" />
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="border-radius:16px;overflow:hidden;border:1px solid rgba(168,85,247,0.2);">
+        <!-- HEADER with gradient background -->
+        <tr><td align="center" style="background:linear-gradient(160deg,#1a0e30 0%,#2d1557 50%,#1a0e30 100%);padding:50px 40px 30px;">
+          <img src="${siteUrl}/logox.png" alt="TaverneDuClash" width="140" style="display:block;max-width:140px;height:auto;margin-bottom:24px;" />
+          <h1 style="margin:0;font-size:30px;color:#f0d080;font-weight:700;letter-spacing:1px;">La Taverne est ouverte !</h1>
+          <div style="width:80px;height:3px;background:linear-gradient(90deg,#c9a84c,#a855f7);margin:16px auto 0;border-radius:2px;"></div>
         </td></tr>
-        <!-- Title -->
-        <tr><td align="center" style="padding:10px 40px 10px;">
-          <h1 style="margin:0;font-size:28px;color:#c9a84c;font-weight:700;">La Taverne est ouverte !</h1>
+        <!-- BODY -->
+        <tr><td style="background:linear-gradient(180deg,#160c28,#0e0818);padding:35px 45px;">
+          <p style="margin:0 0 10px;color:#e8dff8;font-size:17px;line-height:1.8;text-align:center;">
+            Tu t&rsquo;es inscrit sur la waitlist de <strong style="color:#c9a84c;">TaverneDuClash</strong>.
+          </p>
+          <p style="margin:0 0 30px;color:#e8dff8;font-size:17px;line-height:1.8;text-align:center;">
+            L&rsquo;outil est maintenant disponible ! Cr&eacute;e ton profil pour rejoindre l&rsquo;&eacute;quipe.
+          </p>
+          <!-- CTA BUTTON — large, eye-catching -->
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+            <tr><td align="center">
+              <table role="presentation" cellpadding="0" cellspacing="0" style="border-radius:10px;overflow:hidden;box-shadow:0 8px 30px rgba(124,58,237,0.4),0 4px 15px rgba(201,168,76,0.15);">
+                <tr><td style="background:linear-gradient(135deg,#7c3aed,#a855f7,#7c3aed);padding:3px;">
+                  <table role="presentation" cellpadding="0" cellspacing="0" style="border-radius:8px;overflow:hidden;">
+                    <tr><td style="background:linear-gradient(135deg,#3d1a6e,#7c3aed);padding:18px 50px;text-align:center;">
+                      <a href="${registerUrl}" style="color:#f0d080;text-decoration:none;font-size:18px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;display:block;">
+                        Cr&eacute;er mon profil
+                      </a>
+                    </td></tr>
+                  </table>
+                </td></tr>
+              </table>
+            </td></tr>
+          </table>
+          <p style="margin:20px 0 0;text-align:center;font-size:13px;color:#9d8fc0;font-style:italic;">
+            Clique sur le bouton ci-dessus pour finaliser ton inscription.
+          </p>
         </td></tr>
-        <!-- Divider -->
-        <tr><td align="center" style="padding:10px 60px;">
-          <div style="height:2px;background:linear-gradient(90deg,transparent,#a855f7,transparent);"></div>
+        <!-- FEATURES teaser -->
+        <tr><td style="background:#0b0614;padding:30px 45px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="33%" style="text-align:center;padding:10px;">
+                <div style="font-size:24px;margin-bottom:6px;">&#9876;</div>
+                <div style="color:#c9a84c;font-size:12px;font-weight:700;letter-spacing:1px;">DRAFT IA</div>
+              </td>
+              <td width="33%" style="text-align:center;padding:10px;">
+                <div style="font-size:24px;margin-bottom:6px;">&#128269;</div>
+                <div style="color:#c9a84c;font-size:12px;font-weight:700;letter-spacing:1px;">SCOUT</div>
+              </td>
+              <td width="33%" style="text-align:center;padding:10px;">
+                <div style="font-size:24px;margin-bottom:6px;">&#128172;</div>
+                <div style="color:#c9a84c;font-size:12px;font-weight:700;letter-spacing:1px;">COACH IA</div>
+              </td>
+            </tr>
+          </table>
         </td></tr>
-        <!-- Body text -->
-        <tr><td style="padding:20px 40px;color:#e8dff8;font-size:16px;line-height:1.6;text-align:center;">
-          Tu t&rsquo;es inscrit sur la waitlist de <strong style="color:#c9a84c;">TaverneDuClash</strong>. L&rsquo;outil est maintenant disponible !<br><br>
-          Cr&eacute;e ton profil pour rejoindre l&rsquo;&eacute;quipe.
-        </td></tr>
-        <!-- CTA Button -->
-        <tr><td align="center" style="padding:20px 40px 40px;">
-          <a href="${siteUrl}/register.html?email=${encodeURIComponent(recipientEmail)}"
-             style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,#a855f7,#7c3aed);color:#ffffff;text-decoration:none;font-size:17px;font-weight:700;border-radius:8px;letter-spacing:0.5px;">
-            Cr&eacute;er mon profil
-          </a>
-        </td></tr>
-        <!-- Footer -->
-        <tr><td align="center" style="padding:20px 40px 30px;border-top:1px solid #1a1228;">
-          <p style="margin:0;font-size:13px;color:#6b5f7d;line-height:1.5;">
+        <!-- FOOTER -->
+        <tr><td align="center" style="background:#07030f;padding:25px 40px;border-top:1px solid rgba(168,85,247,0.15);">
+          <p style="margin:0;font-size:13px;color:#6b5f7d;line-height:1.6;">
             TaverneDuClash &mdash; L&rsquo;outil de draft ultime pour League of Legends Clash
+          </p>
+          <p style="margin:8px 0 0;font-size:11px;color:#4a3f5e;">
+            Tu re&ccedil;ois cet email car tu t&rsquo;es inscrit sur la waitlist.
           </p>
         </td></tr>
       </table>
