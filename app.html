@@ -440,6 +440,21 @@ footer p{font-style:italic;opacity:0.45;line-height:1.8}
 .clash-status.declined{color:var(--red)}
 .clash-status.pending{color:var(--muted);animation:pulse 1.5s ease-in-out infinite}
 
+/* FAQ */
+.faq-sec{padding:6rem 4rem;position:relative;z-index:1}
+.faq-header{text-align:center;margin-bottom:3rem}
+.faq-eye{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.4em;color:var(--gold);text-transform:uppercase;margin-bottom:0.6rem}
+.faq-title{font-family:'Cinzel',serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:600}
+.faq-list{max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:0.8rem}
+.faq-item{background:linear-gradient(160deg,rgba(22,14,42,0.5),rgba(10,5,20,0.7));border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:border-color 0.3s}
+.faq-item.open{border-color:var(--borderv)}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.3rem;cursor:pointer;font-family:'Cinzel',serif;font-size:0.85rem;color:var(--gold);letter-spacing:0.05em}
+.faq-q::after{content:'+';font-size:1.2rem;color:var(--violet);transition:transform 0.3s}
+.faq-item.open .faq-q::after{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.4s ease;padding:0 1.3rem}
+.faq-item.open .faq-a{max-height:200px;padding:0 1.3rem 1.2rem}
+.faq-a p{color:var(--muted);font-style:italic;font-size:0.88rem;line-height:1.8}
+
 @media(max-width:900px){
   .clash-roles{grid-template-columns:repeat(3,1fr)}
   nav{padding:0.9rem 1.2rem}
@@ -457,6 +472,7 @@ footer p{font-style:italic;opacity:0.45;line-height:1.8}
   .sec{padding:3rem 1rem}
   .role-bar{grid-template-columns:repeat(2,1fr)}
   .hero-stats{flex-direction:column;gap:0.8rem;align-items:center}
+  .faq-sec{padding:3rem 1.2rem}
 }
 </style>
 </head>
@@ -599,6 +615,36 @@ footer p{font-style:italic;opacity:0.45;line-height:1.8}
       <div class="feat-card reveal reveal-delay-1"><span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M12 2l3 6h6l-5 4 2 7-6-4-6 4 2-7-5-4h6z" stroke-linejoin="round"/><circle cx="12" cy="15" r="3"/></svg></span><h3 class="feat-title">German & Carry</h3><p class="feat-desc">Les awards hebdomadaires basés sur les performances Clash de l'équipe.</p></div>
     </div>
   </section>
+  <!-- FAQ -->
+  <section class="faq-sec" id="faq">
+    <div class="faq-header reveal">
+      <div class="faq-eye">Questions fréquentes</div>
+      <h2 class="faq-title">Tout ce que tu veux savoir</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal" role="button" tabindex="0" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter')this.classList.toggle('open')">
+        <div class="faq-q">C'est quoi TaverneDuClash exactement ?</div>
+        <div class="faq-a"><p>C'est un outil web conçu pour les équipes de Clash sur League of Legends. Il combine un système de draft intelligent, un scout des adversaires, un coach IA (NEROBOT) et des rappels WhatsApp automatiques pour t'aider à dominer chaque tournoi.</p></div>
+      </div>
+      <div class="faq-item reveal reveal-delay-1" role="button" tabindex="0" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter')this.classList.toggle('open')">
+        <div class="faq-q">C'est gratuit ?</div>
+        <div class="faq-a"><p>Oui, TaverneDuClash sera gratuit. L'objectif c'est d'aider la communauté Clash, pas de monétiser. Inscris-toi à la waitlist pour être prévenu du lancement.</p></div>
+      </div>
+      <div class="faq-item reveal reveal-delay-2" role="button" tabindex="0" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter')this.classList.toggle('open')">
+        <div class="faq-q">Ça marche sur quel serveur ? (EUW, EUNE, etc.)</div>
+        <div class="faq-a"><p>L'outil fonctionne avec tous les serveurs supportés par l'API Riot Games, dont EUW, EUNE, NA, KR, et tous les autres.</p></div>
+      </div>
+      <div class="faq-item reveal reveal-delay-3" role="button" tabindex="0" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter')this.classList.toggle('open')">
+        <div class="faq-q">C'est autorisé par Riot Games ?</div>
+        <div class="faq-a"><p>Oui. TaverneDuClash utilise l'API officielle de Riot Games dans le respect de leurs conditions d'utilisation. Aucune donnée privée n'est collectée en dehors de ce que l'API fournit publiquement.</p></div>
+      </div>
+      <div class="faq-item reveal reveal-delay-4" role="button" tabindex="0" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter')this.classList.toggle('open')">
+        <div class="faq-q">Il faut un compte Riot pour utiliser l'outil ?</div>
+        <div class="faq-a"><p>Non, pas besoin de connecter ton compte Riot. Tu entres simplement les pseudos des joueurs et l'outil récupère les infos via l'API publique.</p></div>
+      </div>
+    </div>
+  </section>
+
   <footer>
     <div class="footer-logo">TaverneDuClash</div>
     <p>Construit avec l'API Riot Games<br><em>TaverneDuClash n'est pas affilié à Riot Games.</em></p>
@@ -1629,7 +1675,7 @@ async function loadDiscord(){
 let audioEl=null;
 function initMusic(){
   audioEl=document.createElement('audio');
-  audioEl.src='https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+  audioEl.src='musique.mp3';
   audioEl.loop=true;audioEl.volume=0.2;
   document.addEventListener('click',()=>{if(audioEl.paused&&!isMuted)audioEl.play().catch(()=>{});},{once:true});
 }
