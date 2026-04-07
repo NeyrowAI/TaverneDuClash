@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TaverneDuClash — Domine chaque Draft Clash</title>
+<meta name="description" content="L'outil de draft ultime pour League of Legends Clash. Stats en direct, coach IA, scout ennemi et rappels WhatsApp.">
+<meta property="og:title" content="TaverneDuClash — Domine chaque Draft Clash">
+<meta property="og:description" content="Stats en direct, coach IA, scout ennemi et rappels WhatsApp pour dominer chaque Clash.">
+<meta property="og:image" content="/logo3.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/jpeg" href="/logo3.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -204,9 +211,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem
 .feat-card{background:linear-gradient(160deg,rgba(22,14,42,0.6),rgba(10,5,20,0.85));border:1px solid var(--border);border-radius:8px;padding:1.6rem;transition:all 0.4s;position:relative;overflow:hidden}
 .feat-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,transparent,var(--accent-color,var(--violet)),transparent);opacity:0.5}
 .feat-card:hover{border-color:var(--borderv);transform:translateY(-6px);box-shadow:0 15px 40px rgba(124,58,237,0.1)}
-.feat-card:nth-child(even){transform:translateY(40px)}
-.feat-card:nth-child(even).visible{transform:translateY(40px)}
-.feat-card:nth-child(even):hover{transform:translateY(34px)}
+.feat-card:nth-child(even).visible{transform:translateY(30px)}
+.feat-card:nth-child(even).visible:hover{transform:translateY(24px)}
 .feat-icon{width:36px;height:36px;margin-bottom:0.8rem;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(61,26,110,0.4),rgba(22,12,40,0.6));border:1px solid var(--accent-color,var(--violet));border-radius:8px;opacity:0.85}
 .feat-title{font-family:'Cinzel',serif;font-size:0.88rem;color:var(--gold);margin-bottom:0.5rem}
 .feat-desc{color:var(--muted);font-size:0.83rem;line-height:1.7;font-style:italic}
@@ -256,14 +262,66 @@ footer p{font-style:italic;opacity:0.4;color:var(--muted);font-size:0.72rem;line
   .feat-card:nth-child(even):hover{transform:translateY(-4px)}
   .features-header{margin:0 auto 3rem;text-align:center}
 }
+/* HAMBURGER */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:0.5rem;background:none;border:none;z-index:200}
+.hamburger span{display:block;width:24px;height:2px;background:var(--gold);border-radius:2px;transition:all 0.3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(7,3,15,0.97);z-index:150;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold);text-decoration:none;letter-spacing:0.15em;transition:color 0.3s}
+.mobile-menu a:hover{color:var(--gl)}
+
+/* TESTIMONIALS */
+.testimonials-sec{padding:6rem 4rem;position:relative;z-index:1}
+.testimonials-header{text-align:center;margin-bottom:3rem}
+.testimonials-eye{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.4em;color:var(--gold);text-transform:uppercase;margin-bottom:0.6rem}
+.testimonials-title{font-family:'Cinzel',serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:600;margin-bottom:0.8rem}
+.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:900px;margin:0 auto}
+.testimonial-card{background:linear-gradient(160deg,rgba(22,14,42,0.6),rgba(10,5,20,0.85));border:1px solid var(--border);border-radius:10px;padding:1.8rem;position:relative}
+.testimonial-card::before{content:'\201C';position:absolute;top:12px;left:16px;font-size:3rem;color:var(--gold);opacity:0.15;font-family:serif;line-height:1}
+.testimonial-text{color:var(--text);font-style:italic;font-size:0.92rem;line-height:1.8;margin-bottom:1.2rem}
+.testimonial-author{display:flex;align-items:center;gap:0.8rem}
+.testimonial-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--pb));display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:0.8rem;color:var(--gl);font-weight:900}
+.testimonial-info{display:flex;flex-direction:column}
+.testimonial-name{font-family:'Cinzel',serif;font-size:0.8rem;color:var(--gold);letter-spacing:0.05em}
+.testimonial-role{font-size:0.72rem;color:var(--muted);font-style:italic}
+.testimonial-stars{color:var(--gold);font-size:0.8rem;letter-spacing:2px;margin-bottom:0.6rem}
+
+/* FAQ */
+.faq-sec{padding:6rem 4rem;position:relative;z-index:1}
+.faq-header{text-align:center;margin-bottom:3rem}
+.faq-eye{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.4em;color:var(--gold);text-transform:uppercase;margin-bottom:0.6rem}
+.faq-title{font-family:'Cinzel',serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:600}
+.faq-list{max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:0.8rem}
+.faq-item{background:linear-gradient(160deg,rgba(22,14,42,0.5),rgba(10,5,20,0.7));border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:border-color 0.3s}
+.faq-item.open{border-color:var(--borderv)}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.3rem;cursor:pointer;font-family:'Cinzel',serif;font-size:0.85rem;color:var(--gold);letter-spacing:0.05em}
+.faq-q::after{content:'+';font-size:1.2rem;color:var(--violet);transition:transform 0.3s}
+.faq-item.open .faq-q::after{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.4s ease;padding:0 1.3rem}
+.faq-item.open .faq-a{max-height:200px;padding:0 1.3rem 1.2rem}
+.faq-a p{color:var(--muted);font-style:italic;font-size:0.88rem;line-height:1.8}
+
 @media(max-width:600px){
   nav{padding:0.8rem 1.2rem}
   .nav-links{display:none}
+  .hamburger{display:flex}
   .hero{padding:2rem 1.2rem}
   .features-sec{padding:3rem 1.2rem}
+  .testimonials-sec{padding:3rem 1.2rem}
+  .faq-sec{padding:3rem 1.2rem}
   .waitlist-sec{padding:3rem 1.2rem}
   .waitlist-form{flex-direction:column;align-items:center}
   .waitlist-input{width:100%}
+}
+
+/* B1 — Reduce animations for users who prefer it */
+@media(prefers-reduced-motion:reduce){
+  .mist,.rune-ring,.e-line,.frag,.sword-deco{animation:none!important}
+  #particleCanvas{display:none}
+  .reveal{opacity:1;transform:none;transition:none}
 }
 </style>
 </head>
@@ -305,9 +363,9 @@ footer p{font-style:italic;opacity:0.4;color:var(--muted);font-size:0.72rem;line
 <nav>
   <a class="nav-logo" href="/"><img src="/logo3.jpg" alt="Logo"><em>Taverne</em> <strong>Du Clash</strong></a>
   <ul class="nav-links">
-    <li><a href="#features">Fonctionnalites</a></li>
+    <li><a href="#features">Fonctionnalités</a></li>
     <li><a href="#waitlist">Rejoindre</a></li>
-    <li><a href="/app">Acceder a l'outil</a></li>
+    <li><a href="#waitlist">Accéder à l'outil</a></li>
     <li>
       <a class="nav-discord-btn" href="https://discord.gg/axgmKnGPw" target="_blank">
         <svg viewBox="0 0 71 55"><path d="M60.1 4.9A58.5 58.5 0 0 0 45.5.4a.2.2 0 0 0-.2.1 40.8 40.8 0 0 0-1.8 3.7 54 54 0 0 0-16.2 0A37.5 37.5 0 0 0 25.5.5a.2.2 0 0 0-.2-.1A58.4 58.4 0 0 0 10.7 4.9a.2.2 0 0 0-.1.1C1.6 18.1-.9 31 .3 43.6a.2.2 0 0 0 .1.2 58.8 58.8 0 0 0 17.7 8.9.2.2 0 0 0 .2-.1 42 42 0 0 0 3.6-5.9.2.2 0 0 0-.1-.3 38.7 38.7 0 0 1-5.5-2.6.2.2 0 0 1 0-.4l1.1-.8a.2.2 0 0 1 .2 0c11.5 5.3 24 5.3 35.4 0a.2.2 0 0 1 .2 0l1.1.8a.2.2 0 0 1 0 .4 36.1 36.1 0 0 1-5.5 2.6.2.2 0 0 0-.1.3 47.1 47.1 0 0 0 3.6 5.9.2.2 0 0 0 .2.1 58.7 58.7 0 0 0 17.8-8.9.2.2 0 0 0 .1-.2C73 29.1 69.5 16.3 60.2 5a.2.2 0 0 0-.1-.1zM23.7 36.4c-3.5 0-6.4-3.2-6.4-7.2s2.8-7.2 6.4-7.2c3.6 0 6.5 3.3 6.4 7.2 0 4-2.8 7.2-6.4 7.2zm23.7 0c-3.5 0-6.4-3.2-6.4-7.2s2.8-7.2 6.4-7.2c3.6 0 6.5 3.3 6.4 7.2 0 4-2.8 7.2-6.4 7.2z"/></svg>
@@ -315,12 +373,22 @@ footer p{font-style:italic;opacity:0.4;color:var(--muted);font-size:0.72rem;line
       </a>
     </li>
   </ul>
+  <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#features" onclick="toggleMobileMenu()">Fonctionnalités</a>
+  <a href="#waitlist" onclick="toggleMobileMenu()">Rejoindre la Waitlist</a>
+  <a href="https://discord.gg/axgmKnGPw" target="_blank">Discord</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <div class="hero-badge reveal"><div class="hero-badge-dot"></div><span>En developpement</span></div>
+    <div class="hero-badge reveal"><div class="hero-badge-dot"></div><span>En développement</span></div>
     <h1 class="hero-title-epic"><span class="gold epic-word" style="--i:0">DOMINE</span><br><span class="violet epic-word" style="--i:1">CHAQUE</span> <span class="violet epic-word" style="--i:2">DRAFT</span><br><span class="gold epic-word" style="--i:3">CLASH</span></h1>
     <div class="hero-accent reveal reveal-delay-2"></div>
     <p class="hero-sub reveal reveal-delay-2">L'outil de draft ultime pour League of Legends Clash. Stats en direct, coach IA, scout ennemi et rappels WhatsApp.</p>
@@ -360,14 +428,14 @@ footer p{font-style:italic;opacity:0.4;color:var(--muted);font-size:0.72rem;line
 
         <!-- SLIDE 2: Scout ennemi -->
         <div class="carousel-slide scout-slide">
-          <div class="scout-slide-title">🔍 Scout Equipe Ennemie</div>
+          <div class="scout-slide-title">🔍 Scout Équipe Ennemie</div>
           <p class="scout-slide-desc">Analyse les champions favoris des adversaires pour obtenir les meilleurs bans.</p>
           <div class="scout-slide-inputs">
             <div class="scout-slide-input">DarkViper#EUW</div>
             <div class="scout-slide-input">xShadow#1234</div>
             <div class="scout-slide-input">NightFury#EUW</div>
           </div>
-          <div style="font-family:Cinzel;font-size:0.6rem;color:var(--red);letter-spacing:0.1em;margin-bottom:0.4rem">BANS RECOMMANDES</div>
+          <div style="font-family:Cinzel;font-size:0.6rem;color:var(--red);letter-spacing:0.1em;margin-bottom:0.4rem">BANS RECOMMANDÉS</div>
           <div class="scout-slide-results" id="scoutResults"></div>
         </div>
 
@@ -424,32 +492,32 @@ footer p{font-style:italic;opacity:0.4;color:var(--muted);font-size:0.72rem;line
 <!-- FEATURES -->
 <section class="features-sec" id="features">
   <div class="features-header reveal from-left">
-    <div class="features-eye">Fonctionnalites</div>
+    <div class="features-eye">Fonctionnalités</div>
     <h2 class="features-title">Un arsenal complet<br>pour ta draft</h2>
     <div class="features-line"></div>
-    <p class="features-desc">Chaque fonctionnalite a ete pensee pour te donner un avantage decisif en Clash.</p>
+    <p class="features-desc">Chaque fonctionnalité a été pensée pour te donner un avantage décisif en Clash.</p>
   </div>
 
   <div class="features-grid">
     <div class="feat-card reveal" style="--accent-color:var(--gold);transition-delay:0s">
       <span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 4 5-9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      <h3 class="feat-title">Stats en Direct</h3><p class="feat-desc">Rang, winrate, LP et top 5 champions recuperes en temps reel via l'API Riot Games pour chaque joueur.</p>
+      <h3 class="feat-title">Stats en Direct</h3><p class="feat-desc">Rang, winrate, LP et top 5 champions récupérés en temps réel via l'API Riot Games pour chaque joueur.</p>
     </div>
     <div class="feat-card reveal" style="--accent-color:var(--violet);transition-delay:0.15s">
       <span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M8 14h8l2 8H6l2-8z"/><path d="M9 4l1-2h4l1 2" stroke-linecap="round"/></svg></span>
-      <h3 class="feat-title">NEROBOT — Coach IA</h3><p class="feat-desc">Un coach virtuel specialise LoL qui reagit a chaque pick en temps reel. Conseils de matchup et de build.</p>
+      <h3 class="feat-title">NEROBOT — Coach IA</h3><p class="feat-desc">Un coach virtuel spécialisé LoL qui réagit à chaque pick en temps réel. Conseils de matchup et de build.</p>
     </div>
     <div class="feat-card reveal" style="--accent-color:var(--gold);transition-delay:0.3s">
       <span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M12 2a7 7 0 017 7c0 2.5-1.3 4.5-3 5.7V17a1 1 0 01-1 1h-6a1 1 0 01-1-1v-2.3C6.3 13.5 5 11.5 5 9a7 7 0 017-7z"/><path d="M9 21h6M10 17v1M14 17v1" stroke-linecap="round"/><path d="M12 6v2M9.5 8.5l1 1M14.5 8.5l-1 1" stroke-linecap="round" opacity="0.6"/></svg></span>
-      <h3 class="feat-title">Draft Intelligente</h3><p class="feat-desc">Analyse de composition, score de synergie, counterpicks et suggestions basees sur la maitrise des joueurs.</p>
+      <h3 class="feat-title">Draft Intelligente</h3><p class="feat-desc">Analyse de composition, score de synergie, counterpicks et suggestions basées sur la maîtrise des joueurs.</p>
     </div>
     <div class="feat-card reveal" style="--accent-color:var(--red);transition-delay:0.45s">
       <span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke-linecap="round"/></svg></span>
-      <h3 class="feat-title">Scout Ennemi</h3><p class="feat-desc">Analyse les champions favoris des adversaires et suggere les bans optimaux pour chaque Clash.</p>
+      <h3 class="feat-title">Scout Ennemi</h3><p class="feat-desc">Analyse les champions favoris des adversaires et suggère les bans optimaux pour chaque Clash.</p>
     </div>
     <div class="feat-card reveal" style="--accent-color:var(--green);transition-delay:0.6s">
       <span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="var(--green)"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.82 14.01c-.24.68-1.41 1.3-1.95 1.38-.5.07-1.13.1-1.83-.11-.42-.13-.96-.32-1.65-.63-2.9-1.26-4.79-4.19-4.93-4.39-.14-.2-1.17-1.56-1.17-2.97s.74-2.11 1-2.4c.27-.29.58-.36.78-.36h.56c.18 0 .43-.07.67.51.24.58.83 2.03.9 2.17.07.15.12.32.02.51-.1.2-.15.32-.29.49-.15.17-.31.38-.44.51-.15.15-.3.31-.13.6.17.3.78 1.28 1.67 2.07 1.14 1.02 2.11 1.33 2.41 1.48.29.15.47.13.64-.08.17-.2.75-.87.95-1.17.2-.29.41-.24.68-.15.27.1 1.72.81 2.01.96.29.15.49.22.56.34.07.12.07.71-.17 1.39z"/></svg></span>
-      <h3 class="feat-title">Rappels WhatsApp</h3><p class="feat-desc">Notifications automatiques 2 jours avant chaque Clash. Confirme ta participation et ton role directement.</p>
+      <h3 class="feat-title">Rappels WhatsApp</h3><p class="feat-desc">Notifications automatiques 2 jours avant chaque Clash. Confirme ta participation et ton rôle directement.</p>
     </div>
     <div class="feat-card reveal" style="--accent-color:var(--gold);transition-delay:0.75s">
       <span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M12 2l3 6h6l-5 4 2 7-6-4-6 4 2-7-5-4h6z" stroke-linejoin="round"/><circle cx="12" cy="15" r="3"/></svg></span>
@@ -460,35 +528,114 @@ footer p{font-style:italic;opacity:0.4;color:var(--muted);font-size:0.72rem;line
 
 <div class="sec-divider"></div>
 
+<!-- TESTIMONIALS -->
+<section class="testimonials-sec" id="testimonials">
+  <div class="testimonials-header reveal">
+    <div class="testimonials-eye">Ils en parlent</div>
+    <h2 class="testimonials-title">Ce qu'en disent nos joueurs</h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card reveal">
+      <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="testimonial-text">On a ban les 5 OTP de l'équipe adverse grâce au scout. Résultat : 3-0 en Clash. L'outil est une vraie triche légale.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">N</div>
+        <div class="testimonial-info">
+          <span class="testimonial-name">Nero</span>
+          <span class="testimonial-role">Jungle — Clash régulier</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-1">
+      <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="testimonial-text">NEROBOT m'a conseillé un counter que j'aurais jamais pick moi-même. J'ai solo carry la game. Le coach IA c'est un game changer.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">T</div>
+        <div class="testimonial-info">
+          <span class="testimonial-name">Timotix</span>
+          <span class="testimonial-role">Mid — Tryhard Clash</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-2">
+      <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="testimonial-text">Les rappels WhatsApp c'est génial. Plus personne oublie le Clash, et on sait qui joue quel rôle avant même de se co.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">E</div>
+        <div class="testimonial-info">
+          <span class="testimonial-name">Eracci</span>
+          <span class="testimonial-role">Support — Capitaine d'équipe</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sec-divider"></div>
+
+<!-- FAQ -->
+<section class="faq-sec" id="faq">
+  <div class="faq-header reveal">
+    <div class="faq-eye">Questions fréquentes</div>
+    <h2 class="faq-title">Tout ce que tu veux savoir</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item reveal" onclick="this.classList.toggle('open')">
+      <div class="faq-q">C'est quoi TaverneDuClash exactement ?</div>
+      <div class="faq-a"><p>C'est un outil web conçu pour les équipes de Clash sur League of Legends. Il combine un système de draft intelligent, un scout des adversaires, un coach IA (NEROBOT) et des rappels WhatsApp automatiques pour t'aider à dominer chaque tournoi.</p></div>
+    </div>
+    <div class="faq-item reveal reveal-delay-1" onclick="this.classList.toggle('open')">
+      <div class="faq-q">C'est gratuit ?</div>
+      <div class="faq-a"><p>Oui, TaverneDuClash sera gratuit. L'objectif c'est d'aider la communauté Clash, pas de monétiser. Inscris-toi à la waitlist pour être prévenu du lancement.</p></div>
+    </div>
+    <div class="faq-item reveal reveal-delay-2" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Ça marche sur quel serveur ? (EUW, EUNE, etc.)</div>
+      <div class="faq-a"><p>L'outil fonctionne avec tous les serveurs supportés par l'API Riot Games, dont EUW, EUNE, NA, KR, et tous les autres.</p></div>
+    </div>
+    <div class="faq-item reveal reveal-delay-3" onclick="this.classList.toggle('open')">
+      <div class="faq-q">C'est autorisé par Riot Games ?</div>
+      <div class="faq-a"><p>Oui. TaverneDuClash utilise l'API officielle de Riot Games dans le respect de leurs conditions d'utilisation. Aucune donnée privée n'est collectée en dehors de ce que l'API fournit publiquement.</p></div>
+    </div>
+    <div class="faq-item reveal reveal-delay-4" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Il faut un compte Riot pour utiliser l'outil ?</div>
+      <div class="faq-a"><p>Non, pas besoin de connecter ton compte Riot. Tu entres simplement les pseudos des joueurs et l'outil récupère les infos via l'API publique.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="sec-divider"></div>
+
 <!-- WAITLIST -->
 <section class="waitlist-sec" id="waitlist">
   <div class="waitlist-glow"></div>
   <div class="waitlist-card reveal scale-in">
-    <div class="waitlist-eye">Bientot disponible</div>
+    <div class="waitlist-eye">Bientôt disponible</div>
     <h2 class="waitlist-title">Rejoins la liste d'attente</h2>
-    <p class="waitlist-desc">Sois le premier informe quand TaverneDuClash sera disponible pour toutes les equipes.</p>
+    <p class="waitlist-desc">Sois le premier informé quand TaverneDuClash sera disponible pour toutes les équipes.</p>
     <form class="waitlist-form" id="waitlistForm" onsubmit="submitWaitlist(event)">
       <input class="waitlist-input" type="email" placeholder="ton.email@exemple.com" required id="waitlistEmail">
-      <button class="waitlist-submit" type="submit" id="waitlistBtn">S'inscrire</button>
+      <button class="waitlist-submit" type="submit" id="waitlistBtn">Rejoindre la Waitlist</button>
     </form>
-    <p class="waitlist-privacy">Aucun spam. Desabonnement en un clic.</p>
+    <p class="waitlist-privacy">Aucun spam. Désabonnement en un clic.</p>
     <div class="waitlist-counter">
       <span class="waitlist-counter-num" id="waitlistCount">100+</span>
-      <span class="waitlist-counter-label">deja inscrits</span>
+      <span class="waitlist-counter-label">déjà inscrits</span>
       <span class="waitlist-counter-dot"></span>
     </div>
-    <div class="waitlist-success" id="waitlistSuccess">✅ Tu es inscrit ! On te previent des le lancement.</div>
+    <div class="waitlist-success" id="waitlistSuccess">✅ Tu es inscrit ! On te prévient dès le lancement.</div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo"><em>Taverne</em> <strong>Du Clash</strong></div>
-  <p>Construit avec l'API Riot Games<br><em>TaverneDuClash n'est pas affilie a Riot Games.</em></p>
+  <p>Construit avec l'API Riot Games<br><em>TaverneDuClash n'est pas affilié à Riot Games.</em></p>
   <div class="footer-links">
     <a href="https://discord.gg/axgmKnGPw" target="_blank">Discord</a>
     <a href="https://github.com/NeyrowAI/TaverneDuClash" target="_blank">GitHub</a>
+    <a href="mailto:contact@taverneduclash.com">Contact</a>
   </div>
+  <p style="margin-top:0.8rem;font-size:0.6rem;opacity:0.3">© 2026 TaverneDuClash — Tes données ne sont jamais partagées.</p>
 </footer>
 
 <script>
@@ -646,9 +793,15 @@ async function submitWaitlist(e) {
     document.getElementById('waitlistSuccess').classList.add('show');
     document.getElementById('waitlistForm').style.display = 'none';
   } catch(err) {
-    alert('Erreur. Reessaie plus tard.');
+    alert('Erreur. Réessaie plus tard.');
   }
-  btn.disabled = false; btn.textContent = "S'inscrire";
+  btn.disabled = false; btn.textContent = "Rejoindre la Waitlist";
+}
+
+// ── HAMBURGER MENU ──
+function toggleMobileMenu() {
+  document.getElementById('hamburgerBtn').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
 }
 
 // ── INIT ──
