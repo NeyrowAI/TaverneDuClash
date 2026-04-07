@@ -399,15 +399,27 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 3
 .n-send{background:rgba(61,26,110,0.65);border:none;border-left:1px solid var(--borderv);color:var(--gl);padding:0.7rem 0.9rem;cursor:pointer;font-size:0.8rem;transition:background 0.2s}
 .n-send:hover{background:rgba(124,58,237,0.55)}
 
-/* FEATURES */
-.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem;max-width:1100px;margin:0 auto}
-.feat-card{background:linear-gradient(160deg,rgba(26,16,48,0.5),rgba(14,8,24,0.75));border:1px solid var(--border);border-radius:6px;padding:1.7rem;transition:all 0.3s;position:relative;overflow:hidden}
-.feat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--violet),transparent);opacity:0;transition:opacity 0.3s}
-.feat-card:hover{border-color:var(--borderv);transform:translateY(-4px)}
-.feat-card:hover::after{opacity:1}
-.feat-icon{font-size:1.7rem;margin-bottom:0.7rem;display:block}
-.feat-title{font-family:'Cinzel',serif;font-size:0.88rem;color:var(--gold);margin-bottom:0.55rem}
-.feat-desc{color:var(--muted);font-size:0.85rem;line-height:1.8;font-style:italic}
+/* FEATURES — ZIGZAG PARALLAX */
+.features-zigzag{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:0}
+.feat-row{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;padding:3rem 2rem;position:relative}
+.feat-row:nth-child(even) .feat-visual{order:-1}
+.feat-visual{position:relative;display:flex;align-items:center;justify-content:center}
+.feat-icon-wrap{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,rgba(61,26,110,0.4),rgba(14,8,24,0.8));border:1px solid var(--borderv);display:flex;align-items:center;justify-content:center;position:relative;transition:transform 0.4s,box-shadow 0.4s}
+.feat-icon-wrap svg{width:36px;height:36px}
+.feat-icon-wrap::before{content:'';position:absolute;inset:-8px;border-radius:50%;border:1px dashed rgba(168,85,247,0.15);animation:spin 30s linear infinite}
+.feat-row:hover .feat-icon-wrap{transform:scale(1.1);box-shadow:0 0 40px rgba(168,85,247,0.25)}
+.feat-content{position:relative}
+.feat-num{font-family:'Cinzel',serif;font-size:3rem;font-weight:900;color:rgba(201,168,76,0.07);position:absolute;top:-1.2rem;left:-0.5rem;line-height:1;pointer-events:none}
+.feat-title{font-family:'Cinzel',serif;font-size:1.05rem;color:var(--gold);margin-bottom:0.6rem;letter-spacing:0.05em}
+.feat-desc{color:var(--muted);font-size:0.88rem;line-height:1.9;font-style:italic}
+.feat-tag{display:inline-block;margin-top:0.8rem;font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--violet);border:1px solid var(--borderv);padding:0.3rem 0.8rem;border-radius:3px}
+/* Progress line between items */
+.feat-line{width:1px;height:50px;background:linear-gradient(180deg,var(--borderv),transparent);margin:0 auto}
+/* Parallax scroll effect */
+.feat-row{opacity:0;transform:translateY(50px);transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1),transform 0.7s cubic-bezier(0.16,1,0.3,1)}
+.feat-row.visible{opacity:1;transform:translateY(0)}
+.feat-row:nth-child(odd) .feat-visual{transform:translateY(var(--parallax,0))}
+.feat-row:nth-child(even) .feat-visual{transform:translateY(calc(var(--parallax,0) * -1))}
 
 footer{padding:2.5rem 3rem;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:0.75rem;position:relative;z-index:1}
 .footer-logo{font-family:'Cinzel',serif;font-size:0.88rem;color:var(--gold);letter-spacing:0.2em;margin-bottom:0.35rem}
@@ -467,6 +479,9 @@ footer p{font-style:italic;opacity:0.45;line-height:1.8}
   .comp-analyzer{grid-template-columns:1fr;gap:0.8rem}
   .synergy-ring-wrap{flex-direction:row;gap:1rem}
   .hero-stats{gap:1rem}
+  .feat-row{grid-template-columns:1fr;gap:1.5rem;padding:2rem 1rem}
+  .feat-row:nth-child(even) .feat-visual{order:0}
+  .feat-visual{justify-content:flex-start}
 }
 @media(max-width:600px){
   .sec{padding:3rem 1rem}
@@ -606,13 +621,85 @@ footer p{font-style:italic;opacity:0.45;line-height:1.8}
       <h2 class="sec-title reveal reveal-delay-1">Tout ce dont tu as besoin</h2>
       <div class="sec-line reveal reveal-delay-2"></div>
     </div>
-    <div class="features-grid">
-      <div class="feat-card reveal reveal-delay-1"><span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 4 5-9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3 class="feat-title">Stats Live</h3><p class="feat-desc">Rang, winrate et champions favoris récupérés en temps réel via l'API Riot pour chaque joueur.</p></div>
-      <div class="feat-card reveal reveal-delay-2"><span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" stroke-width="1.5"><path d="M14.5 2l6 6-9 9-6-6 9-9z"/><path d="M3 21l3.5-3.5"/><path d="M17 2l5 5" stroke-linecap="round"/></svg></span><h3 class="feat-title">Draft par Rôles</h3><p class="feat-desc">Assigne chaque joueur à son rôle pour des suggestions de picks parfaitement adaptées.</p></div>
-      <div class="feat-card reveal reveal-delay-3"><span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M12 2a7 7 0 017 7c0 2.5-1.3 4.5-3 5.7V17a1 1 0 01-1 1h-6a1 1 0 01-1-1v-2.3C6.3 13.5 5 11.5 5 9a7 7 0 017-7z"/><path d="M9 21h6M10 17v1M14 17v1" stroke-linecap="round"/><path d="M12 6v2M9.5 8.5l1 1M14.5 8.5l-1 1" stroke-linecap="round" opacity="0.6"/></svg></span><h3 class="feat-title">Double Analyse</h3><p class="feat-desc">Counterpicks théoriques + picks recommandés selon la maîtrise réelle de chaque joueur.</p></div>
-      <div class="feat-card reveal reveal-delay-4"><span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke-linecap="round"/></svg></span><h3 class="feat-title">Scout Ennemi</h3><p class="feat-desc">Analyse les champions favoris des adversaires et suggère les meilleurs bans.</p></div>
-      <div class="feat-card reveal reveal-delay-5"><span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M8 14h8l2 8H6l2-8z"/><path d="M9 4l1-2h4l1 2" stroke-linecap="round"/></svg></span><h3 class="feat-title">NEROBOT</h3><p class="feat-desc">Coach virtuel disponible en permanence pour répondre à toutes tes questions LoL.</p></div>
-      <div class="feat-card reveal reveal-delay-1"><span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M12 2l3 6h6l-5 4 2 7-6-4-6 4 2-7-5-4h6z" stroke-linejoin="round"/><circle cx="12" cy="15" r="3"/></svg></span><h3 class="feat-title">German & Carry</h3><p class="feat-desc">Les awards hebdomadaires basés sur les performances Clash de l'équipe.</p></div>
+    <div class="features-zigzag" id="featZigzag">
+
+      <div class="feat-row">
+        <div class="feat-content">
+          <div class="feat-num">01</div>
+          <h3 class="feat-title">Stats Live</h3>
+          <p class="feat-desc">Rang, winrate et champions favoris récupérés en temps réel via l'API Riot pour chaque joueur.</p>
+          <span class="feat-tag">API Riot Games</span>
+        </div>
+        <div class="feat-visual">
+          <div class="feat-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 4 5-9" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+      </div>
+      <div class="feat-line"></div>
+
+      <div class="feat-row">
+        <div class="feat-content">
+          <div class="feat-num">02</div>
+          <h3 class="feat-title">Draft par Rôles</h3>
+          <p class="feat-desc">Assigne chaque joueur à son rôle pour des suggestions de picks parfaitement adaptées.</p>
+          <span class="feat-tag">Top / Jungle / Mid / ADC / Support</span>
+        </div>
+        <div class="feat-visual">
+          <div class="feat-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="var(--violet)" stroke-width="1.5"><path d="M14.5 2l6 6-9 9-6-6 9-9z"/><path d="M3 21l3.5-3.5"/><path d="M17 2l5 5" stroke-linecap="round"/></svg></div>
+        </div>
+      </div>
+      <div class="feat-line"></div>
+
+      <div class="feat-row">
+        <div class="feat-content">
+          <div class="feat-num">03</div>
+          <h3 class="feat-title">Double Analyse</h3>
+          <p class="feat-desc">Counterpicks théoriques + picks recommandés selon la maîtrise réelle de chaque joueur.</p>
+          <span class="feat-tag">Théorie + Pratique</span>
+        </div>
+        <div class="feat-visual">
+          <div class="feat-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M12 2a7 7 0 017 7c0 2.5-1.3 4.5-3 5.7V17a1 1 0 01-1 1h-6a1 1 0 01-1-1v-2.3C6.3 13.5 5 11.5 5 9a7 7 0 017-7z"/><path d="M9 21h6M10 17v1M14 17v1" stroke-linecap="round"/><path d="M12 6v2M9.5 8.5l1 1M14.5 8.5l-1 1" stroke-linecap="round" opacity="0.6"/></svg></div>
+        </div>
+      </div>
+      <div class="feat-line"></div>
+
+      <div class="feat-row">
+        <div class="feat-content">
+          <div class="feat-num">04</div>
+          <h3 class="feat-title">Scout Ennemi</h3>
+          <p class="feat-desc">Analyse les champions favoris des adversaires et suggère les meilleurs bans.</p>
+          <span class="feat-tag">Intelligence tactique</span>
+        </div>
+        <div class="feat-visual">
+          <div class="feat-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke-linecap="round"/></svg></div>
+        </div>
+      </div>
+      <div class="feat-line"></div>
+
+      <div class="feat-row">
+        <div class="feat-content">
+          <div class="feat-num">05</div>
+          <h3 class="feat-title">NEROBOT</h3>
+          <p class="feat-desc">Coach virtuel disponible en permanence pour répondre à toutes tes questions LoL.</p>
+          <span class="feat-tag">Coach IA</span>
+        </div>
+        <div class="feat-visual">
+          <div class="feat-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="var(--violet)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M8 14h8l2 8H6l2-8z"/><path d="M9 4l1-2h4l1 2" stroke-linecap="round"/></svg></div>
+        </div>
+      </div>
+      <div class="feat-line"></div>
+
+      <div class="feat-row">
+        <div class="feat-content">
+          <div class="feat-num">06</div>
+          <h3 class="feat-title">German & Carry</h3>
+          <p class="feat-desc">Les awards hebdomadaires basés sur les performances Clash de l'équipe.</p>
+          <span class="feat-tag">Awards</span>
+        </div>
+        <div class="feat-visual">
+          <div class="feat-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M12 2l3 6h6l-5 4 2 7-6-4-6 4 2-7-5-4h6z" stroke-linejoin="round"/><circle cx="12" cy="15" r="3"/></svg></div>
+        </div>
+      </div>
+
     </div>
   </section>
   <!-- FAQ -->
@@ -806,15 +893,55 @@ footer p{font-style:italic;opacity:0.45;line-height:1.8}
       <h2 class="sec-title reveal reveal-delay-1">Fonctionnalités</h2>
       <div class="sec-line reveal reveal-delay-2"></div>
     </div>
-    <div class="features-grid">
-      <div class="feat-card reveal reveal-delay-1"><span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 4 5-9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3 class="feat-title">Stats Live via API Riot</h3><p class="feat-desc">Rang, winrate, LP et champions favoris récupérés en temps réel depuis l'API officielle Riot Games pour chaque joueur de l'équipe.</p></div>
-      <div class="feat-card reveal reveal-delay-2"><span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" stroke-width="1.5"><path d="M14.5 2l6 6-9 9-6-6 9-9z"/><path d="M3 21l3.5-3.5"/><path d="M17 2l5 5" stroke-linecap="round"/></svg></span><h3 class="feat-title">Draft par Rôles</h3><p class="feat-desc">Assigne chaque joueur à son rôle — Top, Jungle, Mid, ADC, Support — avec les vraies icônes officielles Riot pour des suggestions de picks parfaitement adaptées.</p></div>
-      <div class="feat-card reveal reveal-delay-3"><span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M12 2a7 7 0 017 7c0 2.5-1.3 4.5-3 5.7V17a1 1 0 01-1 1h-6a1 1 0 01-1-1v-2.3C6.3 13.5 5 11.5 5 9a7 7 0 017-7z"/><path d="M9 21h6M10 17v1M14 17v1" stroke-linecap="round"/><path d="M12 6v2M9.5 8.5l1 1M14.5 8.5l-1 1" stroke-linecap="round" opacity="0.6"/></svg></span><h3 class="feat-title">Double Analyse de Draft</h3><p class="feat-desc">Deux blocs de suggestions : les meilleurs counterpicks théoriques + les picks recommandés selon la maîtrise réelle de chaque joueur.</p></div>
-      <div class="feat-card reveal reveal-delay-4"><span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke-linecap="round"/></svg></span><h3 class="feat-title">Scout Équipe Ennemie</h3><p class="feat-desc">Entre les pseudos adverses pour analyser leurs champions favoris via l'API Riot et obtenir des suggestions de bans personnalisées.</p></div>
-      <div class="feat-card reveal reveal-delay-5"><span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M8 14h8l2 8H6l2-8z"/><path d="M9 4l1-2h4l1 2" stroke-linecap="round"/></svg></span><h3 class="feat-title">NEROBOT — Coach LoL</h3><p class="feat-desc">Un coach virtuel spécialisé League of Legends disponible en permanence dans le panel flottant pour répondre à toutes tes questions. Proactif : il réagit à chaque pick !</p></div>
-      <div class="feat-card reveal reveal-delay-1"><span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M12 2l3 6h6l-5 4 2 7-6-4-6 4 2-7-5-4h6z" stroke-linejoin="round"/><circle cx="12" cy="15" r="3"/></svg></span><h3 class="feat-title">German & Carry de la Semaine</h3><p class="feat-desc">Les awards hebdomadaires basés sur les performances KDA lors des matchs de Clash, mis à jour après chaque tournoi.</p></div>
-      <div class="feat-card reveal reveal-delay-2"><span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" stroke-width="1.5"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg></span><h3 class="feat-title">Sauvegarder les Drafts</h3><p class="feat-desc">Sauvegarde tes drafts en local pour les retrouver facilement, comparer et préparer tes prochains Clash.</p></div>
-      <div class="feat-card reveal reveal-delay-3"><span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><h3 class="feat-title">Analyseur de Comp</h3><p class="feat-desc">Score de synergie en temps réel, détection du style de comp (engage, poke, protect) et analyse des forces/faiblesses.</p></div>
+    <div class="features-zigzag">
+
+      <div class="feat-row">
+        <div class="feat-content"><div class="feat-num">01</div><h3 class="feat-title">Stats Live via API Riot</h3><p class="feat-desc">Rang, winrate, LP et champions favoris récupérés en temps réel depuis l'API officielle Riot Games pour chaque joueur de l'équipe.</p><span class="feat-tag">API Riot Games</span></div>
+        <div class="feat-visual"><div class="feat-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 4 5-9" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+      </div>
+      <div class="feat-line"></div>
+
+      <div class="feat-row">
+        <div class="feat-content"><div class="feat-num">02</div><h3 class="feat-title">Draft par Rôles</h3><p class="feat-desc">Assigne chaque joueur à son rôle — Top, Jungle, Mid, ADC, Support — avec les vraies icônes officielles Riot pour des suggestions de picks parfaitement adaptées.</p><span class="feat-tag">Top / Jungle / Mid / ADC / Support</span></div>
+        <div class="feat-visual"><div class="feat-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="var(--violet)" stroke-width="1.5"><path d="M14.5 2l6 6-9 9-6-6 9-9z"/><path d="M3 21l3.5-3.5"/><path d="M17 2l5 5" stroke-linecap="round"/></svg></div></div>
+      </div>
+      <div class="feat-line"></div>
+
+      <div class="feat-row">
+        <div class="feat-content"><div class="feat-num">03</div><h3 class="feat-title">Double Analyse de Draft</h3><p class="feat-desc">Deux blocs de suggestions : les meilleurs counterpicks théoriques + les picks recommandés selon la maîtrise réelle de chaque joueur.</p><span class="feat-tag">Théorie + Pratique</span></div>
+        <div class="feat-visual"><div class="feat-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M12 2a7 7 0 017 7c0 2.5-1.3 4.5-3 5.7V17a1 1 0 01-1 1h-6a1 1 0 01-1-1v-2.3C6.3 13.5 5 11.5 5 9a7 7 0 017-7z"/><path d="M9 21h6M10 17v1M14 17v1" stroke-linecap="round"/><path d="M12 6v2M9.5 8.5l1 1M14.5 8.5l-1 1" stroke-linecap="round" opacity="0.6"/></svg></div></div>
+      </div>
+      <div class="feat-line"></div>
+
+      <div class="feat-row">
+        <div class="feat-content"><div class="feat-num">04</div><h3 class="feat-title">Scout Équipe Ennemie</h3><p class="feat-desc">Entre les pseudos adverses pour analyser leurs champions favoris via l'API Riot et obtenir des suggestions de bans personnalisées.</p><span class="feat-tag">Intelligence tactique</span></div>
+        <div class="feat-visual"><div class="feat-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke-linecap="round"/></svg></div></div>
+      </div>
+      <div class="feat-line"></div>
+
+      <div class="feat-row">
+        <div class="feat-content"><div class="feat-num">05</div><h3 class="feat-title">NEROBOT — Coach LoL</h3><p class="feat-desc">Un coach virtuel spécialisé League of Legends disponible en permanence dans le panel flottant pour répondre à toutes tes questions. Proactif : il réagit à chaque pick !</p><span class="feat-tag">Coach IA</span></div>
+        <div class="feat-visual"><div class="feat-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="var(--violet)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M8 14h8l2 8H6l2-8z"/><path d="M9 4l1-2h4l1 2" stroke-linecap="round"/></svg></div></div>
+      </div>
+      <div class="feat-line"></div>
+
+      <div class="feat-row">
+        <div class="feat-content"><div class="feat-num">06</div><h3 class="feat-title">German & Carry de la Semaine</h3><p class="feat-desc">Les awards hebdomadaires basés sur les performances KDA lors des matchs de Clash, mis à jour après chaque tournoi.</p><span class="feat-tag">Awards</span></div>
+        <div class="feat-visual"><div class="feat-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M12 2l3 6h6l-5 4 2 7-6-4-6 4 2-7-5-4h6z" stroke-linejoin="round"/><circle cx="12" cy="15" r="3"/></svg></div></div>
+      </div>
+      <div class="feat-line"></div>
+
+      <div class="feat-row">
+        <div class="feat-content"><div class="feat-num">07</div><h3 class="feat-title">Sauvegarder les Drafts</h3><p class="feat-desc">Sauvegarde tes drafts en local pour les retrouver facilement, comparer et préparer tes prochains Clash.</p><span class="feat-tag">Sauvegarde locale</span></div>
+        <div class="feat-visual"><div class="feat-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="var(--violet)" stroke-width="1.5"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg></div></div>
+      </div>
+      <div class="feat-line"></div>
+
+      <div class="feat-row">
+        <div class="feat-content"><div class="feat-num">08</div><h3 class="feat-title">Analyseur de Comp</h3><p class="feat-desc">Score de synergie en temps réel, détection du style de comp (engage, poke, protect) et analyse des forces/faiblesses.</p><span class="feat-tag">Synergie</span></div>
+        <div class="feat-visual"><div class="feat-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div></div>
+      </div>
+
     </div>
     <footer style="margin-top:4rem">
       <div class="footer-logo">TaverneDuClash</div>
@@ -888,10 +1015,10 @@ footer p{font-style:italic;opacity:0.45;line-height:1.8}
 <div class="aw-modal-bg" id="carryModal"><div class="aw-modal carry"><button class="aw-modal-x" onclick="closeAward('carry')">×</button><span class="aw-modal-emoji" style="color:var(--gold);">&#x2655;</span><div class="aw-modal-title">Carry de la semaine</div><div class="aw-modal-player">Celadon</div><div class="aw-modal-stat">Le joueur avec le meilleur KDA lors des derniers matchs de Clash. La Taverne salue son héros !</div><span class="aw-modal-badge">Meilleur KDA du Clash</span></div></div>
 
 <!-- NEROBOT -->
-<button class="nerobot-fab" onclick="toggleNero()"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><rect x="5" y="10" width="14" height="10" rx="2"/><circle cx="9" cy="15" r="1.5" fill="var(--gold)"/><circle cx="15" cy="15" r="1.5" fill="var(--gold)"/><path d="M12 2v4M8 10V8a4 4 0 018 0v2"/></svg><div class="n-dot"></div></button>
+<button class="nerobot-fab" onclick="toggleNero()"><img id="neroFabBlitz" src="" alt="NEROBOT" width="32" height="32" style="border-radius:50%;object-fit:cover;"><div class="n-dot"></div></button>
 <div class="nerobot-panel" id="neroPanel">
   <div class="nerobot-head">
-    <div class="nerobot-ava"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><rect x="5" y="10" width="14" height="10" rx="2"/><circle cx="9" cy="15" r="1.5" fill="var(--gold)"/><circle cx="15" cy="15" r="1.5" fill="var(--gold)"/><path d="M12 2v4M8 10V8a4 4 0 018 0v2"/></svg></div>
+    <div class="nerobot-ava"><img id="neroChatBlitz" src="" alt="NEROBOT" width="26" height="26" style="border-radius:50%;object-fit:cover;"></div>
     <div class="nerobot-info"><div class="nerobot-name">NEROBOT</div><div class="nerobot-status">● En ligne — Coach LoL</div></div>
     <button class="nerobot-close" onclick="toggleNero()">✕</button>
   </div>
@@ -1050,6 +1177,23 @@ function initReveal(){
     if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
   }), {threshold:0.08});
   document.querySelectorAll('.reveal:not(.visible)').forEach(el=>obs.observe(el));
+
+  // Zigzag feature rows — reveal on scroll
+  const featObs = new IntersectionObserver(entries=>entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('visible'); featObs.unobserve(e.target); }
+  }), {threshold:0.15});
+  document.querySelectorAll('.feat-row').forEach(el=>featObs.observe(el));
+
+  // Parallax effect on feature icons
+  window.addEventListener('scroll', ()=>{
+    const rows = document.querySelectorAll('.feat-row.visible');
+    rows.forEach(row=>{
+      const rect = row.getBoundingClientRect();
+      const center = rect.top + rect.height/2;
+      const offset = (window.innerHeight/2 - center) * 0.08;
+      row.querySelector('.feat-visual')?.style.setProperty('--parallax', offset + 'px');
+    });
+  }, {passive:true});
 }
 
 // ── RIOT API ──
@@ -1194,6 +1338,12 @@ async function loadChamps(){
     Object.entries(items.data).forEach(([id,item])=>{
       itemData[item.name.toLowerCase()]={id,name:item.name,img:`https://ddragon.leagueoflegends.com/cdn/${lolVer}/img/item/${id}.png`};
     });
+    // Blitzcrank avatar for NEROBOT
+    const blitzUrl = `https://ddragon.leagueoflegends.com/cdn/${lolVer}/img/champion/Blitzcrank.png`;
+    const fabImg = document.getElementById('neroFabBlitz');
+    const chatImg = document.getElementById('neroChatBlitz');
+    if(fabImg) fabImg.src = blitzUrl;
+    if(chatImg) chatImg.src = blitzUrl;
   }catch(e){console.error('Champs load fail',e)}
 }
 function findItemImg(name){
