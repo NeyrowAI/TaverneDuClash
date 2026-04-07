@@ -10,6 +10,9 @@
 <meta property="og:image" content="/logox.png">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/jpeg" href="/logox.png">
+<meta name="theme-color" content="#07030f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -17,10 +20,10 @@
   --void:#07030f;--dark:#0e0818;--mid:#160c28;
   --purple:#3d1a6e;--pb:#7c3aed;--violet:#a855f7;
   --gold:#c9a84c;--gl:#f0d080;
-  --text:#e8dff8;--muted:#9d8fc0;
+  --text:#e8dff8;--muted:#b0a3d4;
   --border:rgba(201,168,76,0.18);--borderv:rgba(168,85,247,0.25);
 }
-html{scroll-behavior:smooth;overflow-x:hidden}
+html{scroll-behavior:smooth;overflow-x:hidden;color-scheme:dark}
 body{background:var(--void);color:var(--text);font-family:'Crimson Pro',serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem 1rem}
 
 /* BG EFFECTS */
@@ -59,8 +62,8 @@ body{background:var(--void);color:var(--text);font-family:'Crimson Pro',serif;mi
 /* FORM */
 .form-group{margin-bottom:1.4rem}
 .form-label{
-  display:block;font-family:'Cinzel',serif;font-size:0.72rem;
-  letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);
+  display:block;font-family:'Cinzel',serif;font-size:0.78rem;
+  letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);
   margin-bottom:0.4rem;
 }
 .form-input{
@@ -117,7 +120,7 @@ body{background:var(--void);color:var(--text);font-family:'Crimson Pro',serif;mi
   text-transform:uppercase;padding:0.95rem 2.2rem;
   background:linear-gradient(135deg,var(--purple),var(--pb));
   border:1px solid rgba(168,85,247,0.5);color:var(--gl);
-  cursor:pointer;transition:all 0.3s;border-radius:3px;
+  cursor:pointer;transition:background 0.3s,transform 0.3s,box-shadow 0.3s;border-radius:3px;
   text-decoration:none;display:inline-block;width:100%;
   text-align:center;
 }
@@ -172,6 +175,11 @@ body{background:var(--void);color:var(--text);font-family:'Crimson Pro',serif;mi
 }
 .checkbox-row span{font-style:italic}
 
+/* FOCUS */
+.form-input:focus-visible,.phone-prefix:focus-visible,.btn-p:focus-visible,.back-link:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+button,a{touch-action:manipulation}
+.reg-title{text-wrap:balance}
+
 /* RESPONSIVE */
 @media(max-width:540px){
   body{padding:1rem 0.5rem}
@@ -191,7 +199,7 @@ body{background:var(--void);color:var(--text);font-family:'Crimson Pro',serif;mi
 
 <!-- FORM CONTAINER -->
 <div class="register-container">
-  <img src="/logox.png" alt="TaverneDuClash" class="reg-logo">
+  <img src="/logox.png" alt="TaverneDuClash" class="reg-logo" width="80" height="80">
   <h1 class="reg-title">Inscription &mdash; TaverneDuClash</h1>
   <p class="reg-subtitle">Cr&eacute;e ton profil pour rejoindre la Taverne</p>
 
@@ -199,14 +207,14 @@ body{background:var(--void);color:var(--text);font-family:'Crimson Pro',serif;mi
     <!-- PSEUDO -->
     <div class="form-group">
       <label class="form-label" for="pseudo">Pseudo</label>
-      <input class="form-input" type="text" id="pseudo" name="pseudo" placeholder="Ton pseudo" required>
+      <input class="form-input" type="text" id="pseudo" name="pseudo" placeholder="Ton pseudo..." required autocomplete="username" spellcheck="false">
       <div class="form-error" id="err-pseudo">Ce champ est obligatoire.</div>
     </div>
 
     <!-- RIOT ID -->
     <div class="form-group">
       <label class="form-label" for="riotId">Pseudo in-game Riot</label>
-      <input class="form-input" type="text" id="riotId" name="riotId" placeholder="Pseudo#TAG" required pattern="^.+#.+$">
+      <input class="form-input" type="text" id="riotId" name="riotId" placeholder="Pseudo#TAG" required pattern="^.+#.+$" autocomplete="off" spellcheck="false">
       <div class="form-hint">Format : Pseudo#TAG (ex: Nero#oreN)</div>
       <div class="form-error" id="err-riotId">Format invalide. Assure-toi d'inclure le # (ex: Nero#oreN).</div>
     </div>
@@ -240,7 +248,7 @@ body{background:var(--void);color:var(--text);font-family:'Crimson Pro',serif;mi
             <option value="+213">&#x1F1E9;&#x1F1FF; +213</option>
           </optgroup>
         </select>
-        <input class="form-input phone-number" type="tel" id="phone" name="phone" placeholder="470 123 456" required>
+        <input class="form-input phone-number" type="tel" id="phone" name="phone" placeholder="470 123 456" required inputmode="tel" autocomplete="tel-national">
       </div>
       <div class="form-error" id="err-phone">Num&eacute;ro de t&eacute;l&eacute;phone obligatoire.</div>
     </div>
@@ -248,7 +256,7 @@ body{background:var(--void);color:var(--text);font-family:'Crimson Pro',serif;mi
     <!-- EMAIL -->
     <div class="form-group">
       <label class="form-label" for="email">Email</label>
-      <input class="form-input" type="email" id="email" name="email" placeholder="ton.email@exemple.com" required>
+      <input class="form-input" type="email" id="email" name="email" placeholder="ton.email@exemple.com" required autocomplete="email">
       <div class="form-error" id="err-email">Adresse email invalide.</div>
     </div>
 
@@ -369,7 +377,11 @@ body{background:var(--void);color:var(--text);font-family:'Crimson Pro',serif;mi
     } catch (err) {
       btn.disabled = false;
       btn.textContent = "S'inscrire";
-      alert('Erreur : ' + err.message);
+      const errEl = document.createElement('div');
+      errEl.style.cssText = 'color:#ff6b6b;text-align:center;margin-top:1rem;font-size:0.9rem;';
+      errEl.textContent = 'Erreur : ' + err.message;
+      form.parentNode.insertBefore(errEl, form.nextSibling);
+      setTimeout(() => errEl.remove(), 5000);
     }
   });
 })();

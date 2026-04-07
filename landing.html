@@ -11,6 +11,10 @@
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/jpeg" href="/logox.png">
+<meta name="theme-color" content="#07030f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://ddragon.leagueoflegends.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -18,12 +22,12 @@
   --void:#07030f;--dark:#0e0818;--mid:#160c28;
   --purple:#3d1a6e;--pb:#7c3aed;--violet:#a855f7;
   --gold:#c9a84c;--gl:#f0d080;
-  --text:#e8dff8;--muted:#9d8fc0;
+  --text:#e8dff8;--muted:#b0a3d4;
   --border:rgba(201,168,76,0.18);--borderv:rgba(168,85,247,0.25);
   --red:#ff6b6b;--green:#50c878;--cyan:#00d4ff;
   --discord:#7289da;
 }
-html{scroll-behavior:smooth;overflow-x:hidden}
+html{scroll-behavior:smooth;overflow-x:hidden;color-scheme:dark}
 body{background:var(--void);color:var(--text);font-family:'Crimson Pro',serif;min-height:100vh}
 
 /* PARTICLES */
@@ -76,18 +80,18 @@ body{background:var(--void);color:var(--text);font-family:'Crimson Pro',serif;mi
 .reveal-delay-4{transition-delay:0.6s}
 
 /* NAV */
-nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem 3rem;border-bottom:1px solid var(--border);background:rgba(7,3,15,0.88);backdrop-filter:blur(16px);position:sticky;top:0;z-index:100}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0.5rem 2rem;border-bottom:1px solid var(--border);background:rgba(7,3,15,0.88);backdrop-filter:blur(16px);position:sticky;top:0;z-index:100}
 .nav-logo{display:flex;align-items:center;gap:0.6rem;font-family:'Cinzel',serif;font-size:1rem;font-weight:900;color:var(--gold);letter-spacing:0.15em;text-decoration:none;white-space:nowrap;flex-shrink:0}
-.nav-logo img{width:120px;height:120px;object-fit:contain;border:none;filter:drop-shadow(0 0 6px rgba(201,168,76,0.3));transition:transform 0.3s ease,filter 0.3s ease}
+.nav-logo img{width:48px;height:48px;object-fit:contain;border:none;filter:drop-shadow(0 0 6px rgba(201,168,76,0.3));transition:transform 0.3s ease,filter 0.3s ease}
 .nav-logo:hover img{transform:scale(1.08);filter:drop-shadow(0 0 10px rgba(201,168,76,0.5))}
 .nav-logo em{color:var(--violet);font-style:normal;font-weight:400}
 .nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;font-family:'Cinzel',serif;transition:color 0.3s}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;font-family:'Cinzel',serif;font-weight:600;transition:color 0.3s;padding:0.5rem 0.3rem}
 .nav-links a:hover{color:var(--gold)}
 .nav-discord-btn{display:flex;align-items:center;gap:0.5rem;padding:0.45rem 1rem;background:rgba(114,137,218,0.1);border:1px solid rgba(114,137,218,0.3);border-radius:4px;text-decoration:none;transition:all 0.3s}
 .nav-discord-btn:hover{background:rgba(114,137,218,0.2);border-color:rgba(114,137,218,0.5);transform:translateY(-1px)}
 .nav-discord-btn svg{width:18px;height:18px;fill:var(--discord)}
-.nav-discord-btn span{font-family:'Cinzel',serif;font-size:0.65rem;color:var(--discord);letter-spacing:0.05em}
+.nav-discord-btn span{font-family:'Cinzel',serif;font-size:0.78rem;font-weight:600;color:var(--discord);letter-spacing:0.05em}
 
 /* HERO — SPLIT LAYOUT */
 .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1.3fr;align-items:center;padding:4rem 4rem 2rem;gap:2rem;position:relative;z-index:1}
@@ -105,9 +109,9 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem
 .hero-accent{width:80px;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--gold),rgba(201,168,76,0.2));margin-bottom:2rem}
 .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
 
-.btn-p{font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.95rem 2.2rem;background:linear-gradient(135deg,var(--purple),var(--pb));border:1px solid rgba(168,85,247,0.5);color:var(--gl);cursor:pointer;transition:all 0.3s;border-radius:3px;text-decoration:none;display:inline-block}
+.btn-p{font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.95rem 2.2rem;background:linear-gradient(135deg,var(--purple),var(--pb));border:1px solid rgba(168,85,247,0.5);color:var(--gl);cursor:pointer;transition:background 0.3s,transform 0.3s,box-shadow 0.3s;border-radius:3px;text-decoration:none;display:inline-block}
 .btn-p:hover{background:linear-gradient(135deg,var(--pb),var(--violet));transform:translateY(-2px);box-shadow:0 10px 35px rgba(124,58,237,0.4)}
-.btn-s{font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.95rem 2.2rem;background:transparent;border:1px solid var(--border);color:var(--gold);cursor:pointer;transition:all 0.3s;border-radius:3px;text-decoration:none;display:inline-block}
+.btn-s{font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.95rem 2.2rem;background:transparent;border:1px solid var(--border);color:var(--gold);cursor:pointer;transition:border-color 0.3s,background 0.3s,transform 0.3s;border-radius:3px;text-decoration:none;display:inline-block}
 .btn-s:hover{border-color:var(--gold);background:rgba(201,168,76,0.06);transform:translateY(-2px)}
 
 .hero-inscrits{display:inline-flex;align-items:center;gap:0.6rem;padding:0.5rem 1.2rem;background:rgba(14,8,24,0.8);border:1px solid var(--border);border-radius:25px}
@@ -208,7 +212,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem
 .features-desc{color:var(--muted);font-style:italic;line-height:1.8;font-size:0.92rem}
 
 .features-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
-.feat-card{background:linear-gradient(160deg,rgba(22,14,42,0.6),rgba(10,5,20,0.85));border:1px solid var(--border);border-radius:8px;padding:1.6rem;transition:all 0.4s;position:relative;overflow:hidden}
+.feat-card{background:linear-gradient(160deg,rgba(22,14,42,0.6),rgba(10,5,20,0.85));border:1px solid var(--border);border-radius:8px;padding:1.6rem;transition:border-color 0.4s,transform 0.4s,box-shadow 0.4s;position:relative;overflow:hidden}
 .feat-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,transparent,var(--accent-color,var(--violet)),transparent);opacity:0.5}
 .feat-card:hover{border-color:var(--borderv);transform:translateY(-6px);box-shadow:0 15px 40px rgba(124,58,237,0.1)}
 .feat-card:nth-child(even).visible{transform:translateY(30px)}
@@ -228,10 +232,10 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem
 .waitlist-input{width:300px;background:rgba(7,3,15,0.7);border:1px solid var(--borderv);color:var(--text);padding:0.75rem 1.1rem;font-family:'Crimson Pro',serif;font-size:0.9rem;border-radius:4px;outline:none;transition:border-color 0.2s}
 .waitlist-input:focus{border-color:var(--violet)}
 .waitlist-input::placeholder{color:var(--muted);opacity:0.35}
-.waitlist-submit{font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.75rem 1.5rem;background:linear-gradient(135deg,var(--purple),var(--pb));border:1px solid rgba(168,85,247,0.5);color:var(--gl);cursor:pointer;transition:all 0.3s;border-radius:4px}
+.waitlist-submit{font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.75rem 1.5rem;background:linear-gradient(135deg,var(--purple),var(--pb));border:1px solid rgba(168,85,247,0.5);color:var(--gl);cursor:pointer;transition:all 0.3s;border-radius:3px}
 .waitlist-submit:hover{background:linear-gradient(135deg,var(--pb),var(--violet));box-shadow:0 6px 20px rgba(124,58,237,0.35);transform:translateY(-1px)}
 .waitlist-submit:disabled{opacity:0.5;cursor:not-allowed}
-.waitlist-privacy{font-size:0.72rem;color:var(--muted);opacity:0.4;margin-bottom:1.2rem}
+.waitlist-privacy{font-size:0.72rem;color:var(--muted);opacity:0.7;margin-bottom:1.2rem}
 .waitlist-counter{display:inline-flex;align-items:center;gap:0.5rem;padding:0.4rem 1rem;background:rgba(7,3,15,0.5);border:1px solid var(--border);border-radius:20px}
 .waitlist-counter-num{font-family:'Cinzel',serif;font-size:1rem;font-weight:900;color:var(--gl)}
 .waitlist-counter-label{font-size:0.78rem;color:var(--muted)}
@@ -243,14 +247,23 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 /* FOOTER */
-footer{padding:2.5rem 3rem;border-top:1px solid var(--border);text-align:center;position:relative;z-index:1}
+footer{padding:2.5rem 4rem;border-top:1px solid var(--border);text-align:center;position:relative;z-index:1}
 .footer-logo{font-family:'Cinzel',serif;font-size:0.88rem;letter-spacing:0.2em;margin-bottom:0.5rem}
 .footer-logo em{color:var(--violet);font-style:normal;font-weight:400}
 .footer-logo strong{color:var(--gold)}
-footer p{font-style:italic;opacity:0.4;color:var(--muted);font-size:0.72rem;line-height:1.8}
+footer p{font-style:italic;opacity:0.6;color:var(--muted);font-size:0.72rem;line-height:1.8}
 .footer-links{display:flex;justify-content:center;gap:1.5rem;margin-top:0.8rem}
 .footer-links a{color:var(--muted);text-decoration:none;font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.1em;transition:color 0.3s}
 .footer-links a:hover{color:var(--gold)}
+
+/* FOCUS VISIBLE */
+.btn-p:focus-visible,.btn-s:focus-visible,.nav-links a:focus-visible,.waitlist-input:focus-visible,.carousel-dot:focus-visible,.faq-q:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+
+/* TOUCH */
+button,a,.faq-item,.carousel-dot{touch-action:manipulation}
+
+/* TEXT WRAP */
+.hero h1,.features-title,.testimonials-title,.faq-title,.waitlist-title{text-wrap:balance}
 
 /* RESPONSIVE */
 @media(max-width:1024px){
@@ -317,6 +330,7 @@ footer p{font-style:italic;opacity:0.4;color:var(--muted);font-size:0.72rem;line
   .waitlist-sec{padding:3rem 1.2rem}
   .waitlist-form{flex-direction:column;align-items:center}
   .waitlist-input{width:100%}
+  footer{padding:2rem 1.2rem}
 }
 
 /* B1 — Reduce animations for users who prefer it */
@@ -335,8 +349,8 @@ footer p{font-style:italic;opacity:0.4;color:var(--muted);font-size:0.72rem;line
   <div class="hex-grid"></div>
   <div class="mist m1"></div><div class="mist m2"></div><div class="mist m3"></div><div class="mist m4"></div>
   <div class="rune-ring rr1"></div><div class="rune-ring rr2"></div><div class="rune-ring rr3"></div><div class="rune-ring rr4"></div>
-  <svg class="sword-deco" style="--rot:35deg;width:250px;height:250px;top:8%;right:3%" viewBox="0 0 100 300"><path d="M50 8 L57 140 L50 292 L43 140 Z" fill="rgba(201,168,76,0.7)" stroke="rgba(201,168,76,0.15)" stroke-width="0.5"/><rect x="32" y="133" width="36" height="7" rx="1" fill="rgba(168,85,247,0.6)"/></svg>
-  <svg class="sword-deco" style="--rot:-20deg;width:180px;height:180px;bottom:15%;left:2%" viewBox="0 0 100 300"><path d="M50 8 L57 140 L50 292 L43 140 Z" fill="rgba(168,85,247,0.6)" stroke="rgba(168,85,247,0.15)" stroke-width="0.5"/><rect x="32" y="133" width="36" height="7" rx="1" fill="rgba(201,168,76,0.6)"/></svg>
+  <svg class="sword-deco" aria-hidden="true" style="--rot:35deg;width:250px;height:250px;top:8%;right:3%" viewBox="0 0 100 300"><path d="M50 8 L57 140 L50 292 L43 140 Z" fill="rgba(201,168,76,0.7)" stroke="rgba(201,168,76,0.15)" stroke-width="0.5"/><rect x="32" y="133" width="36" height="7" rx="1" fill="rgba(168,85,247,0.6)"/></svg>
+  <svg class="sword-deco" aria-hidden="true" style="--rot:-20deg;width:180px;height:180px;bottom:15%;left:2%" viewBox="0 0 100 300"><path d="M50 8 L57 140 L50 292 L43 140 Z" fill="rgba(168,85,247,0.6)" stroke="rgba(168,85,247,0.15)" stroke-width="0.5"/><rect x="32" y="133" width="36" height="7" rx="1" fill="rgba(201,168,76,0.6)"/></svg>
 </div>
 
 <!-- ENERGY LINES -->
@@ -363,7 +377,7 @@ footer p{font-style:italic;opacity:0.4;color:var(--muted);font-size:0.72rem;line
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="/"><img src="/logox.png" alt="Logo"><em>Taverne</em> <strong>Du Clash</strong></a>
+  <a class="nav-logo" href="/"><img src="/logox.png" alt="Logo" width="48" height="48"><em>Taverne</em> <strong>Du Clash</strong></a>
   <ul class="nav-links">
     <li><a href="#features">Fonctionnalités</a></li>
     <li><a href="#waitlist">Rejoindre</a></li>
@@ -375,7 +389,7 @@ footer p{font-style:italic;opacity:0.4;color:var(--muted);font-size:0.72rem;line
       </a>
     </li>
   </ul>
-  <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()">
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu de navigation" onclick="toggleMobileMenu()">
     <span></span><span></span><span></span>
   </button>
 </nav>
@@ -411,7 +425,7 @@ footer p{font-style:italic;opacity:0.4;color:var(--muted);font-size:0.72rem;line
 
         <!-- SLIDE 1: Draft LoL style -->
         <div class="carousel-slide draft-slide active">
-          <img class="map-bg" src="/map.png" alt="Summoner's Rift">
+          <img class="map-bg" src="/map.png" alt="" width="300" height="300">
           <div class="draft-header"><span>Draft en cours</span></div>
           <div class="draft-timer">
             <div class="draft-timer-num">26</div>
@@ -471,9 +485,9 @@ footer p{font-style:italic;opacity:0.4;color:var(--muted);font-size:0.72rem;line
       </div>
 
       <div class="carousel-dots" id="carouselDots">
-        <div class="carousel-dot active" onclick="goToSlide(0)"></div>
-        <div class="carousel-dot" onclick="goToSlide(1)"></div>
-        <div class="carousel-dot" onclick="goToSlide(2)"></div>
+        <button class="carousel-dot active" onclick="goToSlide(0)" aria-label="Slide 1"></button>
+        <button class="carousel-dot" onclick="goToSlide(1)" aria-label="Slide 2"></button>
+        <button class="carousel-dot" onclick="goToSlide(2)" aria-label="Slide 3"></button>
       </div>
     </div>
 
@@ -582,23 +596,23 @@ footer p{font-style:italic;opacity:0.4;color:var(--muted);font-size:0.72rem;line
     <h2 class="faq-title">Tout ce que tu veux savoir</h2>
   </div>
   <div class="faq-list">
-    <div class="faq-item reveal" onclick="this.classList.toggle('open')">
+    <div class="faq-item reveal" role="button" tabindex="0" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter')this.classList.toggle('open')">
       <div class="faq-q">C'est quoi TaverneDuClash exactement ?</div>
       <div class="faq-a"><p>C'est un outil web conçu pour les équipes de Clash sur League of Legends. Il combine un système de draft intelligent, un scout des adversaires, un coach IA (NEROBOT) et des rappels WhatsApp automatiques pour t'aider à dominer chaque tournoi.</p></div>
     </div>
-    <div class="faq-item reveal reveal-delay-1" onclick="this.classList.toggle('open')">
+    <div class="faq-item reveal reveal-delay-1" role="button" tabindex="0" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter')this.classList.toggle('open')">
       <div class="faq-q">C'est gratuit ?</div>
       <div class="faq-a"><p>Oui, TaverneDuClash sera gratuit. L'objectif c'est d'aider la communauté Clash, pas de monétiser. Inscris-toi à la waitlist pour être prévenu du lancement.</p></div>
     </div>
-    <div class="faq-item reveal reveal-delay-2" onclick="this.classList.toggle('open')">
+    <div class="faq-item reveal reveal-delay-2" role="button" tabindex="0" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter')this.classList.toggle('open')">
       <div class="faq-q">Ça marche sur quel serveur ? (EUW, EUNE, etc.)</div>
       <div class="faq-a"><p>L'outil fonctionne avec tous les serveurs supportés par l'API Riot Games, dont EUW, EUNE, NA, KR, et tous les autres.</p></div>
     </div>
-    <div class="faq-item reveal reveal-delay-3" onclick="this.classList.toggle('open')">
+    <div class="faq-item reveal reveal-delay-3" role="button" tabindex="0" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter')this.classList.toggle('open')">
       <div class="faq-q">C'est autorisé par Riot Games ?</div>
       <div class="faq-a"><p>Oui. TaverneDuClash utilise l'API officielle de Riot Games dans le respect de leurs conditions d'utilisation. Aucune donnée privée n'est collectée en dehors de ce que l'API fournit publiquement.</p></div>
     </div>
-    <div class="faq-item reveal reveal-delay-4" onclick="this.classList.toggle('open')">
+    <div class="faq-item reveal reveal-delay-4" role="button" tabindex="0" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter')this.classList.toggle('open')">
       <div class="faq-q">Il faut un compte Riot pour utiliser l'outil ?</div>
       <div class="faq-a"><p>Non, pas besoin de connecter ton compte Riot. Tu entres simplement les pseudos des joueurs et l'outil récupère les infos via l'API publique.</p></div>
     </div>
@@ -615,7 +629,7 @@ footer p{font-style:italic;opacity:0.4;color:var(--muted);font-size:0.72rem;line
     <h2 class="waitlist-title">Rejoins la liste d'attente</h2>
     <p class="waitlist-desc">Sois le premier informé quand TaverneDuClash sera disponible pour toutes les équipes.</p>
     <form class="waitlist-form" id="waitlistForm" onsubmit="submitWaitlist(event)">
-      <input class="waitlist-input" type="email" placeholder="ton.email@exemple.com" required id="waitlistEmail">
+      <input class="waitlist-input" type="email" placeholder="ton.email@exemple.com" required id="waitlistEmail" autocomplete="email">
       <button class="waitlist-submit" type="submit" id="waitlistBtn">Rejoindre la Waitlist</button>
     </form>
     <p class="waitlist-privacy">Aucun spam. Désabonnement en un clic.</p>
@@ -798,7 +812,9 @@ async function submitWaitlist(e) {
     document.getElementById('waitlistSuccess').classList.add('show');
     document.getElementById('waitlistForm').style.display = 'none';
   } catch(err) {
-    alert('Erreur. Réessaie plus tard.');
+    const errDiv = document.getElementById('waitlistSuccess');
+    errDiv.innerHTML = '<h3 style="color:#ff6b6b">Une erreur est survenue</h3><p>Vérifie ton email et réessaie.</p>';
+    errDiv.classList.add('show');
   }
   btn.disabled = false; btn.textContent = "Rejoindre la Waitlist";
 }
