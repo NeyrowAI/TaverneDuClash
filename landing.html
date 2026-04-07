@@ -236,8 +236,10 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem
 .waitlist-counter-num{font-family:'Cinzel',serif;font-size:1rem;font-weight:900;color:var(--gl)}
 .waitlist-counter-label{font-size:0.78rem;color:var(--muted)}
 .waitlist-counter-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 5px rgba(80,200,120,0.4)}
-.waitlist-success{display:none;color:var(--green);font-family:'Cinzel',serif;font-size:0.85rem;margin-top:0.5rem}
+.waitlist-success{display:none;text-align:center;margin-top:1.5rem;padding:1.5rem;background:rgba(80,200,120,0.06);border:1px solid rgba(80,200,120,0.2);border-radius:8px}
 .waitlist-success.show{display:block;animation:fadeIn 0.5s ease}
+.waitlist-success h3{font-family:'Cinzel',serif;font-size:1rem;color:var(--gl);margin-bottom:0.4rem;letter-spacing:0.05em}
+.waitlist-success p{color:var(--muted);font-size:0.88rem;font-style:italic;line-height:1.6}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 /* FOOTER */
@@ -622,7 +624,10 @@ footer p{font-style:italic;opacity:0.4;color:var(--muted);font-size:0.72rem;line
       <span class="waitlist-counter-label">déjà inscrits</span>
       <span class="waitlist-counter-dot"></span>
     </div>
-    <div class="waitlist-success" id="waitlistSuccess">✅ Tu es inscrit ! On te prévient dès le lancement.</div>
+    <div class="waitlist-success" id="waitlistSuccess">
+      <h3>Inscription confirmée</h3>
+      <p>Tu fais partie de la liste. On te prévient dès le lancement.</p>
+    </div>
   </div>
 </section>
 
