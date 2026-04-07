@@ -7,7 +7,7 @@ const CORS_HEADERS = {
   'Access-Control-Allow-Headers': 'Content-Type, Authorization',
 };
 
-function buildEmailHtml(siteUrl) {
+function buildEmailHtml(siteUrl, recipientEmail) {
   return `<!DOCTYPE html>
 <html lang="fr">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
@@ -34,7 +34,7 @@ function buildEmailHtml(siteUrl) {
         </td></tr>
         <!-- CTA Button -->
         <tr><td align="center" style="padding:20px 40px 40px;">
-          <a href="${siteUrl}/register.html"
+          <a href="${siteUrl}/register.html?email=${encodeURIComponent(recipientEmail)}"
              style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,#a855f7,#7c3aed);color:#ffffff;text-decoration:none;font-size:17px;font-weight:700;border-radius:8px;letter-spacing:0.5px;">
             Cr&eacute;er mon profil
           </a>
@@ -75,8 +75,6 @@ module.exports = async function handler(req, res) {
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
     const siteUrl = process.env.SITE_URL || 'https://taverne-du-clash.com';
-    const html = buildEmailHtml(siteUrl);
-
     const { testEmail } = req.body || {};
 
     // Build recipient list
@@ -99,6 +97,7 @@ module.exports = async function handler(req, res) {
     const results = [];
     for (const email of recipients) {
       try {
+        const html = buildEmailHtml(siteUrl, email);
         const { data, error } = await resend.emails.send({
           from: testEmail
             ? 'TaverneDuClash <onboarding@resend.dev>'

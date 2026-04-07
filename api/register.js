@@ -12,7 +12,7 @@ module.exports = async function handler(req, res) {
 
   // POST — inscription d'un joueur
   if (req.method === 'POST') {
-    const { pseudo, riotId, phone, email } = req.body || {};
+    const { pseudo, riotId, phone, email, optNewsletter, optWhatsapp, optTips } = req.body || {};
 
     // Validation des champs
     if (!pseudo || !riotId || !phone || !email) {
@@ -50,6 +50,9 @@ module.exports = async function handler(req, res) {
         riotId,
         phone,
         email,
+        optNewsletter: !!optNewsletter,
+        optWhatsapp: !!optWhatsapp,
+        optTips: !!optTips,
         date: new Date().toISOString()
       };
       await kv.rpush('registrations', JSON.stringify(registration));

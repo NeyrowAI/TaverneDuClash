@@ -160,6 +160,18 @@ body{background:var(--void);color:var(--text);font-family:'Crimson Pro',serif;mi
 }
 .back-link:hover{color:var(--gold)}
 
+/* CHECKBOXES */
+.checkbox-row{
+  display:flex;align-items:flex-start;gap:0.6rem;
+  margin-bottom:0.7rem;cursor:pointer;
+  font-size:0.88rem;color:var(--muted);line-height:1.5;
+}
+.checkbox-row input[type="checkbox"]{
+  accent-color:var(--violet);width:18px;height:18px;margin-top:2px;
+  flex-shrink:0;cursor:pointer;
+}
+.checkbox-row span{font-style:italic}
+
 /* RESPONSIVE */
 @media(max-width:540px){
   body{padding:1rem 0.5rem}
@@ -240,6 +252,23 @@ body{background:var(--void);color:var(--text);font-family:'Crimson Pro',serif;mi
       <div class="form-error" id="err-email">Adresse email invalide.</div>
     </div>
 
+    <!-- NEWSLETTER / NOTIFICATIONS -->
+    <div class="form-group" style="margin-top:1.8rem;border-top:1px solid var(--borderv);padding-top:1.4rem">
+      <label class="form-label" style="margin-bottom:0.8rem">Notifications</label>
+      <label class="checkbox-row">
+        <input type="checkbox" id="optNewsletter" checked>
+        <span>Je souhaite recevoir les actualit&eacute;s et mises &agrave; jour de TaverneDuClash</span>
+      </label>
+      <label class="checkbox-row">
+        <input type="checkbox" id="optWhatsapp" checked>
+        <span>Je souhaite recevoir les rappels de Clash via WhatsApp</span>
+      </label>
+      <label class="checkbox-row">
+        <input type="checkbox" id="optTips">
+        <span>Je souhaite recevoir des tips et guides LoL par email</span>
+      </label>
+    </div>
+
     <button type="submit" class="btn-p" id="submitBtn">S'inscrire</button>
   </form>
 
@@ -260,6 +289,16 @@ body{background:var(--void);color:var(--text);font-family:'Crimson Pro',serif;mi
   const form = document.getElementById('registerForm');
   const btn = document.getElementById('submitBtn');
   const successMsg = document.getElementById('successMsg');
+
+  // Pré-remplir l'email depuis l'URL (?email=xxx)
+  const params = new URLSearchParams(window.location.search);
+  const prefillEmail = params.get('email');
+  if (prefillEmail) {
+    const emailField = document.getElementById('email');
+    emailField.value = prefillEmail;
+    emailField.readOnly = true;
+    emailField.style.opacity = '0.7';
+  }
 
   function showError(id, show) {
     const el = document.getElementById(id);
@@ -313,7 +352,10 @@ body{background:var(--void);color:var(--text);font-family:'Crimson Pro',serif;mi
           pseudo,
           riotId,
           phone: fullPhone,
-          email
+          email,
+          optNewsletter: document.getElementById('optNewsletter').checked,
+          optWhatsapp: document.getElementById('optWhatsapp').checked,
+          optTips: document.getElementById('optTips').checked
         })
       });
 
