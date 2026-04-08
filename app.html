@@ -485,6 +485,30 @@ footer p{font-style:italic;opacity:0.45;line-height:1.8}
 .history-kda-val{font-size:0.6rem;color:var(--muted)}
 .history-cs{font-size:0.68rem;color:var(--muted);min-width:45px;text-align:right}
 .p-card{cursor:pointer}
+.history-expand{font-size:0.55rem;color:var(--muted);transition:transform 0.2s;margin-left:auto}
+
+/* GAME DETAIL */
+.game-detail{padding:0.5rem 0;animation:gdSlide 0.3s ease}
+@keyframes gdSlide{from{opacity:0;max-height:0}to{opacity:1;max-height:800px}}
+.gd-team{margin:0.4rem 0;border-radius:6px;overflow:hidden}
+.gd-team.gd-win{border:1px solid rgba(30,144,255,0.2)}
+.gd-team.gd-loss{border:1px solid rgba(192,57,43,0.2)}
+.gd-team-head{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.1em;padding:0.45rem 0.7rem;text-transform:uppercase}
+.gd-win .gd-team-head{background:rgba(30,90,160,0.12);color:#5dade2}
+.gd-loss .gd-team-head{background:rgba(160,30,30,0.12);color:#e74c3c}
+.gd-header{display:grid;grid-template-columns:28px 1fr 55px 32px 38px 38px auto;gap:0.3rem;padding:0.25rem 0.7rem;font-size:0.5rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;border-bottom:1px solid rgba(255,255,255,0.04)}
+.gd-row{display:grid;grid-template-columns:28px 1fr 55px 32px 38px 38px auto;gap:0.3rem;padding:0.3rem 0.7rem;align-items:center;font-size:0.68rem;border-bottom:1px solid rgba(255,255,255,0.03)}
+.gd-row:last-child{border-bottom:none}
+.gd-me{background:rgba(201,168,76,0.06)}
+.gd-champ{width:24px;height:24px;border-radius:50%;object-fit:cover;border:1px solid var(--border)}
+.gd-player{min-width:0;overflow:hidden}
+.gd-name{font-size:0.65rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gd-champ-name{font-size:0.55rem;color:var(--muted);font-style:italic}
+.gd-kda{text-align:center;font-size:0.65rem;color:var(--text);line-height:1.3}
+.gd-kda span{font-size:0.55rem;color:var(--muted)}
+.gd-cs,.gd-dmg,.gd-gold{text-align:center;font-size:0.62rem;color:var(--muted)}
+.gd-items{display:flex;gap:1px;flex-wrap:nowrap}
+.gd-item{width:18px;height:18px;border-radius:2px;border:1px solid rgba(255,255,255,0.06)}
 
 /* FAQ */
 .faq-sec{padding:6rem 4rem;position:relative;z-index:1}
@@ -1302,6 +1326,27 @@ async function loadHistory(playerName){
       const p = m.info.participants.find(x=>x.puuid===puuid);
       if(!p) return null;
       const champ = champData.find(c=>c.key==p.championId) || {name:p.championName,img:''};
+      const allParticipants = m.info.participants.map(x=>{
+        const ch = champData.find(c=>c.key==x.championId) || {name:x.championName,img:''};
+        return {
+          name: x.riotIdGameName || x.summonerName || '???',
+          tag: x.riotIdTagline || '',
+          champ: ch.name,
+          champImg: ch.img || `https://ddragon.leagueoflegends.com/cdn/${lolVer}/img/champion/${x.championName}.png`,
+          kills: x.kills, deaths: x.deaths, assists: x.assists,
+          kda: x.deaths===0 ? 'Perfect' : ((x.kills+x.assists)/x.deaths).toFixed(1),
+          cs: x.totalMinionsKilled + (x.neutralMinionsKilled||0),
+          gold: x.goldEarned,
+          damage: x.totalDamageDealtToChampions,
+          vision: x.visionScore,
+          win: x.win,
+          team: x.teamId,
+          role: x.individualPosition || x.teamPosition || '',
+          items: [x.item0,x.item1,x.item2,x.item3,x.item4,x.item5,x.item6].filter(i=>i>0),
+          level: x.champLevel,
+          puuid: x.puuid
+        };
+      });
       return {
         win: p.win,
         champ: champ.name,
@@ -1314,7 +1359,9 @@ async function loadHistory(playerName){
         duration: Math.round(m.info.gameDuration/60),
         role: p.individualPosition || p.teamPosition || '',
         queue: m.info.queueId,
-        date: new Date(m.info.gameCreation)
+        date: new Date(m.info.gameCreation),
+        participants: allParticipants,
+        playerPuuid: puuid
       };
     }).filter(Boolean);
     playerHistory[playerName] = history;
@@ -1346,24 +1393,79 @@ function openHistory(playerName){
         <div class="history-stat"><span class="history-stat-val ${wins/history.length>=0.5?'wr-good':'wr-bad'}">${Math.round(wins/history.length*100)}%</span><span class="history-stat-label">Winrate récent</span></div>
         <div class="history-stat"><span class="history-stat-val">${avgKda.toFixed(1)}</span><span class="history-stat-label">KDA moyen</span></div>
       </div>
-      <div class="history-list">${history.map(m=>`
-        <div class="history-match ${m.win?'win':'loss'}">
+      <div class="history-list">${history.map((m,i)=>`
+        <div class="history-match ${m.win?'win':'loss'}" onclick="toggleGameDetail(this,${i})" style="cursor:pointer">
           <div class="history-result">${m.win?'V':'D'}</div>
           <img class="history-champ" src="${m.champImg}" alt="${m.champ}" title="${m.champ}">
           <div class="history-info">
             <div class="history-champ-name">${m.champ}</div>
-            <div class="history-time">${m.duration}min · ${timeAgo(m.date)}</div>
+            <div class="history-time">${m.duration}min · ${m.date.toLocaleDateString('fr-FR',{day:'numeric',month:'short'})} · ${timeAgo(m.date)}</div>
           </div>
           <div class="history-kda">
             <span class="history-score">${m.kills}/${m.deaths}/${m.assists}</span>
             <span class="history-kda-val">${m.kda} KDA</span>
           </div>
           <div class="history-cs">${m.cs} CS</div>
+          <div class="history-expand">&#x25BC;</div>
         </div>`).join('')}
       </div>`;
+    // store history ref for detail expansion
+    window._currentHistory = history;
   });
 }
 function closeHistory(){ document.getElementById('historyModal').classList.remove('open'); document.getElementById('historyOverlay').classList.remove('open'); }
+
+function toggleGameDetail(el, idx){
+  const existing = el.nextElementSibling;
+  if(existing && existing.classList.contains('game-detail')){
+    existing.remove();
+    el.querySelector('.history-expand').innerHTML = '&#x25BC;';
+    return;
+  }
+  // Close any other open detail
+  el.closest('.history-list').querySelectorAll('.game-detail').forEach(d=>{ d.previousElementSibling.querySelector('.history-expand').innerHTML='&#x25BC;'; d.remove(); });
+  el.querySelector('.history-expand').innerHTML = '&#x25B2;';
+
+  const m = window._currentHistory[idx];
+  if(!m || !m.participants) return;
+  const team1 = m.participants.filter(p=>p.team===100);
+  const team2 = m.participants.filter(p=>p.team===200);
+  const team1Win = team1[0]?.win;
+  const fmtGold = g => g>=1000 ? (g/1000).toFixed(1)+'k' : g;
+  const fmtDmg = d => d>=1000 ? (d/1000).toFixed(1)+'k' : d;
+  const itemImgs = items => items.map(id=>`<img class="gd-item" src="https://ddragon.leagueoflegends.com/cdn/${lolVer}/img/item/${id}.png" alt="">`).join('');
+
+  const renderTeam = (team, isWin) => team.map(p=>{
+    const isMe = p.puuid === m.playerPuuid;
+    return `<div class="gd-row${isMe?' gd-me':''}">
+      <img class="gd-champ" src="${p.champImg}" alt="${p.champ}">
+      <div class="gd-player">
+        <div class="gd-name">${p.name}</div>
+        <div class="gd-champ-name">${p.champ}</div>
+      </div>
+      <div class="gd-kda">${p.kills}/${p.deaths}/${p.assists}<br><span>${p.kda}</span></div>
+      <div class="gd-cs">${p.cs}</div>
+      <div class="gd-dmg">${fmtDmg(p.damage)}</div>
+      <div class="gd-gold">${fmtGold(p.gold)}</div>
+      <div class="gd-items">${itemImgs(p.items)}</div>
+    </div>`;
+  }).join('');
+
+  const detail = document.createElement('div');
+  detail.className = 'game-detail';
+  detail.innerHTML = `
+    <div class="gd-team ${team1Win?'gd-win':'gd-loss'}">
+      <div class="gd-team-head">${team1Win?'Victoire':'Défaite'} — Équipe Bleue</div>
+      <div class="gd-header"><span></span><span>Joueur</span><span>KDA</span><span>CS</span><span>DMG</span><span>Gold</span><span>Items</span></div>
+      ${renderTeam(team1, team1Win)}
+    </div>
+    <div class="gd-team ${!team1Win?'gd-win':'gd-loss'}">
+      <div class="gd-team-head">${!team1Win?'Victoire':'Défaite'} — Équipe Rouge</div>
+      <div class="gd-header"><span></span><span>Joueur</span><span>KDA</span><span>CS</span><span>DMG</span><span>Gold</span><span>Items</span></div>
+      ${renderTeam(team2, !team1Win)}
+    </div>`;
+  el.after(detail);
+}
 function timeAgo(d){
   const s=Math.floor((Date.now()-d)/1000);
   if(s<3600) return Math.floor(s/60)+'min';
