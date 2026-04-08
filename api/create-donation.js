@@ -37,8 +37,8 @@ export default async function handler(req, res) {
       metadata: {
         donorName: donorName.trim(),
       },
-      success_url: `https://taverneduclash.vercel.app/landing.html?donation=success&name=${encodeURIComponent(donorName.trim())}`,
-      cancel_url: `https://taverneduclash.vercel.app/landing.html?donation=cancel`,
+      success_url: `https://${req.headers.host}/landing.html?donation=success&name=${encodeURIComponent(donorName.trim())}`,
+      cancel_url: `https://${req.headers.host}/landing.html?donation=cancel`,
     });
 
     return res.status(200).json({ url: session.url });
