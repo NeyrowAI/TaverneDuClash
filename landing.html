@@ -642,43 +642,6 @@ button,a,.faq-item,.carousel-dot{touch-action:manipulation}
   </div>
 </section>
 
-<div class="sec-divider"></div>
-
-<!-- DONATE -->
-<section class="donate-sec" id="donate">
-  <div class="donate-header reveal">
-    <div class="donate-eye">Communaut&eacute;</div>
-    <h2 class="donate-title">Soutiens la Taverne</h2>
-    <p class="donate-desc">TaverneDuClash est un projet communautaire gratuit. Les dons nous aident &agrave; couvrir les frais d'h&eacute;bergement, d'API et &agrave; continuer &agrave; d&eacute;velopper de nouvelles fonctionnalit&eacute;s.</p>
-  </div>
-  <div class="donate-card reveal scale-in">
-    <form id="donateForm" onsubmit="submitDonation(event)">
-      <div class="donate-field">
-        <label for="donorName">Ton pseudo</label>
-        <input class="donate-input" type="text" id="donorName" placeholder="Ton pseudo" required maxlength="30">
-      </div>
-      <div class="donate-field">
-        <label>Montant</label>
-        <div class="donate-amounts" id="donateAmounts">
-          <button type="button" class="donate-amt" data-amount="2" onclick="selectAmount(2,this)">2&euro;</button>
-          <button type="button" class="donate-amt active" data-amount="5" onclick="selectAmount(5,this)">5&euro;</button>
-          <button type="button" class="donate-amt" data-amount="10" onclick="selectAmount(10,this)">10&euro;</button>
-          <button type="button" class="donate-amt" data-amount="20" onclick="selectAmount(20,this)">20&euro;</button>
-        </div>
-        <div class="donate-custom">
-          <div class="donate-custom-row">
-            <input class="donate-custom-input" type="number" id="donateCustom" placeholder="Autre montant" min="1" step="1" oninput="selectCustomAmount()">
-            <span class="donate-custom-label">&euro;</span>
-          </div>
-        </div>
-      </div>
-      <button class="donate-submit" type="submit" id="donateBtn">Faire un don</button>
-    </form>
-  </div>
-</section>
-
-<div class="sec-divider"></div>
-
 <!-- FAQ -->
 <section class="faq-sec" id="faq">
   <div class="faq-header reveal">
@@ -732,6 +695,41 @@ button,a,.faq-item,.carousel-dot{touch-action:manipulation}
       <h3>Inscription confirmée</h3>
       <p>Tu fais partie de la liste. On te prévient dès le lancement.</p>
     </div>
+  </div>
+</section>
+
+<div class="sec-divider"></div>
+
+<!-- DONATE -->
+<section class="donate-sec" id="donate">
+  <div class="donate-header reveal">
+    <div class="donate-eye">Communaut&eacute;</div>
+    <h2 class="donate-title">Soutiens la Taverne</h2>
+    <p class="donate-desc">TaverneDuClash est un projet communautaire gratuit. Les dons nous aident &agrave; couvrir les frais d'h&eacute;bergement, d'API et &agrave; continuer &agrave; d&eacute;velopper de nouvelles fonctionnalit&eacute;s.</p>
+  </div>
+  <div class="donate-card reveal scale-in">
+    <form id="donateForm" onsubmit="submitDonation(event)">
+      <div class="donate-field">
+        <label for="donorName">Ton pseudo</label>
+        <input class="donate-input" type="text" id="donorName" placeholder="Ton pseudo" required maxlength="30">
+      </div>
+      <div class="donate-field">
+        <label>Montant</label>
+        <div class="donate-amounts" id="donateAmounts">
+          <button type="button" class="donate-amt" data-amount="2" onclick="selectAmount(2,this)">2&euro;</button>
+          <button type="button" class="donate-amt active" data-amount="5" onclick="selectAmount(5,this)">5&euro;</button>
+          <button type="button" class="donate-amt" data-amount="10" onclick="selectAmount(10,this)">10&euro;</button>
+          <button type="button" class="donate-amt" data-amount="20" onclick="selectAmount(20,this)">20&euro;</button>
+        </div>
+        <div class="donate-custom">
+          <div class="donate-custom-row">
+            <input class="donate-custom-input" type="number" id="donateCustom" placeholder="Autre montant" min="1" step="1" oninput="selectCustomAmount()">
+            <span class="donate-custom-label">&euro;</span>
+          </div>
+        </div>
+      </div>
+      <button class="donate-submit" type="submit" id="donateBtn">Faire un don</button>
+    </form>
   </div>
 </section>
 
