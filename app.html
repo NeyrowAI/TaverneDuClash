@@ -179,106 +179,133 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 3
 .aw-modal.german .aw-modal-badge{background:rgba(255,107,107,0.1);border:1px solid rgba(255,107,107,0.3);color:var(--red)}
 .aw-modal.carry .aw-modal-badge{background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);color:var(--gold)}
 
-/* DRAFT PAGE */
-.draft-page{padding:2rem 3rem;position:relative;z-index:1}
+/* DRAFT PAGE — LoL CLIENT STYLE */
+.draft-page{position:relative;z-index:1;display:flex;flex-direction:column;min-height:calc(100vh - 90px)}
 
-/* SAVED DRAFTS BAR */
-.saved-drafts-bar{display:flex;align-items:center;gap:0.7rem;margin-bottom:1.2rem;padding:0.8rem 1rem;background:rgba(14,8,24,0.65);border:1px solid var(--border);border-radius:6px;flex-wrap:wrap}
-.sd-title{font-family:'Cinzel',serif;font-size:0.7rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;flex-shrink:0}
-.sd-list{display:flex;gap:0.4rem;flex-wrap:wrap;flex:1}
-.sd-chip{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.05em;padding:0.28rem 0.65rem;background:rgba(168,85,247,0.08);border:1px solid var(--borderv);color:var(--violet);cursor:pointer;border-radius:2px;transition:all 0.2s;display:flex;align-items:center;gap:0.35rem}
+/* TOP BAR: saved drafts + roles */
+.draft-topbar{display:flex;align-items:center;gap:0.6rem;padding:0.5rem 1.5rem;background:linear-gradient(180deg,rgba(14,8,24,0.95),rgba(7,3,15,0.8));border-bottom:1px solid var(--border);flex-wrap:wrap}
+.sd-title{font-family:'Cinzel',serif;font-size:0.62rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;flex-shrink:0}
+.sd-list{display:flex;gap:0.35rem;flex-wrap:wrap;flex:1}
+.sd-chip{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.05em;padding:0.22rem 0.55rem;background:rgba(168,85,247,0.08);border:1px solid var(--borderv);color:var(--violet);cursor:pointer;border-radius:2px;transition:all 0.2s;display:flex;align-items:center;gap:0.3rem}
 .sd-chip:hover{border-color:var(--violet);background:rgba(168,85,247,0.15)}
-.sd-chip .sd-x{font-size:0.7rem;color:var(--muted);cursor:pointer;line-height:1}
+.sd-chip .sd-x{font-size:0.65rem;color:var(--muted);cursor:pointer;line-height:1}
 .sd-chip .sd-x:hover{color:var(--red)}
-.sd-save{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.08em;padding:0.28rem 0.65rem;background:rgba(201,168,76,0.08);border:1px solid var(--border);color:var(--gold);cursor:pointer;border-radius:2px;transition:all 0.2s;flex-shrink:0}
+.sd-save{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.08em;padding:0.22rem 0.55rem;background:rgba(201,168,76,0.08);border:1px solid var(--border);color:var(--gold);cursor:pointer;border-radius:2px;transition:all 0.2s;flex-shrink:0}
 .sd-save:hover{border-color:var(--gold);background:rgba(201,168,76,0.15)}
 
-/* COMP ANALYZER */
-.comp-analyzer{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;margin-bottom:1.2rem;align-items:start}
-.comp-panel{background:rgba(14,8,24,0.65);border:1px solid var(--border);border-radius:6px;padding:1rem}
-.comp-panel-title{font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;display:flex;align-items:center;gap:0.4rem}
-.comp-tags{display:flex;flex-wrap:wrap;gap:0.3rem;margin-bottom:0.5rem}
-.comp-tag{font-size:0.62rem;padding:0.15rem 0.45rem;border-radius:2px;font-family:'Cinzel',serif;letter-spacing:0.05em}
+/* BAN BAR */
+.draft-ban-bar{display:flex;align-items:center;justify-content:center;gap:0;padding:0.6rem 1.5rem;background:linear-gradient(180deg,rgba(7,3,15,0.8),rgba(14,8,24,0.6));border-bottom:1px solid rgba(255,107,107,0.08)}
+.ban-side{display:flex;gap:0.3rem;align-items:center}
+.ban-side.blue{flex-direction:row}
+.ban-side.red{flex-direction:row-reverse}
+.ban-vs{font-family:'Cinzel',serif;font-size:0.55rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;padding:0 1.5rem;opacity:0.5}
+.ban-slot{width:36px;height:36px;border-radius:3px;background:rgba(7,3,15,0.7);border:1px dashed rgba(255,107,107,0.15);display:flex;align-items:center;justify-content:center;font-size:0.5rem;color:var(--muted);cursor:pointer;overflow:hidden;position:relative;transition:all 0.2s}
+.ban-slot.has-ban{border-style:solid;border-color:rgba(255,107,107,0.35)}
+.ban-slot img{width:100%;height:100%;object-fit:cover}
+.ban-slot .bx{position:absolute;inset:0;background:rgba(255,107,107,0.5);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.2s;font-size:0.7rem;color:#fff}
+.ban-slot:hover .bx{opacity:1}
+.ban-slot .ban-line{position:absolute;inset:0;pointer-events:none}
+.ban-slot .ban-line::after{content:'';position:absolute;top:0;left:50%;width:2px;height:141%;background:rgba(255,107,107,0.7);transform:rotate(45deg);transform-origin:top center}
+
+/* MAIN DRAFT AREA */
+.draft-arena{flex:1;display:grid;grid-template-columns:280px 1fr 280px;gap:0;position:relative;overflow:hidden}
+
+/* PICK COLUMNS */
+.draft-side{display:flex;flex-direction:column;padding:0.8rem;gap:0.3rem}
+.draft-side.blue{background:linear-gradient(90deg,rgba(30,90,160,0.06),transparent);border-right:1px solid rgba(30,144,255,0.06)}
+.draft-side.red{background:linear-gradient(270deg,rgba(160,30,30,0.06),transparent);border-left:1px solid rgba(192,57,43,0.06)}
+.draft-side-title{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.4rem}
+.draft-side-title.our{color:#5dade2}.draft-side-title.enemy{color:#e74c3c}
+.t-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.our .t-dot{background:#5dade2}.enemy .t-dot{background:#e74c3c}
+.picks{display:flex;flex-direction:column;gap:0.3rem;flex:1}
+.pick{display:flex;align-items:center;gap:0.5rem;background:rgba(7,3,15,0.5);border:1px solid rgba(168,85,247,0.06);border-radius:3px;padding:0.45rem 0.55rem;min-height:50px;transition:all 0.25s}
+.pick.filled{border-color:rgba(30,144,255,0.2);background:linear-gradient(90deg,rgba(30,90,160,0.08),rgba(7,3,15,0.5))}
+.pick.efilled{border-color:rgba(192,57,43,0.2);background:linear-gradient(270deg,rgba(160,30,30,0.08),rgba(7,3,15,0.5))}
+.pick-num{font-family:'Cinzel',serif;font-size:0.58rem;color:var(--muted);width:12px;flex-shrink:0}
+.pick-role-img{width:16px;height:16px;object-fit:contain;filter:brightness(0.85) sepia(0.3) hue-rotate(220deg) saturate(2);flex-shrink:0}
+.pick-role-img.enemy{filter:sepia(1) hue-rotate(300deg) saturate(2) brightness(0.9)}
+.pick-champ-img{width:40px;height:40px;border-radius:4px;object-fit:cover;border:2px solid rgba(30,90,160,0.3);flex-shrink:0;transition:border-color 0.3s}
+.pick.filled .pick-champ-img{border-color:rgba(30,144,255,0.4)}
+.pick.efilled .pick-champ-img{border-color:rgba(192,57,43,0.4)}
+.pick-ph{width:40px;height:40px;border-radius:4px;background:rgba(168,85,247,0.04);border:1px dashed rgba(168,85,247,0.12);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.7rem}
+.pick-info{flex:1;min-width:0}
+.pick-cname{font-family:'Cinzel',serif;font-size:0.7rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pick-player{font-size:0.6rem;color:var(--muted);font-style:italic}
+.pick-rm{background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.7rem;transition:color 0.2s;flex-shrink:0}
+.pick-rm:hover{color:var(--red)}
+/* Add pick controls at bottom of side column */
+.draft-add{margin-top:auto;display:flex;flex-direction:column;gap:0.35rem}
+.c-search-wrap{position:relative}
+.c-search{width:100%;background:rgba(7,3,15,0.8);border:1px solid var(--borderv);color:var(--text);padding:0.45rem 0.7rem;font-family:'Crimson Pro',serif;font-size:0.85rem;border-radius:3px;outline:none;transition:border-color 0.2s}
+.c-search:focus{border-color:var(--violet)}
+.c-search::placeholder{color:var(--muted);opacity:0.35}
+.c-drop{position:absolute;bottom:100%;left:0;right:0;background:rgba(12,6,22,0.99);border:1px solid var(--borderv);border-bottom:none;border-radius:4px 4px 0 0;max-height:200px;overflow-y:auto;z-index:60;display:none}
+.c-drop.open{display:block}
+.c-opt{display:flex;align-items:center;gap:0.5rem;padding:0.4rem 0.6rem;cursor:pointer;transition:background 0.12s}
+.c-opt:hover{background:rgba(168,85,247,0.1)}
+.c-opt img{width:26px;height:26px;border-radius:4px;object-fit:cover;border:1px solid var(--border)}
+.c-opt span{font-size:0.8rem;color:var(--text)}
+.c-drop::-webkit-scrollbar{width:3px}
+.c-drop::-webkit-scrollbar-thumb{background:var(--borderv);border-radius:2px}
+.role-pick-sel{width:100%;background:rgba(7,3,15,0.8);border:1px solid var(--border);color:var(--text);padding:0.4rem 0.7rem;font-family:'Crimson Pro',serif;font-size:0.8rem;border-radius:3px;outline:none;cursor:pointer}
+.role-pick-sel option{background:var(--dark)}
+.add-btn{width:100%;font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.08em;padding:0.45rem;background:transparent;border:1px solid rgba(30,144,255,0.2);color:#5dade2;cursor:pointer;transition:all 0.2s;border-radius:2px}
+.add-btn:hover{border-color:rgba(30,144,255,0.5);background:rgba(30,90,160,0.08)}
+.add-btn.e{border-color:rgba(192,57,43,0.2);color:#e74c3c}
+.add-btn.e:hover{border-color:rgba(192,57,43,0.5);background:rgba(160,30,30,0.08)}
+
+/* CENTER PANEL */
+.draft-center{display:flex;flex-direction:column;align-items:center;padding:0.8rem 1rem;gap:0.8rem;background:rgba(7,3,15,0.4);overflow-y:auto;max-height:calc(100vh - 180px)}
+
+/* COMP ANALYZER (compact) */
+.comp-analyzer{display:flex;flex-direction:column;align-items:center;gap:0.6rem;width:100%}
+.comp-row{display:flex;gap:0.8rem;width:100%;justify-content:center}
+.comp-panel{background:rgba(14,8,24,0.65);border:1px solid var(--border);border-radius:6px;padding:0.7rem;flex:1;max-width:220px}
+.comp-panel-title{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;display:flex;align-items:center;gap:0.3rem}
+.comp-tags{display:flex;flex-wrap:wrap;gap:0.25rem;margin-bottom:0.35rem}
+.comp-tag{font-size:0.55rem;padding:0.12rem 0.35rem;border-radius:2px;font-family:'Cinzel',serif;letter-spacing:0.04em}
 .comp-tag.engage{background:rgba(255,107,107,0.1);border:1px solid rgba(255,107,107,0.25);color:#ff9090}
 .comp-tag.poke{background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.25);color:var(--cyan)}
 .comp-tag.protect{background:rgba(80,200,120,0.08);border:1px solid rgba(80,200,120,0.25);color:var(--green)}
 .comp-tag.split{background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);color:var(--gold)}
 .comp-tag.teamfight{background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.25);color:var(--violet)}
+.comp-detail{font-size:0.65rem;color:var(--muted);font-style:italic;line-height:1.5}
+.comp-detail strong{color:var(--text);font-weight:600;font-style:normal}
 
-/* SYNERGY SCORE RING */
-.synergy-ring-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0.8rem 0.5rem}
-.synergy-ring{position:relative;width:90px;height:90px}
-.synergy-ring svg{transform:rotate(-90deg)}
+/* SYNERGY RING */
+.synergy-ring-wrap{display:flex;flex-direction:column;align-items:center;padding:0.3rem}
+.synergy-ring{position:relative;width:80px;height:80px}
+.synergy-ring svg{transform:rotate(-90deg);width:80px;height:80px}
 .synergy-ring circle{fill:none;stroke-width:4}
 .synergy-ring .bg-ring{stroke:rgba(168,85,247,0.1)}
 .synergy-ring .score-ring{stroke:var(--violet);stroke-linecap:round;transition:stroke-dashoffset 1s ease,stroke 0.5s}
 .synergy-val{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.synergy-num{font-family:'Cinzel',serif;font-size:1.3rem;font-weight:900;color:var(--gl);line-height:1}
-.synergy-label{font-family:'Cinzel',serif;font-size:0.45rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;margin-top:0.1rem}
-.synergy-verdict{font-family:'Cinzel',serif;font-size:0.58rem;color:var(--violet);text-align:center;margin-top:0.4rem;letter-spacing:0.05em}
+.synergy-num{font-family:'Cinzel',serif;font-size:1.15rem;font-weight:900;color:var(--gl);line-height:1}
+.synergy-label{font-family:'Cinzel',serif;font-size:0.4rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;margin-top:0.1rem}
+.synergy-verdict{font-family:'Cinzel',serif;font-size:0.52rem;color:var(--violet);text-align:center;margin-top:0.2rem;letter-spacing:0.05em}
 
-.comp-detail{font-size:0.72rem;color:var(--muted);font-style:italic;line-height:1.6}
-.comp-detail strong{color:var(--text);font-weight:600;font-style:normal}
-
-.role-bar{display:grid;grid-template-columns:repeat(5,1fr);gap:0.8rem;margin-bottom:1.5rem;background:rgba(14,8,24,0.7);border:1px solid var(--border);border-radius:6px;padding:1.2rem}
-.role-bar-title{grid-column:1/-1;font-family:'Cinzel',serif;font-size:0.78rem;color:var(--gold);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.5rem}
-.role-slot{background:rgba(7,3,15,0.6);border:1px solid var(--borderv);border-radius:4px;padding:0.7rem 0.4rem;text-align:center;transition:all 0.2s}
+/* ROLE BAR (compact horizontal) */
+.role-bar{display:flex;gap:0.4rem;width:100%;justify-content:center;flex-wrap:wrap}
+.role-bar-title{display:none}
+.role-slot{background:rgba(7,3,15,0.6);border:1px solid var(--borderv);border-radius:4px;padding:0.35rem 0.25rem;text-align:center;transition:all 0.2s;flex:1;min-width:70px;max-width:100px}
 .role-slot:hover{border-color:var(--violet);background:rgba(168,85,247,0.06)}
-.role-slot-icon img{width:30px;height:30px;object-fit:contain;filter:brightness(0.85) sepia(0.3) hue-rotate(220deg) saturate(2);margin-bottom:0.3rem}
-.role-slot-name{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.1em;color:var(--gold);text-transform:uppercase;margin-bottom:0.35rem}
-.role-sel{width:100%;background:rgba(7,3,15,0.9);border:1px solid rgba(168,85,247,0.2);color:var(--text);padding:0.3rem;font-family:'Crimson Pro',serif;font-size:0.78rem;border-radius:2px;outline:none;cursor:pointer;text-align:center}
+.role-slot-icon img{width:22px;height:22px;object-fit:contain;filter:brightness(0.85) sepia(0.3) hue-rotate(220deg) saturate(2);margin-bottom:0.15rem}
+.role-slot-name{font-family:'Cinzel',serif;font-size:0.5rem;letter-spacing:0.08em;color:var(--gold);text-transform:uppercase;margin-bottom:0.2rem}
+.role-sel{width:100%;background:rgba(7,3,15,0.9);border:1px solid rgba(168,85,247,0.2);color:var(--text);padding:0.2rem;font-family:'Crimson Pro',serif;font-size:0.68rem;border-radius:2px;outline:none;cursor:pointer;text-align:center}
 .role-sel option{background:var(--dark)}
 
-.draft-cols{display:grid;grid-template-columns:1fr 56px 1fr;gap:1rem;margin-bottom:1.2rem}
-.draft-col{background:rgba(14,8,24,0.65);border:1px solid var(--border);border-radius:6px;padding:1.2rem}
-.draft-col-title{font-family:'Cinzel',serif;font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem}
-.draft-col-title.our{color:var(--gold)}.draft-col-title.enemy{color:var(--red)}
-.t-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.our .t-dot{background:var(--gold)}.enemy .t-dot{background:var(--red)}
-.draft-vs{display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:1.1rem;color:var(--muted);padding-top:2.5rem}
-.ban-label{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.35rem}
-.bans-row{display:flex;gap:0.35rem;flex-wrap:wrap;margin-bottom:0.7rem}
-.ban-slot{width:38px;height:38px;border-radius:3px;background:rgba(7,3,15,0.6);border:1px dashed rgba(255,107,107,0.18);display:flex;align-items:center;justify-content:center;font-size:0.55rem;color:var(--muted);cursor:pointer;overflow:hidden;position:relative;transition:all 0.2s}
-.ban-slot.has-ban{border-style:solid;border-color:rgba(255,107,107,0.35)}
-.ban-slot img{width:100%;height:100%;object-fit:cover}
-.ban-slot .bx{position:absolute;inset:0;background:rgba(255,107,107,0.5);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.2s;font-size:0.8rem;color:#fff}
-.ban-slot:hover .bx{opacity:1}
-.ban-slot .ban-line{position:absolute;inset:0;pointer-events:none}
-.ban-slot .ban-line::after{content:'';position:absolute;top:0;left:50%;width:2px;height:141%;background:rgba(255,107,107,0.7);transform:rotate(45deg);transform-origin:top center}
-.picks{display:flex;flex-direction:column;gap:0.45rem;margin-bottom:0.7rem}
-.pick{display:flex;align-items:center;gap:0.6rem;background:rgba(7,3,15,0.5);border:1px solid rgba(168,85,247,0.08);border-radius:3px;padding:0.5rem 0.65rem;min-height:52px;transition:border-color 0.2s}
-.pick.filled{border-color:rgba(201,168,76,0.2)}
-.pick.efilled{border-color:rgba(255,107,107,0.2)}
-.pick-num{font-family:'Cinzel',serif;font-size:0.62rem;color:var(--muted);width:12px;flex-shrink:0}
-.pick-role-img{width:18px;height:18px;object-fit:contain;filter:brightness(0.85) sepia(0.3) hue-rotate(220deg) saturate(2);flex-shrink:0}
-.pick-role-img.enemy{filter:sepia(1) hue-rotate(300deg) saturate(2) brightness(0.9)}
-.pick-champ-img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid var(--border);flex-shrink:0;transition:border-color 0.3s}
-.pick.filled .pick-champ-img{border-color:rgba(201,168,76,0.35)}
-.pick.efilled .pick-champ-img{border-color:rgba(255,107,107,0.35)}
-.pick-ph{width:42px;height:42px;border-radius:50%;background:rgba(168,85,247,0.05);border:1px dashed rgba(168,85,247,0.15);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.75rem}
-.pick-info{flex:1;min-width:0}
-.pick-cname{font-family:'Cinzel',serif;font-size:0.73rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pick-player{font-size:0.65rem;color:var(--muted);font-style:italic}
-.pick-rm{background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.75rem;transition:color 0.2s;flex-shrink:0}
-.pick-rm:hover{color:var(--red)}
-.c-search-wrap{position:relative;margin-bottom:0.5rem}
-.c-search{width:100%;background:rgba(7,3,15,0.8);border:1px solid var(--borderv);color:var(--text);padding:0.5rem 0.85rem;font-family:'Crimson Pro',serif;font-size:0.9rem;border-radius:3px;outline:none;transition:border-color 0.2s}
-.c-search:focus{border-color:var(--violet)}
-.c-search::placeholder{color:var(--muted);opacity:0.35}
-.c-drop{position:absolute;top:100%;left:0;right:0;background:rgba(12,6,22,0.99);border:1px solid var(--borderv);border-top:none;border-radius:0 0 4px 4px;max-height:170px;overflow-y:auto;z-index:60;display:none}
-.c-drop.open{display:block}
-.c-opt{display:flex;align-items:center;gap:0.55rem;padding:0.42rem 0.65rem;cursor:pointer;transition:background 0.12s}
-.c-opt:hover{background:rgba(168,85,247,0.1)}
-.c-opt img{width:28px;height:28px;border-radius:50%;object-fit:cover;border:1px solid var(--border)}
-.c-opt span{font-size:0.83rem;color:var(--text)}
-.c-drop::-webkit-scrollbar{width:3px}
-.c-drop::-webkit-scrollbar-thumb{background:var(--borderv);border-radius:2px}
-.role-pick-sel{width:100%;background:rgba(7,3,15,0.8);border:1px solid var(--border);color:var(--text);padding:0.5rem 0.85rem;font-family:'Crimson Pro',serif;font-size:0.85rem;border-radius:3px;outline:none;margin-bottom:0.5rem;cursor:pointer}
-.role-pick-sel option{background:var(--dark)}
-.add-btn{width:100%;font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.08em;padding:0.5rem;background:transparent;border:1px solid var(--border);color:var(--gold);cursor:pointer;transition:all 0.2s;border-radius:2px;margin-bottom:0.4rem}
-.add-btn:hover{border-color:var(--gold);background:rgba(201,168,76,0.05)}
-.add-btn.e{border-color:rgba(255,107,107,0.25);color:var(--red)}
-.add-btn.e:hover{border-color:rgba(255,107,107,0.6);background:rgba(255,107,107,0.05)}
+/* DRAFT ACTION BUTTONS in center */
+.draft-actions{display:flex;gap:0.5rem;width:100%;flex-wrap:wrap;justify-content:center}
+.draft-actions button{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.06em;padding:0.4rem 0.8rem;border-radius:2px;cursor:pointer;transition:all 0.2s;flex:1;min-width:100px}
+.sugg-trigger{background:linear-gradient(135deg,var(--purple),var(--pb));border:1px solid var(--violet);color:var(--gl)}
+.sugg-trigger:hover:not(:disabled){background:linear-gradient(135deg,var(--pb),var(--violet));box-shadow:0 4px 15px rgba(124,58,237,0.3)}
+.sugg-trigger:disabled{opacity:0.4;cursor:not-allowed}
+.scout-trigger{background:rgba(255,107,107,0.08);border:1px solid rgba(255,107,107,0.3);color:var(--red)}
+.scout-trigger:hover{background:rgba(255,107,107,0.15)}
+
+/* BOTTOM PANELS (slide up) */
+.draft-bottom-panels{border-top:1px solid var(--border);background:rgba(14,8,24,0.9)}
 
 /* SCOUT */
 .scout-box{background:rgba(14,8,24,0.65);border:1px solid rgba(255,107,107,0.18);border-radius:6px;padding:1.2rem;margin-bottom:1.2rem}
@@ -348,6 +375,31 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 3
 .build-runes{margin-top:0.6rem;display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap}
 .build-rune{display:flex;align-items:center;gap:0.25rem;font-size:0.65rem;color:var(--violet)}
 .build-rune img{width:20px;height:20px;border-radius:50%;border:1px solid var(--borderv)}
+
+/* SCOUT PANEL TOGGLE */
+.draft-bottom-panels .scout-box{display:none}
+.draft-bottom-panels .scout-box.open{display:block}
+
+/* DRAFT RESPONSIVE */
+@media(max-width:900px){
+  .draft-arena{grid-template-columns:1fr;grid-template-rows:auto auto auto}
+  .draft-side.blue{border-right:none;border-bottom:1px solid rgba(30,144,255,0.1)}
+  .draft-side.red{border-left:none;border-top:1px solid rgba(192,57,43,0.1)}
+  .draft-center{max-height:none;order:3}
+  .draft-side.blue{order:1}
+  .draft-side.red{order:2}
+  .comp-row{flex-direction:column}
+  .comp-panel{max-width:100%}
+  .draft-ban-bar{flex-wrap:wrap;gap:0.3rem;padding:0.5rem 0.8rem}
+}
+@media(max-width:600px){
+  .draft-topbar{padding:0.4rem 0.8rem}
+  .draft-side{padding:0.6rem}
+  .ban-slot{width:30px;height:30px}
+  .ban-vs{padding:0 0.8rem;font-size:0.48rem}
+  .draft-actions{flex-direction:column}
+  .draft-actions button{min-width:auto}
+}
 
 /* MUSIC */
 .music-bar{position:fixed;bottom:1.2rem;right:1.2rem;z-index:200;display:flex;align-items:center;gap:0.55rem;background:rgba(12,6,20,0.93);border:1px solid var(--borderv);border-radius:28px;padding:0.45rem 0.9rem;backdrop-filter:blur(12px)}
@@ -529,13 +581,8 @@ footer p{font-style:italic;opacity:0.45;line-height:1.8}
   .clash-roles{grid-template-columns:repeat(3,1fr)}
   nav{padding:0.9rem 1.2rem}
   .nav-links{display:none}
-  .draft-cols{grid-template-columns:1fr;gap:0.8rem}
-  .draft-vs{display:none}
-  .role-bar{grid-template-columns:repeat(3,1fr)}
   .sec{padding:3.5rem 1.5rem}
-  .draft-page{padding:1.5rem}
-  .comp-analyzer{grid-template-columns:1fr;gap:0.8rem}
-  .synergy-ring-wrap{flex-direction:row;gap:1rem}
+  .draft-page{padding:0}
   .hero-stats{gap:1rem}
   .feat-row{grid-template-columns:1fr;gap:1.5rem;padding:2rem 1.5rem}
   .feat-row:nth-child(even) .feat-visual{order:0}
@@ -838,111 +885,138 @@ footer p{font-style:italic;opacity:0.45;line-height:1.8}
 <!-- PAGE: DRAFT -->
 <div class="page" id="page-draft">
   <div class="draft-page">
-    <!-- SAVED DRAFTS -->
-    <div class="saved-drafts-bar reveal" id="savedDraftsBar">
+    <!-- TOP BAR: saved drafts -->
+    <div class="draft-topbar" id="savedDraftsBar">
       <span class="sd-title">Drafts Sauvegardées</span>
       <div class="sd-list" id="sdList"></div>
       <button class="sd-save" onclick="saveDraft()">Sauvegarder</button>
     </div>
-    <!-- ROLES -->
-    <div class="role-bar reveal" id="rolesGrid">
-      <div class="role-bar-title">Assigner les Rôles</div>
+
+    <!-- BAN BAR -->
+    <div class="draft-ban-bar">
+      <div class="ban-side blue" id="ourBansRow"></div>
+      <div class="ban-vs">BANS</div>
+      <div class="ban-side red" id="enemyBansRow"></div>
     </div>
-    <!-- COMP ANALYZER -->
-    <div class="comp-analyzer reveal reveal-delay-1" id="compAnalyzer">
-      <div class="comp-panel" id="compPanelOur">
-        <div class="comp-panel-title">Notre Composition</div>
-        <div class="comp-tags" id="compTagsOur"></div>
-        <div class="comp-detail" id="compDetailOur"><em style="opacity:0.4">Ajoute des picks pour analyser la comp</em></div>
+
+    <!-- MAIN ARENA: 3 columns -->
+    <div class="draft-arena">
+      <!-- BLUE SIDE (our team) -->
+      <div class="draft-side blue">
+        <div class="draft-side-title our"><span class="t-dot"></span>Notre Équipe</div>
+        <div class="picks" id="ourPicks"></div>
+        <div class="draft-add">
+          <div class="c-search-wrap">
+            <input class="c-search" id="ourSearch" placeholder="Rechercher un champion..." autocomplete="off">
+            <div class="c-drop" id="ourDrop"></div>
+          </div>
+          <select class="role-pick-sel" id="ourRoleSel">
+            <option value="">— Rôle —</option>
+            <option value="Top">Top</option><option value="Jungle">Jungle</option>
+            <option value="Mid">Mid</option><option value="ADC">ADC</option><option value="Support">Support</option>
+          </select>
+          <button class="add-btn" onclick="addOurPick()">+ Ajouter Pick</button>
+        </div>
       </div>
-      <div class="synergy-ring-wrap">
-        <div class="synergy-ring">
-          <svg width="90" height="90" viewBox="0 0 90 90">
-            <circle class="bg-ring" cx="45" cy="45" r="38"/>
-            <circle class="score-ring" id="synergyArc" cx="45" cy="45" r="38" stroke-dasharray="238.76" stroke-dashoffset="238.76"/>
-          </svg>
-          <div class="synergy-val">
-            <div class="synergy-num" id="synergyNum">—</div>
-            <div class="synergy-label">Synergie</div>
+
+      <!-- CENTER PANEL -->
+      <div class="draft-center">
+        <!-- Role assignments -->
+        <div class="role-bar" id="rolesGrid">
+          <div class="role-bar-title">Assigner les Rôles</div>
+        </div>
+
+        <!-- Synergy ring -->
+        <div class="synergy-ring-wrap">
+          <div class="synergy-ring">
+            <svg width="80" height="80" viewBox="0 0 80 80">
+              <circle class="bg-ring" cx="40" cy="40" r="35"/>
+              <circle class="score-ring" id="synergyArc" cx="40" cy="40" r="35" stroke-dasharray="219.91" stroke-dashoffset="219.91"/>
+            </svg>
+            <div class="synergy-val">
+              <div class="synergy-num" id="synergyNum">—</div>
+              <div class="synergy-label">Synergie</div>
+            </div>
+          </div>
+          <div class="synergy-verdict" id="synergyVerdict"></div>
+        </div>
+
+        <!-- Comp analyzer -->
+        <div class="comp-analyzer" id="compAnalyzer">
+          <div class="comp-row">
+            <div class="comp-panel" id="compPanelOur">
+              <div class="comp-panel-title">Notre Comp</div>
+              <div class="comp-tags" id="compTagsOur"></div>
+              <div class="comp-detail" id="compDetailOur"><em style="opacity:0.4">Ajoute des picks pour analyser</em></div>
+            </div>
+            <div class="comp-panel" id="compPanelEnemy">
+              <div class="comp-panel-title" style="color:var(--red)">Comp Ennemie</div>
+              <div class="comp-tags" id="compTagsEnemy"></div>
+              <div class="comp-detail" id="compDetailEnemy"><em style="opacity:0.4">Ajoute des picks ennemis</em></div>
+            </div>
           </div>
         </div>
-        <div class="synergy-verdict" id="synergyVerdict"></div>
-      </div>
-      <div class="comp-panel" id="compPanelEnemy">
-        <div class="comp-panel-title" style="color:var(--red)">Comp Ennemie</div>
-        <div class="comp-tags" id="compTagsEnemy"></div>
-        <div class="comp-detail" id="compDetailEnemy"><em style="opacity:0.4">Ajoute des picks ennemis pour analyser</em></div>
-      </div>
-    </div>
-    <!-- SCOUT -->
-    <div class="scout-box reveal reveal-delay-1">
-      <div class="scout-title">Scout Équipe Ennemie</div>
-      <p class="scout-desc">Entre les pseudos adverses (Pseudo#Tag) pour analyser leurs champions favoris et obtenir des suggestions de bans.</p>
-      <div class="scout-inputs" id="scoutInputs">
-        <input class="scout-input" placeholder="Pseudo#Tag ennemi 1">
-        <input class="scout-input" placeholder="Pseudo#Tag ennemi 2">
-        <input class="scout-input" placeholder="Pseudo#Tag ennemi 3">
-        <input class="scout-input" placeholder="Pseudo#Tag ennemi 4">
-        <input class="scout-input" placeholder="Pseudo#Tag ennemi 5">
-      </div>
-      <button class="scout-btn" id="scoutBtn" onclick="scoutEnemies()">Analyser l'équipe ennemie</button>
-      <div id="scoutRes"></div>
-    </div>
-    <!-- DRAFT COLS -->
-    <div class="draft-cols reveal reveal-delay-2">
-      <div class="draft-col">
-        <div class="draft-col-title our"><span class="t-dot"></span>Notre Équipe</div>
-        <div class="ban-label">Nos Bans</div>
-        <div class="bans-row" id="ourBansRow"></div>
-        <div class="ban-label" style="margin-top:0.7rem">Nos Picks</div>
-        <div class="picks" id="ourPicks"></div>
-        <div class="c-search-wrap">
-          <input class="c-search" id="ourSearch" placeholder="Rechercher un champion..." autocomplete="off">
-          <div class="c-drop" id="ourDrop"></div>
+
+        <!-- Action buttons -->
+        <div class="draft-actions">
+          <button class="sugg-trigger" id="suggBtn" onclick="getSuggestions()">Analyser Draft</button>
+          <button class="scout-trigger" onclick="document.getElementById('scoutPanel').classList.toggle('open')">Scout Ennemi</button>
         </div>
-        <select class="role-pick-sel" id="ourRoleSel">
-          <option value="">— Rôle —</option>
-          <option value="Top">Top</option><option value="Jungle">Jungle</option>
-          <option value="Mid">Mid</option><option value="ADC">ADC</option><option value="Support">Support</option>
-        </select>
-        <button class="add-btn" onclick="addOurPick()">+ Ajouter Pick</button>
       </div>
-      <div class="draft-vs">VS</div>
-      <div class="draft-col">
-        <div class="draft-col-title enemy"><span class="t-dot"></span>Équipe Ennemie</div>
-        <div class="ban-label">Bans Ennemis</div>
-        <div class="bans-row" id="enemyBansRow"></div>
-        <div class="ban-label" style="margin-top:0.7rem">Picks Ennemis</div>
+
+      <!-- RED SIDE (enemy team) -->
+      <div class="draft-side red">
+        <div class="draft-side-title enemy"><span class="t-dot"></span>Équipe Ennemie</div>
         <div class="picks" id="enemyPicks"></div>
-        <div class="c-search-wrap">
-          <input class="c-search" id="enemySearch" placeholder="Rechercher un champion ennemi..." autocomplete="off">
-          <div class="c-drop" id="enemyDrop"></div>
+        <div class="draft-add">
+          <div class="c-search-wrap">
+            <input class="c-search" id="enemySearch" placeholder="Rechercher un champion ennemi..." autocomplete="off">
+            <div class="c-drop" id="enemyDrop"></div>
+          </div>
+          <select class="role-pick-sel" id="enemyRoleSel">
+            <option value="">— Rôle ennemi —</option>
+            <option value="Top">Top</option><option value="Jungle">Jungle</option>
+            <option value="Mid">Mid</option><option value="ADC">ADC</option><option value="Support">Support</option>
+          </select>
+          <button class="add-btn e" onclick="addEnemyPick()">+ Ajouter Pick Ennemi</button>
         </div>
-        <select class="role-pick-sel" id="enemyRoleSel">
-          <option value="">— Rôle ennemi —</option>
-          <option value="Top">Top</option><option value="Jungle">Jungle</option>
-          <option value="Mid">Mid</option><option value="ADC">ADC</option><option value="Support">Support</option>
-        </select>
-        <button class="add-btn e" onclick="addEnemyPick()">+ Ajouter Pick Ennemi</button>
       </div>
     </div>
-    <!-- SUGGESTIONS -->
-    <div class="sugg-box reveal reveal-delay-3">
-      <div class="sugg-title">Analyse de Draft</div>
-      <p class="sugg-desc">L'analyse croise les matchups théoriques, les synergies et la maîtrise des joueurs pour proposer la draft optimale.</p>
-      <button class="sugg-btn" id="suggBtn" onclick="getSuggestions()">Analyser & Générer la Meilleure Draft</button>
-      <div class="sugg-res" id="suggRes">
-        <div class="sugg-bloc">
-          <div class="sugg-bloc-title">Top 3 — Counterpicks & Synergies</div>
-          <div class="sugg-cards" id="suggCards1"></div>
-          <div class="sugg-analysis" id="suggAnalysis1"></div>
+
+    <!-- BOTTOM PANELS -->
+    <div class="draft-bottom-panels">
+      <!-- Scout panel (toggleable) -->
+      <div class="scout-box" id="scoutPanel">
+        <div class="scout-title">Scout Équipe Ennemie</div>
+        <p class="scout-desc">Entre les pseudos adverses (Pseudo#Tag) pour analyser leurs champions favoris et obtenir des suggestions de bans.</p>
+        <div class="scout-inputs" id="scoutInputs">
+          <input class="scout-input" placeholder="Pseudo#Tag ennemi 1">
+          <input class="scout-input" placeholder="Pseudo#Tag ennemi 2">
+          <input class="scout-input" placeholder="Pseudo#Tag ennemi 3">
+          <input class="scout-input" placeholder="Pseudo#Tag ennemi 4">
+          <input class="scout-input" placeholder="Pseudo#Tag ennemi 5">
         </div>
-        <div class="sugg-bloc">
-          <div class="sugg-bloc-title">Top 3 — Selon la Maîtrise de l'Équipe</div>
-          <div class="sugg-cards" id="suggCards2"></div>
-          <div class="sugg-analysis" id="suggAnalysis2"></div>
+        <button class="scout-btn" id="scoutBtn" onclick="scoutEnemies()">Analyser l'équipe ennemie</button>
+        <div id="scoutRes"></div>
+      </div>
+
+      <!-- Suggestions panel -->
+      <div class="sugg-box">
+        <div class="sugg-title">Analyse de Draft</div>
+        <p class="sugg-desc">L'analyse croise les matchups théoriques, les synergies et la maîtrise des joueurs pour proposer la draft optimale.</p>
+        <div class="sugg-res" id="suggRes">
+          <div class="sugg-bloc">
+            <div class="sugg-bloc-title">Top 3 — Counterpicks & Synergies</div>
+            <div class="sugg-cards" id="suggCards1"></div>
+            <div class="sugg-analysis" id="suggAnalysis1"></div>
+          </div>
+          <div class="sugg-bloc">
+            <div class="sugg-bloc-title">Top 3 — Selon la Maîtrise de l'Équipe</div>
+            <div class="sugg-cards" id="suggCards2"></div>
+            <div class="sugg-analysis" id="suggAnalysis2"></div>
+          </div>
+          <div class="build-box" id="buildBox" style="display:none"></div>
         </div>
-        <div class="build-box" id="buildBox" style="display:none"></div>
       </div>
     </div>
   </div>
@@ -1770,7 +1844,7 @@ function updateCompAnalyzer(){
   const arc=document.getElementById('synergyArc');
   const numEl=document.getElementById('synergyNum');
   const verdictEl=document.getElementById('synergyVerdict');
-  const circumference=2*Math.PI*38;
+  const circumference=2*Math.PI*35;
   if(ourPicks.length>=2){
     arc.style.strokeDashoffset=circumference*(1-score/100);
     numEl.textContent=score;
