@@ -1162,7 +1162,7 @@ const CHAMP_ARCHETYPES = {
   Kayle:'split',Trundle:'bruiser',Olaf:'bruiser',Nocturne:'assassin',Briar:'assassin',Kassadin:'assassin',
 };
 
-let champData=[], playerStats={}, playerMastery={}, playerPuuids={};
+let champData=[], playerStats={}, playerMastery={}, playerPuuids={}, playerIcons={};
 let itemData={};
 let roleAssign={Top:'',Jungle:'',Mid:'',ADC:'',Support:''};
 let ourPicks=[], enemyPicks=[], ourBans=Array(5).fill(null), enemyBans=Array(5).fill(null);
@@ -1295,7 +1295,8 @@ async function loadPlayer(p){
     const [gn,tag]=p.riotId.split('#');
     const acc=await getAccount(gn,tag);
     playerPuuids[p.name]=acc.puuid;
-    const [,ranked,mastery]=await Promise.all([getSummoner(acc.puuid),getRanked(acc.puuid),getMastery(acc.puuid)]);
+    const [summoner,ranked,mastery]=await Promise.all([getSummoner(acc.puuid),getRanked(acc.puuid),getMastery(acc.puuid)]);
+    if(summoner.profileIconId) playerIcons[p.name]=`https://ddragon.leagueoflegends.com/cdn/${lolVer||'14.10.1'}/img/profileicon/${summoner.profileIconId}.png`;
     const solo=ranked.find(r=>r.queueType==='RANKED_SOLO_5x5');
     playerStats[p.name]={
       tier:solo?solo.tier:'UNRANKED',div:solo?solo.rank:'',lp:solo?solo.leaguePoints:0,
@@ -1504,8 +1505,9 @@ function renderCarousel(){
     const tl=s.tier==='UNRANKED'?'Non classé':`${s.tier} ${s.div}`;
     const chIcons=m.map(c=>{const ch=champData.find(x=>x.key==c.championId);return ch?`<img src="${ch.img}" alt="${ch.name}" title="${ch.name}">`:''}).join('');
     const roleHtml=role?`<div class="p-role"><img src="${ROLE_ICONS[role]}" alt="${role}">${role}</div>`:'';
+    const icon = playerIcons[p.name];
     return `<div class="p-card" onclick="openHistory('${p.name}')">
-      <div class="p-avatar"><span style="position:absolute;font-size:1.3rem">${p.name[0]}</span></div>
+      <div class="p-avatar">${icon?`<img src="${icon}" alt="${p.name}" style="width:100%;height:100%;border-radius:50%;object-fit:cover">`:`<span style="position:absolute;font-size:1.3rem">${p.name[0]}</span>`}</div>
       ${roleHtml}
       <div class="p-name">${p.name}</div>
       <div class="p-rank">${getRE(s.tier)}<span class="${getRC(s.tier)}">${tl}</span>${s.tier!=='UNRANKED'?`<span style="color:var(--muted);font-size:0.66rem">${s.lp}LP</span>`:''}</div>
