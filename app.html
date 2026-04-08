@@ -1296,7 +1296,7 @@ async function loadPlayer(p){
     const acc=await getAccount(gn,tag);
     playerPuuids[p.name]=acc.puuid;
     const [summoner,ranked,mastery]=await Promise.all([getSummoner(acc.puuid),getRanked(acc.puuid).catch(()=>[]),getMastery(acc.puuid).catch(()=>[])]);
-    if(summoner.profileIconId) playerIcons[p.name]=`https://ddragon.leagueoflegends.com/cdn/${lolVer||'14.10.1'}/img/profileicon/${summoner.profileIconId}.png`;
+    if(summoner.profileIconId) playerIcons[p.name]=`https://ddragon.leagueoflegends.com/cdn/${lolVer||'16.7.1'}/img/profileicon/${summoner.profileIconId}.png`;
     const solo=Array.isArray(ranked)?ranked.find(r=>r.queueType==='RANKED_SOLO_5x5'):null;
     playerStats[p.name]={
       tier:solo?solo.tier:'UNRANKED',div:solo?solo.rank:'',lp:solo?solo.leaguePoints:0,
