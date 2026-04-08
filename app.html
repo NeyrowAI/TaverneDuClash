@@ -1270,10 +1270,17 @@ function initReveal(){
 }
 
 // ── RIOT API ──
-async function rFetch(path){
-  const r = await fetch('/api/'+path);
-  if(!r.ok) throw new Error(r.status);
-  return r.json();
+async function rFetch(path, retries=2){
+  for(let i=0;i<=retries;i++){
+    try{
+      const r = await fetch('/api/'+path);
+      if(!r.ok) throw new Error(r.status);
+      return await r.json();
+    }catch(e){
+      if(i===retries) throw e;
+      await new Promise(ok=>setTimeout(ok,1000*(i+1)));
+    }
+  }
 }
 const getAccount = (gn,tag) => rFetch(`account/by-riot-id/${encodeURIComponent(gn)}/${encodeURIComponent(tag)}`);
 const getSummoner = puuid => rFetch(`summoner/by-puuid/${puuid}`);
