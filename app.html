@@ -1295,15 +1295,15 @@ async function loadPlayer(p){
     const [gn,tag]=p.riotId.split('#');
     const acc=await getAccount(gn,tag);
     playerPuuids[p.name]=acc.puuid;
-    const [summoner,ranked,mastery]=await Promise.all([getSummoner(acc.puuid),getRanked(acc.puuid),getMastery(acc.puuid)]);
+    const [summoner,ranked,mastery]=await Promise.all([getSummoner(acc.puuid),getRanked(acc.puuid).catch(()=>[]),getMastery(acc.puuid).catch(()=>[])]);
     if(summoner.profileIconId) playerIcons[p.name]=`https://ddragon.leagueoflegends.com/cdn/${lolVer||'14.10.1'}/img/profileicon/${summoner.profileIconId}.png`;
-    const solo=ranked.find(r=>r.queueType==='RANKED_SOLO_5x5');
+    const solo=Array.isArray(ranked)?ranked.find(r=>r.queueType==='RANKED_SOLO_5x5'):null;
     playerStats[p.name]={
       tier:solo?solo.tier:'UNRANKED',div:solo?solo.rank:'',lp:solo?solo.leaguePoints:0,
       wins:solo?solo.wins:0,losses:solo?solo.losses:0,
       wr:solo?Math.round(solo.wins/(solo.wins+solo.losses)*100):0
     };
-    playerMastery[p.name]=mastery.slice(0,5);
+    playerMastery[p.name]=Array.isArray(mastery)?mastery.slice(0,5):[];
     renderCarousel();
     updateHeroStats();
   }catch{
