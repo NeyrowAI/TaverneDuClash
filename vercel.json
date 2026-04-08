@@ -8,6 +8,8 @@
     { "source": "/api/account/(.*)", "destination": "/api/riot?path=account/$1" },
     { "source": "/api/summoner/(.*)", "destination": "/api/riot?path=summoner/$1" },
     { "source": "/api/ranked/(.*)", "destination": "/api/riot?path=ranked/$1" },
-    { "source": "/api/mastery/(.*)", "destination": "/api/riot?path=mastery/$1" }
+    { "source": "/api/mastery/(.*)", "destination": "/api/riot?path=mastery/$1" },
+    { "source": "/api/matches/(.*)", "destination": "/api/riot?path=matches/$1" },
+    { "source": "/api/match/(.*)", "destination": "/api/riot?path=match/$1" }
   ]
 }

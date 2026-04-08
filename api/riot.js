@@ -24,6 +24,11 @@ export default async function handler(req, res) {
     riotUrl = `https://euw1.api.riotgames.com/lol/league/v4/entries/by-puuid/${parts[2]}`;
   } else if (type === 'mastery' && parts[1] === 'by-puuid' && parts[2]) {
     riotUrl = `https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/${parts[2]}/top?count=5`;
+  } else if (type === 'matches' && parts[1] === 'by-puuid' && parts[2]) {
+    const count = parts[3] || '10';
+    riotUrl = `https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${parts[2]}/ids?count=${count}`;
+  } else if (type === 'match' && parts[1]) {
+    riotUrl = `https://europe.api.riotgames.com/lol/match/v5/matches/${parts[1]}`;
   } else {
     return res.status(404).json({ error: 'Unknown route', path: parts, rawPath });
   }
