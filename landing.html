@@ -35,18 +35,18 @@ body{background:var(--void);color:var(--text);font-family:'Crimson Pro',serif;mi
 
 /* AURORA MESH — animated background gradient */
 .aurora{position:fixed;inset:0;pointer-events:none;z-index:0}
-.aurora::before{content:'';position:absolute;inset:-50%;width:200%;height:200%;background:conic-gradient(from var(--aurora-angle,0deg) at 50% 50%,rgba(124,58,237,0.08),rgba(201,168,76,0.04),rgba(7,3,15,0),rgba(168,85,247,0.06),rgba(201,168,76,0.03),rgba(7,3,15,0));animation:auroraRotate 40s linear infinite;filter:blur(80px)}
-.aurora::after{content:'';position:absolute;inset:-30%;width:160%;height:160%;background:conic-gradient(from var(--aurora-angle,180deg) at 40% 60%,rgba(61,26,110,0.1),rgba(7,3,15,0),rgba(201,168,76,0.05),rgba(7,3,15,0),rgba(168,85,247,0.07));animation:auroraRotate 55s linear infinite reverse;filter:blur(100px)}
+.aurora::before{content:'';position:absolute;inset:-50%;width:200%;height:200%;background:conic-gradient(from var(--aurora-angle,0deg) at 50% 50%,rgba(124,58,237,0.04),rgba(201,168,76,0.02),rgba(7,3,15,0),rgba(168,85,247,0.03),rgba(201,168,76,0.015),rgba(7,3,15,0));animation:auroraRotate 40s linear infinite;filter:blur(80px)}
+.aurora::after{content:'';position:absolute;inset:-30%;width:160%;height:160%;background:conic-gradient(from var(--aurora-angle,180deg) at 40% 60%,rgba(61,26,110,0.05),rgba(7,3,15,0),rgba(201,168,76,0.025),rgba(7,3,15,0),rgba(168,85,247,0.035));animation:auroraRotate 55s linear infinite reverse;filter:blur(100px)}
 @keyframes auroraRotate{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
 
 /* BG EFFECTS */
 .bg-effects{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .mist{position:absolute;border-radius:50%;filter:blur(100px);animation:drift ease-in-out infinite alternate}
-.m1{width:900px;height:900px;background:radial-gradient(circle,rgba(124,58,237,0.18),rgba(61,26,110,0.06),transparent);top:-250px;left:-200px;animation-duration:25s}
-.m2{width:700px;height:700px;background:radial-gradient(circle,rgba(201,168,76,0.09),rgba(201,168,76,0.02),transparent);bottom:-100px;right:-150px;animation-duration:32s;animation-delay:-10s}
-.m3{width:600px;height:600px;background:radial-gradient(circle,rgba(61,26,110,0.15),rgba(124,58,237,0.04),transparent);top:40%;left:60%;animation-duration:20s;animation-delay:-5s}
-.m4{width:450px;height:450px;background:radial-gradient(circle,rgba(168,85,247,0.1),transparent);top:70%;left:10%;animation-duration:28s;animation-delay:-15s}
-.m5{width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,0.06),rgba(124,58,237,0.03),transparent);top:20%;right:20%;animation-duration:35s;animation-delay:-8s}
+.m1{width:900px;height:900px;background:radial-gradient(circle,rgba(124,58,237,0.1),rgba(61,26,110,0.03),transparent);top:-250px;left:-200px;animation-duration:25s}
+.m2{width:700px;height:700px;background:radial-gradient(circle,rgba(201,168,76,0.05),rgba(201,168,76,0.01),transparent);bottom:-100px;right:-150px;animation-duration:32s;animation-delay:-10s}
+.m3{width:600px;height:600px;background:radial-gradient(circle,rgba(61,26,110,0.08),rgba(124,58,237,0.02),transparent);top:40%;left:60%;animation-duration:20s;animation-delay:-5s}
+.m4{width:450px;height:450px;background:radial-gradient(circle,rgba(168,85,247,0.06),transparent);top:70%;left:10%;animation-duration:28s;animation-delay:-15s}
+.m5{width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,0.035),rgba(124,58,237,0.015),transparent);top:20%;right:20%;animation-duration:35s;animation-delay:-8s}
 @keyframes drift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(50px,35px) scale(1.15)}}
 
 /* PULSING ORBS */
