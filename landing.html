@@ -141,6 +141,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0.5rem
 .hero-inscrits-num{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:900;color:var(--gl)}
 .hero-inscrits-label{font-size:0.82rem;color:var(--muted)}
 .hero-inscrits-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px rgba(80,200,120,0.5)}
+.hero-gragas{position:absolute;bottom:2rem;right:2rem;width:180px;pointer-events:none;z-index:10;filter:drop-shadow(0 4px 20px rgba(0,0,0,0.5))}
 
 /* HERO RIGHT — PREVIEW CAROUSEL */
 .hero-right{position:relative;display:flex;justify-content:center}
@@ -509,6 +510,8 @@ window.amplitude = amplitude;
       <span class="hero-inscrits-dot"></span>
     </div>
   </div>
+
+  <video class="hero-gragas" autoplay loop muted playsinline><source src="/gragas.webm" type="video/webm"></video>
 
   <div class="hero-right reveal from-right reveal-delay-2">
     <div class="preview-card">
