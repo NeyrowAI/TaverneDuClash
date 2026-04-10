@@ -30,23 +30,6 @@
 html{scroll-behavior:smooth;overflow-x:hidden;color-scheme:dark}
 body{background:var(--void);color:var(--text);font-family:'Crimson Pro',serif;min-height:100vh;overflow-x:hidden}
 
-/* LIGHT MODE */
-html.light{
-  --void:#f5f0ff;--dark:#ece4f9;--mid:#e0d4f0;
-  --text:#1a1025;--muted:#5a4d6e;
-  --border:rgba(201,168,76,0.25);--borderv:rgba(168,85,247,0.3);
-  color-scheme:light;
-}
-html.light body{background:var(--void);color:var(--text)}
-html.light nav{background:rgba(245,240,255,0.95)}
-html.light .feat-card{background:linear-gradient(160deg,rgba(230,220,245,0.8),rgba(245,240,255,0.9))}
-html.light .testimonial-card{background:linear-gradient(160deg,rgba(230,220,245,0.8),rgba(245,240,255,0.9))}
-html.light .faq-item{background:linear-gradient(160deg,rgba(230,220,245,0.7),rgba(245,240,255,0.85))}
-html.light .waitlist-card{background:linear-gradient(160deg,rgba(230,220,245,0.9),rgba(245,240,255,0.95))}
-html.light .donate-card{background:linear-gradient(160deg,rgba(230,220,245,0.9),rgba(245,240,255,0.95))}
-html.light .donor-ticker{background:rgba(240,235,250,0.8)}
-html.light .mobile-menu{background:rgba(245,240,255,0.98)}
-html.light .mobile-menu a{color:var(--purple)}
 
 /* PARTICLES */
 #particleCanvas{position:fixed;inset:0;pointer-events:none;z-index:1}
@@ -131,10 +114,9 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0.5rem
 
 /* NAV UTILITY BUTTONS (lang + theme) */
 .nav-utils{display:flex;align-items:center;gap:0.5rem;margin-left:0.8rem}
-.nav-lang-btn,.nav-theme-btn{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.05em;padding:0.3rem 0.6rem;background:rgba(61,26,110,0.2);border:1px solid var(--borderv);color:var(--muted);cursor:pointer;border-radius:4px;transition:all 0.3s;white-space:nowrap;line-height:1.2}
-.nav-lang-btn:hover,.nav-theme-btn:hover{border-color:var(--violet);color:var(--gold);background:rgba(61,26,110,0.35)}
+.nav-lang-btn{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.05em;padding:0.3rem 0.6rem;background:rgba(61,26,110,0.2);border:1px solid var(--borderv);color:var(--muted);cursor:pointer;border-radius:4px;transition:all 0.3s;white-space:nowrap;line-height:1.2}
+.nav-lang-btn:hover{border-color:var(--violet);color:var(--gold);background:rgba(61,26,110,0.35)}
 .nav-lang-btn .active-lang{color:var(--gold);font-weight:700}
-.nav-theme-btn{font-size:0.85rem;padding:0.25rem 0.5rem}
 
 /* HERO — SPLIT LAYOUT */
 .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1.3fr;align-items:center;padding:4rem 4rem 2rem;gap:2rem;position:relative;z-index:1}
@@ -301,7 +283,7 @@ footer p{font-style:italic;opacity:0.6;color:var(--muted);font-size:0.72rem;line
 
 /* FOCUS VISIBLE */
 *:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
-.btn-p:focus-visible,.btn-s:focus-visible,.nav-links a:focus-visible,.waitlist-input:focus-visible,.carousel-dot:focus-visible,.faq-q:focus-visible,.nav-lang-btn:focus-visible,.nav-theme-btn:focus-visible,.donate-amt:focus-visible,.donate-submit:focus-visible,.donate-input:focus-visible,.donate-custom-input:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+.btn-p:focus-visible,.btn-s:focus-visible,.nav-links a:focus-visible,.waitlist-input:focus-visible,.carousel-dot:focus-visible,.faq-q:focus-visible,.nav-lang-btn:focus-visible,.donate-amt:focus-visible,.donate-submit:focus-visible,.donate-input:focus-visible,.donate-custom-input:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
 
 /* TOUCH */
 button,a,.faq-item,.carousel-dot{touch-action:manipulation}
@@ -492,13 +474,11 @@ button,a,.faq-item,.carousel-dot{touch-action:manipulation}
     <li>
       <div class="nav-utils">
         <button class="nav-lang-btn" id="langToggle" onclick="toggleLang()" aria-label="Changer de langue"><span class="active-lang">FR</span> | EN</button>
-        <button class="nav-theme-btn" id="themeToggle" onclick="toggleTheme()" aria-label="Changer le theme clair/sombre">&#9790;</button>
       </div>
     </li>
   </ul>
   <div style="display:flex;align-items:center;gap:0.4rem">
     <button class="nav-lang-btn" id="langToggleMobile" onclick="toggleLang()" aria-label="Changer de langue" style="display:none"><span class="active-lang">FR</span> | EN</button>
-    <button class="nav-theme-btn" id="themeToggleMobile" onclick="toggleTheme()" aria-label="Changer le theme" style="display:none">&#9790;</button>
     <button class="hamburger" id="hamburgerBtn" aria-label="Menu de navigation" onclick="toggleMobileMenu()">
       <span></span><span></span><span></span>
     </button>
@@ -1013,27 +993,6 @@ function toggleLang() {
   setLang(currentLang === 'fr' ? 'en' : 'fr');
 }
 
-// ── THEME TOGGLE ──
-let currentTheme = localStorage.getItem('taverne-theme') || 'dark';
-
-function setTheme(theme) {
-  currentTheme = theme;
-  localStorage.setItem('taverne-theme', theme);
-  if (theme === 'light') {
-    document.documentElement.classList.add('light');
-  } else {
-    document.documentElement.classList.remove('light');
-  }
-  // Update icon on all theme buttons
-  const icon = theme === 'light' ? '\u2600' : '\u263E';
-  document.querySelectorAll('.nav-theme-btn').forEach(btn => {
-    btn.textContent = icon;
-  });
-}
-
-function toggleTheme() {
-  setTheme(currentTheme === 'dark' ? 'light' : 'dark');
-}
 
 // ── FAQ TOGGLE WITH ARIA ──
 function toggleFaq(el) {
@@ -1339,8 +1298,6 @@ function closeDonationToast() {
 
 // ── INIT ──
 document.addEventListener('DOMContentLoaded', () => {
-  // Apply saved theme
-  setTheme(currentTheme);
   // Apply saved language
   setLang(currentLang);
   // Show/hide mobile util buttons
