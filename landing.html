@@ -178,7 +178,10 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0.5rem
 .draft-pick.enemy .draft-pick-role{color:#e74c3c}
 .draft-pick-name{font-family:'Cinzel',serif;font-size:0.8rem;color:#ddd;font-weight:600}
 .draft-pick-player{font-size:0.62rem;color:#7f8c8d;font-style:italic}
-.draft-vs{display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:1.3rem;color:rgba(200,200,200,0.2);padding:0 0.5rem;text-shadow:0 0 15px rgba(200,200,200,0.05)}
+.draft-vs{display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:1.3rem;color:rgba(200,200,200,0.2);padding:0 0.3rem;text-shadow:0 0 15px rgba(200,200,200,0.05)}
+.draft-battle-text{font-family:'Cinzel',serif;font-size:0.5rem;letter-spacing:0.12em;text-transform:uppercase;text-align:center;background:linear-gradient(90deg,#c9a84c,#7c3aed,#c9a84c,#7c3aed);background-size:300% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:draftBattleShimmer 4s linear infinite;line-height:1.4}
+@keyframes draftBattleShimmer{0%{background-position:100% 0}100%{background-position:-100% 0}}
+.draft-player-sel{background:rgba(7,3,15,0.8);border:1px solid rgba(60,50,80,0.4);color:#7f8c8d;padding:0.1rem 0.25rem;font-family:'Crimson Pro',serif;font-size:0.55rem;border-radius:2px;max-width:70px;pointer-events:none;appearance:none;-webkit-appearance:none}
 .draft-bottom{background:linear-gradient(90deg,rgba(1,10,19,0.95),rgba(10,20,35,0.95));padding:0.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(30,90,160,0.15);position:relative;z-index:1}
 .draft-bottom span{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.1em;color:#5d6d7e}
 
@@ -516,7 +519,7 @@ button,a,.faq-item,.carousel-dot{touch-action:manipulation}
           </div>
           <div class="draft-body">
             <div class="draft-team" id="draftOur"></div>
-            <div class="draft-vs">VS</div>
+            <div class="draft-vs"><span class="draft-battle-text" data-i18n="draft_battle">Préparez-vous pour la bataille !</span></div>
             <div class="draft-team" id="draftEnemy"></div>
           </div>
           <div class="draft-bottom">
@@ -821,9 +824,8 @@ async function initImages() {
     <div class="draft-pick our${i===0?' active':''}">
       <img class="draft-pick-img" src="${DDR()}${p.champ}.png" alt="${p.champ}">
       <div class="draft-pick-info">
-        <div class="draft-pick-role">${p.role}</div>
         <div class="draft-pick-name">${p.champ}</div>
-        <div class="draft-pick-player">${p.player}</div>
+        <select class="draft-player-sel"><option>${p.player}</option></select>
       </div>
     </div>`).join('');
 
@@ -831,7 +833,6 @@ async function initImages() {
     <div class="draft-pick enemy${i===0?' active':''}">
       <img class="draft-pick-img" src="${DDR()}${p.champ}.png" alt="${p.champ}">
       <div class="draft-pick-info">
-        <div class="draft-pick-role">${p.role}</div>
         <div class="draft-pick-name">${p.champ}</div>
         <div class="draft-pick-player">${p.player}</div>
       </div>
@@ -1092,6 +1093,7 @@ const translations = {
     hero_registered: 'inscrits',
     // Carousel
     draft_header: 'Draft en cours',
+    draft_battle: 'Préparez-vous pour la bataille !',
     scout_title: '🔍 Scout Équipe Ennemie',
     scout_desc: 'Analyse les champions favoris des adversaires pour obtenir les meilleurs bans.',
     scout_bans: 'BANS RECOMMANDÉS',
@@ -1183,6 +1185,7 @@ const translations = {
     hero_registered: 'registered',
     // Carousel
     draft_header: 'Draft in Progress',
+    draft_battle: 'Prepare for battle!',
     scout_title: '🔍 Scout Enemy Team',
     scout_desc: 'Analyze your opponents\' favorite champions to get the best bans.',
     scout_bans: 'RECOMMENDED BANS',
