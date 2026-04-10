@@ -1154,7 +1154,7 @@ function initParticles() {
 // ── SCROLL REVEAL (re-trigger on scroll) ──
 function initReveal() {
   const obs = new IntersectionObserver(entries => entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); } else { e.target.classList.remove('visible'); }
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
   }), { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 }
