@@ -30,7 +30,6 @@
 html{scroll-behavior:smooth;overflow-x:hidden;color-scheme:dark}
 body{background:var(--void);color:var(--text);font-family:'Crimson Pro',serif;min-height:100vh;overflow-x:hidden}
 
-
 /* PARTICLES */
 #particleCanvas{position:fixed;inset:0;pointer-events:none;z-index:1}
 
@@ -112,8 +111,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0.5rem
 .nav-discord-btn svg{width:18px;height:18px;fill:var(--discord)}
 .nav-discord-btn span{font-family:'Cinzel',serif;font-size:0.78rem;font-weight:600;color:var(--discord);letter-spacing:0.05em}
 
-/* NAV UTILITY BUTTONS (lang + theme) */
-.nav-utils{display:flex;align-items:center;gap:0.5rem;margin-left:0.8rem}
+/* NAV LANG */
 .nav-lang-btn{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.05em;padding:0.3rem 0.6rem;background:rgba(61,26,110,0.2);border:1px solid var(--borderv);color:var(--muted);cursor:pointer;border-radius:4px;transition:all 0.3s;white-space:nowrap;line-height:1.2}
 .nav-lang-btn:hover{border-color:var(--violet);color:var(--gold);background:rgba(61,26,110,0.35)}
 .nav-lang-btn .active-lang{color:var(--gold);font-weight:700}
@@ -282,8 +280,7 @@ footer p{font-style:italic;opacity:0.6;color:var(--muted);font-size:0.72rem;line
 .footer-links a:hover{color:var(--gold)}
 
 /* FOCUS VISIBLE */
-*:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
-.btn-p:focus-visible,.btn-s:focus-visible,.nav-links a:focus-visible,.waitlist-input:focus-visible,.carousel-dot:focus-visible,.faq-q:focus-visible,.nav-lang-btn:focus-visible,.donate-amt:focus-visible,.donate-submit:focus-visible,.donate-input:focus-visible,.donate-custom-input:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+.btn-p:focus-visible,.btn-s:focus-visible,.nav-links a:focus-visible,.waitlist-input:focus-visible,.carousel-dot:focus-visible,.faq-q:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
 
 /* TOUCH */
 button,a,.faq-item,.carousel-dot{touch-action:manipulation}
@@ -313,7 +310,6 @@ button,a,.faq-item,.carousel-dot{touch-action:manipulation}
 .mobile-menu.open{display:flex}
 .mobile-menu a{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold);text-decoration:none;letter-spacing:0.15em;transition:color 0.3s}
 .mobile-menu a:hover{color:var(--gl)}
-.mobile-utils{display:flex;gap:0.8rem;margin-top:1rem}
 
 /* TESTIMONIALS */
 .testimonials-sec{padding:6rem 4rem;position:relative;z-index:1}
@@ -424,7 +420,7 @@ button,a,.faq-item,.carousel-dot{touch-action:manipulation}
 <body>
 
 <div class="aurora"></div>
-<canvas id="particleCanvas" aria-hidden="true"></canvas>
+<canvas id="particleCanvas"></canvas>
 
 <div class="bg-effects">
   <div class="hex-grid"></div>
@@ -436,7 +432,7 @@ button,a,.faq-item,.carousel-dot{touch-action:manipulation}
 </div>
 
 <!-- ENERGY LINES -->
-<div class="energy-lines" aria-hidden="true">
+<div class="energy-lines">
   <div class="e-line" style="--line-color:rgba(168,85,247,0.12);--line-op:0.12;--dur:12s;left:8%;height:40%;animation-delay:0s"></div>
   <div class="e-line" style="--line-color:rgba(201,168,76,0.08);--line-op:0.08;--dur:16s;left:25%;height:55%;animation-delay:-4s"></div>
   <div class="e-line" style="--line-color:rgba(168,85,247,0.1);--line-op:0.1;--dur:14s;left:52%;height:35%;animation-delay:-7s"></div>
@@ -446,7 +442,7 @@ button,a,.faq-item,.carousel-dot{touch-action:manipulation}
 </div>
 
 <!-- FLOATING FRAGMENTS -->
-<div class="fragments" aria-hidden="true">
+<div class="fragments">
   <div class="frag diamond" style="--frag-color:rgba(201,168,76,0.15);--fop:0.15;--fdur:18s;--fdx:40px;--fdy:-80px;--frot:45deg;top:15%;left:12%;animation-delay:0s"></div>
   <div class="frag diamond" style="--frag-color:rgba(168,85,247,0.12);--fop:0.12;--fdur:22s;--fdx:-30px;--fdy:-60px;--frot:45deg;top:45%;right:8%;animation-delay:-5s"></div>
   <div class="frag line" style="--frag-color:rgba(201,168,76,0.1);--fop:0.1;--fdur:15s;--fdx:50px;--fdy:-40px;--frot:20deg;top:30%;left:5%;animation-delay:-3s"></div>
@@ -458,46 +454,41 @@ button,a,.faq-item,.carousel-dot{touch-action:manipulation}
 </div>
 
 <!-- NAV -->
-<nav role="navigation" aria-label="Navigation principale">
-  <a class="nav-logo" href="/"><img src="/logox.png" alt="Logo TaverneDuClash" width="48" height="48"><span><em>Taverne</em>DuClash</span></a>
+<nav>
+  <a class="nav-logo" href="/"><img src="/logox.png" alt="Logo" width="48" height="48"><span><em>Taverne</em>DuClash</span></a>
   <ul class="nav-links">
-    <li><a href="#features" data-i18n="nav_features">Fonctionnalites</a></li>
+    <li><a href="#features" data-i18n="nav_features">Fonctionnalités</a></li>
     <li><a href="#waitlist" data-i18n="nav_join">Rejoindre</a></li>
-    <li><a href="#waitlist" data-i18n="nav_access">Acceder a l'outil</a></li>
+    <li><a href="#waitlist" data-i18n="nav_access">Accéder à l'outil</a></li>
     <li><a href="#donate" data-i18n="nav_support">Soutenir</a></li>
     <li>
-      <a class="nav-discord-btn" href="https://discord.gg/axgmKnGPw" target="_blank" aria-label="Rejoins notre serveur Discord">
-        <svg viewBox="0 0 71 55" aria-hidden="true"><path d="M60.1 4.9A58.5 58.5 0 0 0 45.5.4a.2.2 0 0 0-.2.1 40.8 40.8 0 0 0-1.8 3.7 54 54 0 0 0-16.2 0A37.5 37.5 0 0 0 25.5.5a.2.2 0 0 0-.2-.1A58.4 58.4 0 0 0 10.7 4.9a.2.2 0 0 0-.1.1C1.6 18.1-.9 31 .3 43.6a.2.2 0 0 0 .1.2 58.8 58.8 0 0 0 17.7 8.9.2.2 0 0 0 .2-.1 42 42 0 0 0 3.6-5.9.2.2 0 0 0-.1-.3 38.7 38.7 0 0 1-5.5-2.6.2.2 0 0 1 0-.4l1.1-.8a.2.2 0 0 1 .2 0c11.5 5.3 24 5.3 35.4 0a.2.2 0 0 1 .2 0l1.1.8a.2.2 0 0 1 0 .4 36.1 36.1 0 0 1-5.5 2.6.2.2 0 0 0-.1.3 47.1 47.1 0 0 0 3.6 5.9.2.2 0 0 0 .2.1 58.7 58.7 0 0 0 17.8-8.9.2.2 0 0 0 .1-.2C73 29.1 69.5 16.3 60.2 5a.2.2 0 0 0-.1-.1zM23.7 36.4c-3.5 0-6.4-3.2-6.4-7.2s2.8-7.2 6.4-7.2c3.6 0 6.5 3.3 6.4 7.2 0 4-2.8 7.2-6.4 7.2zm23.7 0c-3.5 0-6.4-3.2-6.4-7.2s2.8-7.2 6.4-7.2c3.6 0 6.5 3.3 6.4 7.2 0 4-2.8 7.2-6.4 7.2z"/></svg>
+      <a class="nav-discord-btn" href="https://discord.gg/axgmKnGPw" target="_blank">
+        <svg viewBox="0 0 71 55"><path d="M60.1 4.9A58.5 58.5 0 0 0 45.5.4a.2.2 0 0 0-.2.1 40.8 40.8 0 0 0-1.8 3.7 54 54 0 0 0-16.2 0A37.5 37.5 0 0 0 25.5.5a.2.2 0 0 0-.2-.1A58.4 58.4 0 0 0 10.7 4.9a.2.2 0 0 0-.1.1C1.6 18.1-.9 31 .3 43.6a.2.2 0 0 0 .1.2 58.8 58.8 0 0 0 17.7 8.9.2.2 0 0 0 .2-.1 42 42 0 0 0 3.6-5.9.2.2 0 0 0-.1-.3 38.7 38.7 0 0 1-5.5-2.6.2.2 0 0 1 0-.4l1.1-.8a.2.2 0 0 1 .2 0c11.5 5.3 24 5.3 35.4 0a.2.2 0 0 1 .2 0l1.1.8a.2.2 0 0 1 0 .4 36.1 36.1 0 0 1-5.5 2.6.2.2 0 0 0-.1.3 47.1 47.1 0 0 0 3.6 5.9.2.2 0 0 0 .2.1 58.7 58.7 0 0 0 17.8-8.9.2.2 0 0 0 .1-.2C73 29.1 69.5 16.3 60.2 5a.2.2 0 0 0-.1-.1zM23.7 36.4c-3.5 0-6.4-3.2-6.4-7.2s2.8-7.2 6.4-7.2c3.6 0 6.5 3.3 6.4 7.2 0 4-2.8 7.2-6.4 7.2zm23.7 0c-3.5 0-6.4-3.2-6.4-7.2s2.8-7.2 6.4-7.2c3.6 0 6.5 3.3 6.4 7.2 0 4-2.8 7.2-6.4 7.2z"/></svg>
         <span data-i18n="nav_discord">Rejoins notre Discord !</span>
       </a>
     </li>
     <li>
-      <div class="nav-utils">
-        <button class="nav-lang-btn" id="langToggle" onclick="toggleLang()" aria-label="Changer de langue"><span class="active-lang">FR</span> | EN</button>
-      </div>
+      <button class="nav-lang-btn" id="langToggle" onclick="toggleLang()" aria-label="Changer de langue"><span class="active-lang">FR</span> | EN</button>
     </li>
   </ul>
-  <div style="display:flex;align-items:center;gap:0.4rem">
-    <button class="nav-lang-btn" id="langToggleMobile" onclick="toggleLang()" aria-label="Changer de langue" style="display:none"><span class="active-lang">FR</span> | EN</button>
-    <button class="hamburger" id="hamburgerBtn" aria-label="Menu de navigation" onclick="toggleMobileMenu()">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu de navigation" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Menu mobile">
-  <a href="#features" onclick="toggleMobileMenu()" data-i18n="nav_features">Fonctionnalites</a>
-  <a href="#waitlist" onclick="toggleMobileMenu()" data-i18n="nav_join_mobile">Rejoindre la Waitlist</a>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#features" onclick="toggleMobileMenu()" data-i18n="nav_features">Fonctionnalités</a>
+  <a href="#waitlist" onclick="toggleMobileMenu()" data-i18n="mobile_join_waitlist">Rejoindre la Waitlist</a>
   <a href="#donate" onclick="toggleMobileMenu()" data-i18n="nav_support">Soutenir</a>
   <a href="https://discord.gg/axgmKnGPw" target="_blank">Discord</a>
 </div>
 
 <!-- HERO -->
-<section class="hero" aria-label="Hero">
+<section class="hero">
   <div class="hero-left">
-    <div class="hero-badge reveal"><div class="hero-badge-dot"></div><span data-i18n="hero_badge">En developpement</span></div>
-    <h1 class="hero-title-epic"><span class="gold epic-word" style="--i:0" data-i18n="hero_w1">DOMINE</span><br><span class="violet epic-word" style="--i:1" data-i18n="hero_w2">CHAQUE</span> <span class="violet epic-word" style="--i:2" data-i18n="hero_w3">DRAFT</span><br><span class="gold epic-word" style="--i:3" data-i18n="hero_w4">CLASH</span></h1>
+    <div class="hero-badge reveal"><div class="hero-badge-dot"></div><span data-i18n="hero_badge">En développement</span></div>
+    <h1 class="hero-title-epic"><span class="gold epic-word" style="--i:0">DOMINE</span><br><span class="violet epic-word" style="--i:1">CHAQUE</span> <span class="violet epic-word" style="--i:2">DRAFT</span><br><span class="gold epic-word" style="--i:3">CLASH</span></h1>
     <div class="hero-accent reveal reveal-delay-2"></div>
     <p class="hero-sub reveal reveal-delay-2" data-i18n="hero_sub">L'outil de draft ultime pour League of Legends Clash. Stats en direct, coach IA, scout ennemi et rappels WhatsApp.</p>
     <div class="hero-cta reveal reveal-delay-3">
@@ -518,7 +509,7 @@ button,a,.faq-item,.carousel-dot{touch-action:manipulation}
         <!-- SLIDE 1: Draft LoL style -->
         <div class="carousel-slide draft-slide active">
           <img class="map-bg" src="/map.png" alt="" width="300" height="300">
-          <div class="draft-header"><span data-i18n="carousel_draft_header">Draft en cours</span></div>
+          <div class="draft-header"><span data-i18n="draft_header">Draft en cours</span></div>
           <div class="draft-timer">
             <div class="draft-timer-num">26</div>
             <div class="draft-timer-bar"><div class="draft-timer-fill"></div></div>
@@ -536,14 +527,14 @@ button,a,.faq-item,.carousel-dot{touch-action:manipulation}
 
         <!-- SLIDE 2: Scout ennemi -->
         <div class="carousel-slide scout-slide">
-          <div class="scout-slide-title" data-i18n="carousel_scout_title">&#128269; Scout Equipe Ennemie</div>
-          <p class="scout-slide-desc" data-i18n="carousel_scout_desc">Analyse les champions favoris des adversaires pour obtenir les meilleurs bans.</p>
+          <div class="scout-slide-title" data-i18n="scout_title">🔍 Scout Équipe Ennemie</div>
+          <p class="scout-slide-desc" data-i18n="scout_desc">Analyse les champions favoris des adversaires pour obtenir les meilleurs bans.</p>
           <div class="scout-slide-inputs">
             <div class="scout-slide-input">DarkViper#EUW</div>
             <div class="scout-slide-input">xShadow#1234</div>
             <div class="scout-slide-input">NightFury#EUW</div>
           </div>
-          <div style="font-family:Cinzel;font-size:0.6rem;color:var(--red);letter-spacing:0.1em;margin-bottom:0.4rem" data-i18n="carousel_scout_bans">BANS RECOMMANDES</div>
+          <div style="font-family:Cinzel;font-size:0.6rem;color:var(--red);letter-spacing:0.1em;margin-bottom:0.4rem" data-i18n="scout_bans">BANS RECOMMANDÉS</div>
           <div class="scout-slide-results" id="scoutResults"></div>
         </div>
 
@@ -554,24 +545,24 @@ button,a,.faq-item,.carousel-dot{touch-action:manipulation}
             <img class="chat-header-avatar" id="chatBlitz" src="" alt="NEROBOT">
             <div>
               <div class="chat-header-name">NEROBOT</div>
-              <div class="chat-header-status" data-i18n="carousel_chat_status">En ligne &#8212; Coach LoL</div>
+              <div class="chat-header-status" data-i18n="chat_status">En ligne — Coach LoL</div>
             </div>
           </div>
           <div class="chat-msgs">
-            <div class="chat-msg user" data-i18n="carousel_chat_q1">C'est quoi le meilleur counter de Garen top ?</div>
+            <div class="chat-msg user" data-i18n="chat_user_1">C'est quoi le meilleur counter de Garen top ?</div>
             <div class="chat-msg bot">
               <div class="sender">NEROBOT</div>
-              <span data-i18n="carousel_chat_a1">Les meilleurs counters de Garen top sont <strong>Vayne</strong> (le kite hard), <strong>Kayle</strong> (scale mieux) et <strong>Camille</strong> (trades courts). Ban Darius si tu joues contre un OTP Garen.</span>
+              <span data-i18n="chat_bot_1">Les meilleurs counters de Garen top sont <strong>Vayne</strong> (le kite hard), <strong>Kayle</strong> (scale mieux) et <strong>Camille</strong> (trades courts). Ban Darius si tu joues contre un OTP Garen.</span>
             </div>
-            <div class="chat-msg user" data-i18n="carousel_chat_q2">Et en build ?</div>
+            <div class="chat-msg user" data-i18n="chat_user_2">Et en build ?</div>
             <div class="chat-msg bot">
               <div class="sender">NEROBOT</div>
-              <span data-i18n="carousel_chat_a2">Contre Garen, rush <strong>Couperet noir</strong> pour l'armure. Ensuite <strong>Danse de la mort</strong> pour survivre son ult. Runes: Conquerant obligatoire.</span>
+              <span data-i18n="chat_bot_2">Contre Garen, rush <strong>Couperet noir</strong> pour l'armure. Ensuite <strong>Danse de la mort</strong> pour survivre son ult. Runes: Conquérant obligatoire.</span>
             </div>
           </div>
           <div class="chat-input-row">
-            <div class="chat-input" data-i18n="carousel_chat_placeholder">Pose ta question...</div>
-            <div class="chat-send" role="button" aria-label="Envoyer">&#8594;</div>
+            <div class="chat-input" data-i18n="chat_placeholder">Pose ta question...</div>
+            <div class="chat-send">→</div>
           </div>
         </div>
       </div>
@@ -584,11 +575,11 @@ button,a,.faq-item,.carousel-dot{touch-action:manipulation}
     </div>
 
     <!-- NEROBOT floating badge -->
-    <div class="nerobot-float" aria-hidden="true">
+    <div class="nerobot-float">
       <img id="neroBlitz" src="" alt="NEROBOT">
       <div class="nerobot-float-info">
         <div class="nerobot-float-name">NEROBOT</div>
-        <div class="nerobot-float-msg" data-i18n="nerobot_tip">Pick Aatrox &#8212; meta S-tier !</div>
+        <div class="nerobot-float-msg" data-i18n="nerobot_msg">Pick Aatrox — meta S-tier !</div>
       </div>
       <div class="nerobot-float-dot"></div>
     </div>
@@ -600,36 +591,36 @@ button,a,.faq-item,.carousel-dot{touch-action:manipulation}
 <!-- FEATURES -->
 <section class="features-sec" id="features">
   <div class="features-header reveal from-left">
-    <div class="features-eye" data-i18n="features_eye">Fonctionnalites</div>
-    <h2 class="features-title" data-i18n="features_title">Un arsenal complet<br>pour ta draft</h2>
+    <div class="features-eye" data-i18n="feat_eye">Fonctionnalités</div>
+    <h2 class="features-title" data-i18n="feat_heading">Un arsenal complet<br>pour ta draft</h2>
     <div class="features-line"></div>
-    <p class="features-desc" data-i18n="features_desc">Chaque fonctionnalite a ete pensee pour te donner un avantage decisif en Clash.</p>
+    <p class="features-desc" data-i18n="feat_desc">Chaque fonctionnalité a été pensée pour te donner un avantage décisif en Clash.</p>
   </div>
 
   <div class="features-grid">
     <div class="feat-card reveal" style="--accent-color:var(--gold);transition-delay:0s">
-      <span class="feat-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 4 5-9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      <h3 class="feat-title" data-i18n="feat1_title">Stats en Direct</h3><p class="feat-desc" data-i18n="feat1_desc">Rang, winrate, LP et top 5 champions recuperes en temps reel via l'API Riot Games pour chaque joueur.</p>
+      <span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 4 5-9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <h3 class="feat-title" data-i18n="feat_stats_title">Stats en Direct</h3><p class="feat-desc" data-i18n="feat_stats_desc">Rang, winrate, LP et top 5 champions récupérés en temps réel via l'API Riot Games pour chaque joueur.</p>
     </div>
     <div class="feat-card reveal" style="--accent-color:var(--violet);transition-delay:0.15s">
-      <span class="feat-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M8 14h8l2 8H6l2-8z"/><path d="M9 4l1-2h4l1 2" stroke-linecap="round"/></svg></span>
-      <h3 class="feat-title" data-i18n="feat2_title">NEROBOT &#8212; Coach IA</h3><p class="feat-desc" data-i18n="feat2_desc">Un coach virtuel specialise LoL qui reagit a chaque pick en temps reel. Conseils de matchup et de build.</p>
+      <span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M8 14h8l2 8H6l2-8z"/><path d="M9 4l1-2h4l1 2" stroke-linecap="round"/></svg></span>
+      <h3 class="feat-title" data-i18n="feat_coach_title">NEROBOT — Coach IA</h3><p class="feat-desc" data-i18n="feat_coach_desc">Un coach virtuel spécialisé LoL qui réagit à chaque pick en temps réel. Conseils de matchup et de build.</p>
     </div>
     <div class="feat-card reveal" style="--accent-color:var(--gold);transition-delay:0.3s">
-      <span class="feat-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M12 2a7 7 0 017 7c0 2.5-1.3 4.5-3 5.7V17a1 1 0 01-1 1h-6a1 1 0 01-1-1v-2.3C6.3 13.5 5 11.5 5 9a7 7 0 017-7z"/><path d="M9 21h6M10 17v1M14 17v1" stroke-linecap="round"/><path d="M12 6v2M9.5 8.5l1 1M14.5 8.5l-1 1" stroke-linecap="round" opacity="0.6"/></svg></span>
-      <h3 class="feat-title" data-i18n="feat3_title">Draft Intelligente</h3><p class="feat-desc" data-i18n="feat3_desc">Analyse de composition, score de synergie, counterpicks et suggestions basees sur la maitrise des joueurs.</p>
+      <span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M12 2a7 7 0 017 7c0 2.5-1.3 4.5-3 5.7V17a1 1 0 01-1 1h-6a1 1 0 01-1-1v-2.3C6.3 13.5 5 11.5 5 9a7 7 0 017-7z"/><path d="M9 21h6M10 17v1M14 17v1" stroke-linecap="round"/><path d="M12 6v2M9.5 8.5l1 1M14.5 8.5l-1 1" stroke-linecap="round" opacity="0.6"/></svg></span>
+      <h3 class="feat-title" data-i18n="feat_draft_title">Draft Intelligente</h3><p class="feat-desc" data-i18n="feat_draft_desc">Analyse de composition, score de synergie, counterpicks et suggestions basées sur la maîtrise des joueurs.</p>
     </div>
     <div class="feat-card reveal" style="--accent-color:var(--red);transition-delay:0.45s">
-      <span class="feat-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke-linecap="round"/></svg></span>
-      <h3 class="feat-title" data-i18n="feat4_title">Scout Ennemi</h3><p class="feat-desc" data-i18n="feat4_desc">Analyse les champions favoris des adversaires et suggere les bans optimaux pour chaque Clash.</p>
+      <span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke-linecap="round"/></svg></span>
+      <h3 class="feat-title" data-i18n="feat_scout_title">Scout Ennemi</h3><p class="feat-desc" data-i18n="feat_scout_desc">Analyse les champions favoris des adversaires et suggère les bans optimaux pour chaque Clash.</p>
     </div>
     <div class="feat-card reveal" style="--accent-color:var(--green);transition-delay:0.6s">
-      <span class="feat-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="var(--green)"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.82 14.01c-.24.68-1.41 1.3-1.95 1.38-.5.07-1.13.1-1.83-.11-.42-.13-.96-.32-1.65-.63-2.9-1.26-4.79-4.19-4.93-4.39-.14-.2-1.17-1.56-1.17-2.97s.74-2.11 1-2.4c.27-.29.58-.36.78-.36h.56c.18 0 .43-.07.67.51.24.58.83 2.03.9 2.17.07.15.12.32.02.51-.1.2-.15.32-.29.49-.15.17-.31.38-.44.51-.15.15-.3.31-.13.6.17.3.78 1.28 1.67 2.07 1.14 1.02 2.11 1.33 2.41 1.48.29.15.47.13.64-.08.17-.2.75-.87.95-1.17.2-.29.41-.24.68-.15.27.1 1.72.81 2.01.96.29.15.49.22.56.34.07.12.07.71-.17 1.39z"/></svg></span>
-      <h3 class="feat-title" data-i18n="feat5_title">Rappels WhatsApp</h3><p class="feat-desc" data-i18n="feat5_desc">Notifications automatiques 2 jours avant chaque Clash. Confirme ta participation et ton role directement.</p>
+      <span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="var(--green)"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.82 14.01c-.24.68-1.41 1.3-1.95 1.38-.5.07-1.13.1-1.83-.11-.42-.13-.96-.32-1.65-.63-2.9-1.26-4.79-4.19-4.93-4.39-.14-.2-1.17-1.56-1.17-2.97s.74-2.11 1-2.4c.27-.29.58-.36.78-.36h.56c.18 0 .43-.07.67.51.24.58.83 2.03.9 2.17.07.15.12.32.02.51-.1.2-.15.32-.29.49-.15.17-.31.38-.44.51-.15.15-.3.31-.13.6.17.3.78 1.28 1.67 2.07 1.14 1.02 2.11 1.33 2.41 1.48.29.15.47.13.64-.08.17-.2.75-.87.95-1.17.2-.29.41-.24.68-.15.27.1 1.72.81 2.01.96.29.15.49.22.56.34.07.12.07.71-.17 1.39z"/></svg></span>
+      <h3 class="feat-title" data-i18n="feat_whatsapp_title">Rappels WhatsApp</h3><p class="feat-desc" data-i18n="feat_whatsapp_desc">Notifications automatiques 2 jours avant chaque Clash. Confirme ta participation et ton rôle directement.</p>
     </div>
     <div class="feat-card reveal" style="--accent-color:var(--gold);transition-delay:0.75s">
-      <span class="feat-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M12 2l3 6h6l-5 4 2 7-6-4-6 4 2-7-5-4h6z" stroke-linejoin="round"/><circle cx="12" cy="15" r="3"/></svg></span>
-      <h3 class="feat-title" data-i18n="feat6_title">German &amp; Carry</h3><p class="feat-desc" data-i18n="feat6_desc">Awards hebdomadaires : German de la semaine (pire KDA) et Carry de la semaine (meilleur KDA).</p>
+      <span class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M12 2l3 6h6l-5 4 2 7-6-4-6 4 2-7-5-4h6z" stroke-linejoin="round"/><circle cx="12" cy="15" r="3"/></svg></span>
+      <h3 class="feat-title" data-i18n="feat_awards_title">German & Carry</h3><p class="feat-desc" data-i18n="feat_awards_desc">Awards hebdomadaires : German de la semaine (pire KDA) et Carry de la semaine (meilleur KDA).</p>
     </div>
   </div>
 </section>
@@ -644,35 +635,35 @@ button,a,.faq-item,.carousel-dot{touch-action:manipulation}
   </div>
   <div class="testimonials-grid">
     <div class="testimonial-card reveal">
-      <div class="testimonial-stars" aria-label="5 etoiles">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <p class="testimonial-text" data-i18n="testimonial1_text">On a ban les 5 OTP de l'equipe adverse grace au scout. Resultat : 3-0 en Clash. L'outil est une vraie triche legale.</p>
+      <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="testimonial-text" data-i18n="testimonial_1_text">On a ban les 5 OTP de l'équipe adverse grâce au scout. Résultat : 3-0 en Clash. L'outil est une vraie triche légale.</p>
       <div class="testimonial-author">
         <div class="testimonial-avatar">N</div>
         <div class="testimonial-info">
           <span class="testimonial-name">Nero</span>
-          <span class="testimonial-role" data-i18n="testimonial1_role">Jungle &#8212; Clash regulier</span>
+          <span class="testimonial-role" data-i18n="testimonial_1_role">Jungle — Clash régulier</span>
         </div>
       </div>
     </div>
     <div class="testimonial-card reveal reveal-delay-1">
-      <div class="testimonial-stars" aria-label="5 etoiles">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <p class="testimonial-text" data-i18n="testimonial2_text">NEROBOT m'a conseille un counter que j'aurais jamais pick moi-meme. J'ai solo carry la game. Le coach IA c'est un game changer.</p>
+      <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="testimonial-text" data-i18n="testimonial_2_text">NEROBOT m'a conseillé un counter que j'aurais jamais pick moi-même. J'ai solo carry la game. Le coach IA c'est un game changer.</p>
       <div class="testimonial-author">
         <div class="testimonial-avatar">T</div>
         <div class="testimonial-info">
           <span class="testimonial-name">Timotix</span>
-          <span class="testimonial-role" data-i18n="testimonial2_role">Mid &#8212; Tryhard Clash</span>
+          <span class="testimonial-role" data-i18n="testimonial_2_role">Mid — Tryhard Clash</span>
         </div>
       </div>
     </div>
     <div class="testimonial-card reveal reveal-delay-2">
-      <div class="testimonial-stars" aria-label="5 etoiles">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <p class="testimonial-text" data-i18n="testimonial3_text">Les rappels WhatsApp c'est genial. Plus personne oublie le Clash, et on sait qui joue quel role avant meme de se co.</p>
+      <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="testimonial-text" data-i18n="testimonial_3_text">Les rappels WhatsApp c'est génial. Plus personne oublie le Clash, et on sait qui joue quel rôle avant même de se co.</p>
       <div class="testimonial-author">
         <div class="testimonial-avatar">E</div>
         <div class="testimonial-info">
           <span class="testimonial-name">Eracci</span>
-          <span class="testimonial-role" data-i18n="testimonial3_role">Support &#8212; Capitaine d'equipe</span>
+          <span class="testimonial-role" data-i18n="testimonial_3_role">Support — Capitaine d'équipe</span>
         </div>
       </div>
     </div>
@@ -682,29 +673,29 @@ button,a,.faq-item,.carousel-dot{touch-action:manipulation}
 <!-- FAQ -->
 <section class="faq-sec" id="faq">
   <div class="faq-header reveal">
-    <div class="faq-eye" data-i18n="faq_eye">Questions frequentes</div>
+    <div class="faq-eye" data-i18n="faq_eye">Questions fréquentes</div>
     <h2 class="faq-title" data-i18n="faq_title">Tout ce que tu veux savoir</h2>
   </div>
   <div class="faq-list">
-    <div class="faq-item reveal" role="button" tabindex="0" aria-expanded="false" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter')toggleFaq(this)">
-      <div class="faq-q" data-i18n="faq1_q">C'est quoi TaverneDuClash exactement ?</div>
-      <div class="faq-a" role="region"><p data-i18n="faq1_a">C'est un outil web concu pour les equipes de Clash sur League of Legends. Il combine un systeme de draft intelligent, un scout des adversaires, un coach IA (NEROBOT) et des rappels WhatsApp automatiques pour t'aider a dominer chaque tournoi.</p></div>
+    <div class="faq-item reveal" role="button" tabindex="0" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter')this.classList.toggle('open')">
+      <div class="faq-q" data-i18n="faq_q1">C'est quoi TaverneDuClash exactement ?</div>
+      <div class="faq-a"><p data-i18n="faq_a1">C'est un outil web conçu pour les équipes de Clash sur League of Legends. Il combine un système de draft intelligent, un scout des adversaires, un coach IA (NEROBOT) et des rappels WhatsApp automatiques pour t'aider à dominer chaque tournoi.</p></div>
     </div>
-    <div class="faq-item reveal reveal-delay-1" role="button" tabindex="0" aria-expanded="false" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter')toggleFaq(this)">
-      <div class="faq-q" data-i18n="faq2_q">C'est gratuit ?</div>
-      <div class="faq-a" role="region"><p data-i18n="faq2_a">Oui, TaverneDuClash sera gratuit. L'objectif c'est d'aider la communaute Clash, pas de monetiser. Inscris-toi a la waitlist pour etre prevenu du lancement.</p></div>
+    <div class="faq-item reveal reveal-delay-1" role="button" tabindex="0" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter')this.classList.toggle('open')">
+      <div class="faq-q" data-i18n="faq_q2">C'est gratuit ?</div>
+      <div class="faq-a"><p data-i18n="faq_a2">Oui, TaverneDuClash sera gratuit. L'objectif c'est d'aider la communauté Clash, pas de monétiser. Inscris-toi à la waitlist pour être prévenu du lancement.</p></div>
     </div>
-    <div class="faq-item reveal reveal-delay-2" role="button" tabindex="0" aria-expanded="false" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter')toggleFaq(this)">
-      <div class="faq-q" data-i18n="faq3_q">Ca marche sur quel serveur ? (EUW, EUNE, etc.)</div>
-      <div class="faq-a" role="region"><p data-i18n="faq3_a">L'outil fonctionne avec tous les serveurs supportes par l'API Riot Games, dont EUW, EUNE, NA, KR, et tous les autres.</p></div>
+    <div class="faq-item reveal reveal-delay-2" role="button" tabindex="0" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter')this.classList.toggle('open')">
+      <div class="faq-q" data-i18n="faq_q3">Ça marche sur quel serveur ? (EUW, EUNE, etc.)</div>
+      <div class="faq-a"><p data-i18n="faq_a3">L'outil fonctionne avec tous les serveurs supportés par l'API Riot Games, dont EUW, EUNE, NA, KR, et tous les autres.</p></div>
     </div>
-    <div class="faq-item reveal reveal-delay-3" role="button" tabindex="0" aria-expanded="false" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter')toggleFaq(this)">
-      <div class="faq-q" data-i18n="faq4_q">C'est autorise par Riot Games ?</div>
-      <div class="faq-a" role="region"><p data-i18n="faq4_a">Oui. TaverneDuClash utilise l'API officielle de Riot Games dans le respect de leurs conditions d'utilisation. Aucune donnee privee n'est collectee en dehors de ce que l'API fournit publiquement.</p></div>
+    <div class="faq-item reveal reveal-delay-3" role="button" tabindex="0" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter')this.classList.toggle('open')">
+      <div class="faq-q" data-i18n="faq_q4">C'est autorisé par Riot Games ?</div>
+      <div class="faq-a"><p data-i18n="faq_a4">Oui. TaverneDuClash utilise l'API officielle de Riot Games dans le respect de leurs conditions d'utilisation. Aucune donnée privée n'est collectée en dehors de ce que l'API fournit publiquement.</p></div>
     </div>
-    <div class="faq-item reveal reveal-delay-4" role="button" tabindex="0" aria-expanded="false" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter')toggleFaq(this)">
-      <div class="faq-q" data-i18n="faq5_q">Il faut un compte Riot pour utiliser l'outil ?</div>
-      <div class="faq-a" role="region"><p data-i18n="faq5_a">Non, pas besoin de connecter ton compte Riot. Tu entres simplement les pseudos des joueurs et l'outil recupere les infos via l'API publique.</p></div>
+    <div class="faq-item reveal reveal-delay-4" role="button" tabindex="0" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter')this.classList.toggle('open')">
+      <div class="faq-q" data-i18n="faq_q5">Il faut un compte Riot pour utiliser l'outil ?</div>
+      <div class="faq-a"><p data-i18n="faq_a5">Non, pas besoin de connecter ton compte Riot. Tu entres simplement les pseudos des joueurs et l'outil récupère les infos via l'API publique.</p></div>
     </div>
   </div>
 </section>
@@ -715,22 +706,22 @@ button,a,.faq-item,.carousel-dot{touch-action:manipulation}
 <section class="waitlist-sec" id="waitlist">
   <div class="waitlist-glow"></div>
   <div class="waitlist-card reveal scale-in">
-    <div class="waitlist-eye" data-i18n="waitlist_eye">Bientot disponible</div>
+    <div class="waitlist-eye" data-i18n="waitlist_eye">Bientôt disponible</div>
     <h2 class="waitlist-title" data-i18n="waitlist_title">Rejoins la liste d'attente</h2>
-    <p class="waitlist-desc" data-i18n="waitlist_desc">Sois le premier informe quand TaverneDuClash sera disponible pour toutes les equipes.</p>
+    <p class="waitlist-desc" data-i18n="waitlist_desc">Sois le premier informé quand TaverneDuClash sera disponible pour toutes les équipes.</p>
     <form class="waitlist-form" id="waitlistForm" onsubmit="submitWaitlist(event)">
-      <input class="waitlist-input" type="email" placeholder="ton.email@exemple.com" required id="waitlistEmail" autocomplete="email" aria-label="Adresse email">
+      <input class="waitlist-input" type="email" placeholder="ton.email@exemple.com" required id="waitlistEmail" autocomplete="email">
       <button class="waitlist-submit" type="submit" id="waitlistBtn" data-i18n="waitlist_btn">Rejoindre la Waitlist</button>
     </form>
-    <p class="waitlist-privacy" data-i18n="waitlist_privacy">Aucun spam. Desabonnement en un clic.</p>
+    <p class="waitlist-privacy" data-i18n="waitlist_privacy">Aucun spam. Désabonnement en un clic.</p>
     <div class="waitlist-counter">
       <span class="waitlist-counter-num" id="waitlistCount">150+</span>
-      <span class="waitlist-counter-label" data-i18n="waitlist_counter_label">deja inscrits</span>
+      <span class="waitlist-counter-label" data-i18n="waitlist_already">déjà inscrits</span>
       <span class="waitlist-counter-dot"></span>
     </div>
     <div class="waitlist-success" id="waitlistSuccess">
-      <h3 data-i18n="waitlist_success_title">Inscription confirmee</h3>
-      <p data-i18n="waitlist_success_desc">Tu fais partie de la liste. On te previent des le lancement.</p>
+      <h3 data-i18n="waitlist_success_title">Inscription confirmée</h3>
+      <p data-i18n="waitlist_success_desc">Tu fais partie de la liste. On te prévient dès le lancement.</p>
     </div>
   </div>
 </section>
@@ -740,27 +731,27 @@ button,a,.faq-item,.carousel-dot{touch-action:manipulation}
 <!-- DONATE -->
 <section class="donate-sec" id="donate">
   <div class="donate-header reveal">
-    <div class="donate-eye" data-i18n="donate_eye">Communaute</div>
+    <div class="donate-eye" data-i18n="donate_eye">Communaut&eacute;</div>
     <h2 class="donate-title" data-i18n="donate_title">Soutiens la Taverne</h2>
-    <p class="donate-desc" data-i18n="donate_desc">TaverneDuClash est un projet communautaire gratuit. Les dons nous aident a couvrir les frais d'hebergement, d'API et a continuer a developper de nouvelles fonctionnalites.</p>
+    <p class="donate-desc" data-i18n="donate_desc">TaverneDuClash est un projet communautaire gratuit. Les dons nous aident &agrave; couvrir les frais d'h&eacute;bergement, d'API et &agrave; continuer &agrave; d&eacute;velopper de nouvelles fonctionnalit&eacute;s.</p>
   </div>
   <div class="donate-card reveal scale-in">
     <form id="donateForm" onsubmit="submitDonation(event)">
       <div class="donate-field">
-        <label for="donorName" data-i18n="donate_label_pseudo">Ton pseudo</label>
-        <input class="donate-input" type="text" id="donorName" placeholder="Ton pseudo" required maxlength="30" aria-label="Pseudo du donateur">
+        <label for="donorName" data-i18n="donate_pseudo_label">Ton pseudo</label>
+        <input class="donate-input" type="text" id="donorName" placeholder="Ton pseudo" required maxlength="30">
       </div>
       <div class="donate-field">
-        <label data-i18n="donate_label_amount">Montant</label>
-        <div class="donate-amounts" id="donateAmounts" role="group" aria-label="Montants de don">
-          <button type="button" class="donate-amt" data-amount="2" onclick="selectAmount(2,this)" aria-label="Donner 2 euros">2&euro;</button>
-          <button type="button" class="donate-amt active" data-amount="5" onclick="selectAmount(5,this)" aria-label="Donner 5 euros">5&euro;</button>
-          <button type="button" class="donate-amt" data-amount="10" onclick="selectAmount(10,this)" aria-label="Donner 10 euros">10&euro;</button>
-          <button type="button" class="donate-amt" data-amount="20" onclick="selectAmount(20,this)" aria-label="Donner 20 euros">20&euro;</button>
+        <label data-i18n="donate_amount_label">Montant</label>
+        <div class="donate-amounts" id="donateAmounts">
+          <button type="button" class="donate-amt" data-amount="2" onclick="selectAmount(2,this)">2&euro;</button>
+          <button type="button" class="donate-amt active" data-amount="5" onclick="selectAmount(5,this)">5&euro;</button>
+          <button type="button" class="donate-amt" data-amount="10" onclick="selectAmount(10,this)">10&euro;</button>
+          <button type="button" class="donate-amt" data-amount="20" onclick="selectAmount(20,this)">20&euro;</button>
         </div>
         <div class="donate-custom">
           <div class="donate-custom-row">
-            <input class="donate-custom-input" type="number" id="donateCustom" placeholder="Autre montant" min="1" step="1" oninput="selectCustomAmount()" aria-label="Montant personnalise">
+            <input class="donate-custom-input" type="number" id="donateCustom" placeholder="Autre montant" min="1" step="1" oninput="selectCustomAmount()">
             <span class="donate-custom-label">&euro;</span>
           </div>
         </div>
@@ -771,235 +762,31 @@ button,a,.faq-item,.carousel-dot{touch-action:manipulation}
 </section>
 
 <!-- DONOR TICKER -->
-<div class="donor-ticker" id="donorTicker" aria-label="Derniers donateurs">
-  <span class="donor-ticker-empty" data-i18n="ticker_empty">Sois le premier a soutenir la Taverne !</span>
+<div class="donor-ticker" id="donorTicker">
+  <span class="donor-ticker-empty" data-i18n="ticker_empty">Sois le premier &agrave; soutenir la Taverne !</span>
 </div>
 
 <!-- DONATION TOAST -->
-<div class="donation-toast-overlay" id="donationOverlay" onclick="closeDonationToast()" role="presentation"></div>
-<div class="donation-toast" id="donationToast" role="alertdialog" aria-label="Confirmation de don">
+<div class="donation-toast-overlay" id="donationOverlay" onclick="closeDonationToast()"></div>
+<div class="donation-toast" id="donationToast">
   <h3 data-i18n="toast_title">Merci pour ton soutien !</h3>
-  <p id="donationToastMsg" data-i18n="toast_msg">Ton don aide la Taverne a continuer de grandir. Tu es un vrai champion.</p>
+  <p id="donationToastMsg" data-i18n="toast_msg">Ton don aide la Taverne &agrave; continuer de grandir. Tu es un vrai champion.</p>
   <button class="donation-toast-close" onclick="closeDonationToast()" data-i18n="toast_close">Fermer</button>
 </div>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo"><em>Taverne</em> <strong>Du Clash</strong></div>
-  <p data-i18n="footer_text">Construit avec l'API Riot Games<br><em>TaverneDuClash n'est pas affilie a Riot Games.</em></p>
+  <p data-i18n="footer_riot">Construit avec l'API Riot Games<br><em>TaverneDuClash n'est pas affilié à Riot Games.</em></p>
   <div class="footer-links">
-    <a href="https://discord.gg/axgmKnGPw" target="_blank" aria-label="Serveur Discord">Discord</a>
-    <a href="https://github.com/NeyrowAI/TaverneDuClash" target="_blank" aria-label="Code source GitHub">GitHub</a>
-    <a href="mailto:contact@taverneduclash.com" aria-label="Envoyer un email">Contact</a>
+    <a href="https://discord.gg/axgmKnGPw" target="_blank">Discord</a>
+    <a href="https://github.com/NeyrowAI/TaverneDuClash" target="_blank">GitHub</a>
+    <a href="mailto:contact@taverneduclash.com" data-i18n="footer_contact">Contact</a>
   </div>
-  <p style="margin-top:0.8rem;font-size:0.6rem;opacity:0.3" data-i18n="footer_copy">&copy; 2026 TaverneDuClash &#8212; Tes donnees ne sont jamais partagees.</p>
+  <p style="margin-top:0.8rem;font-size:0.6rem;opacity:0.3" data-i18n="footer_copy">© 2026 TaverneDuClash — Tes données ne sont jamais partagées.</p>
 </footer>
 
 <script>
-// ── TRANSLATIONS ──
-const translations = {
-  fr: {
-    nav_features: "Fonctionnalit\u00e9s",
-    nav_join: "Rejoindre",
-    nav_access: "Acc\u00e9der \u00e0 l'outil",
-    nav_support: "Soutenir",
-    nav_discord: "Rejoins notre Discord !",
-    nav_join_mobile: "Rejoindre la Waitlist",
-    hero_badge: "En d\u00e9veloppement",
-    hero_w1: "DOMINE",
-    hero_w2: "CHAQUE",
-    hero_w3: "DRAFT",
-    hero_w4: "CLASH",
-    hero_sub: "L'outil de draft ultime pour League of Legends Clash. Stats en direct, coach IA, scout ennemi et rappels WhatsApp.",
-    hero_cta_join: "Rejoindre la Waitlist",
-    hero_cta_more: "En savoir plus",
-    hero_registered: "inscrits",
-    carousel_draft_header: "Draft en cours",
-    carousel_scout_title: "\uD83D\uDD0D Scout \u00c9quipe Ennemie",
-    carousel_scout_desc: "Analyse les champions favoris des adversaires pour obtenir les meilleurs bans.",
-    carousel_scout_bans: "BANS RECOMMAND\u00c9S",
-    carousel_chat_status: "En ligne \u2014 Coach LoL",
-    carousel_chat_q1: "C'est quoi le meilleur counter de Garen top ?",
-    carousel_chat_a1: 'Les meilleurs counters de Garen top sont <strong>Vayne</strong> (le kite hard), <strong>Kayle</strong> (scale mieux) et <strong>Camille</strong> (trades courts). Ban Darius si tu joues contre un OTP Garen.',
-    carousel_chat_q2: "Et en build ?",
-    carousel_chat_a2: 'Contre Garen, rush <strong>Couperet noir</strong> pour l\'armure. Ensuite <strong>Danse de la mort</strong> pour survivre son ult. Runes: Conqu\u00e9rant obligatoire.',
-    carousel_chat_placeholder: "Pose ta question...",
-    nerobot_tip: "Pick Aatrox \u2014 meta S-tier !",
-    features_eye: "Fonctionnalit\u00e9s",
-    features_title: "Un arsenal complet<br>pour ta draft",
-    features_desc: "Chaque fonctionnalit\u00e9 a \u00e9t\u00e9 pens\u00e9e pour te donner un avantage d\u00e9cisif en Clash.",
-    feat1_title: "Stats en Direct",
-    feat1_desc: "Rang, winrate, LP et top 5 champions r\u00e9cup\u00e9r\u00e9s en temps r\u00e9el via l'API Riot Games pour chaque joueur.",
-    feat2_title: "NEROBOT \u2014 Coach IA",
-    feat2_desc: "Un coach virtuel sp\u00e9cialis\u00e9 LoL qui r\u00e9agit \u00e0 chaque pick en temps r\u00e9el. Conseils de matchup et de build.",
-    feat3_title: "Draft Intelligente",
-    feat3_desc: "Analyse de composition, score de synergie, counterpicks et suggestions bas\u00e9es sur la ma\u00eetrise des joueurs.",
-    feat4_title: "Scout Ennemi",
-    feat4_desc: "Analyse les champions favoris des adversaires et sugg\u00e8re les bans optimaux pour chaque Clash.",
-    feat5_title: "Rappels WhatsApp",
-    feat5_desc: "Notifications automatiques 2 jours avant chaque Clash. Confirme ta participation et ton r\u00f4le directement.",
-    feat6_title: "German & Carry",
-    feat6_desc: "Awards hebdomadaires : German de la semaine (pire KDA) et Carry de la semaine (meilleur KDA).",
-    testimonials_eye: "Ils en parlent",
-    testimonials_title: "Ce qu'en disent nos joueurs",
-    testimonial1_text: "On a ban les 5 OTP de l'\u00e9quipe adverse gr\u00e2ce au scout. R\u00e9sultat : 3-0 en Clash. L'outil est une vraie triche l\u00e9gale.",
-    testimonial1_role: "Jungle \u2014 Clash r\u00e9gulier",
-    testimonial2_text: "NEROBOT m'a conseill\u00e9 un counter que j'aurais jamais pick moi-m\u00eame. J'ai solo carry la game. Le coach IA c'est un game changer.",
-    testimonial2_role: "Mid \u2014 Tryhard Clash",
-    testimonial3_text: "Les rappels WhatsApp c'est g\u00e9nial. Plus personne oublie le Clash, et on sait qui joue quel r\u00f4le avant m\u00eame de se co.",
-    testimonial3_role: "Support \u2014 Capitaine d'\u00e9quipe",
-    faq_eye: "Questions fr\u00e9quentes",
-    faq_title: "Tout ce que tu veux savoir",
-    faq1_q: "C'est quoi TaverneDuClash exactement ?",
-    faq1_a: "C'est un outil web con\u00e7u pour les \u00e9quipes de Clash sur League of Legends. Il combine un syst\u00e8me de draft intelligent, un scout des adversaires, un coach IA (NEROBOT) et des rappels WhatsApp automatiques pour t'aider \u00e0 dominer chaque tournoi.",
-    faq2_q: "C'est gratuit ?",
-    faq2_a: "Oui, TaverneDuClash sera gratuit. L'objectif c'est d'aider la communaut\u00e9 Clash, pas de mon\u00e9tiser. Inscris-toi \u00e0 la waitlist pour \u00eatre pr\u00e9venu du lancement.",
-    faq3_q: "\u00c7a marche sur quel serveur ? (EUW, EUNE, etc.)",
-    faq3_a: "L'outil fonctionne avec tous les serveurs support\u00e9s par l'API Riot Games, dont EUW, EUNE, NA, KR, et tous les autres.",
-    faq4_q: "C'est autoris\u00e9 par Riot Games ?",
-    faq4_a: "Oui. TaverneDuClash utilise l'API officielle de Riot Games dans le respect de leurs conditions d'utilisation. Aucune donn\u00e9e priv\u00e9e n'est collect\u00e9e en dehors de ce que l'API fournit publiquement.",
-    faq5_q: "Il faut un compte Riot pour utiliser l'outil ?",
-    faq5_a: "Non, pas besoin de connecter ton compte Riot. Tu entres simplement les pseudos des joueurs et l'outil r\u00e9cup\u00e8re les infos via l'API publique.",
-    waitlist_eye: "Bient\u00f4t disponible",
-    waitlist_title: "Rejoins la liste d'attente",
-    waitlist_desc: "Sois le premier inform\u00e9 quand TaverneDuClash sera disponible pour toutes les \u00e9quipes.",
-    waitlist_btn: "Rejoindre la Waitlist",
-    waitlist_privacy: "Aucun spam. D\u00e9sabonnement en un clic.",
-    waitlist_counter_label: "d\u00e9j\u00e0 inscrits",
-    waitlist_success_title: "Inscription confirm\u00e9e",
-    waitlist_success_desc: "Tu fais partie de la liste. On te pr\u00e9vient d\u00e8s le lancement.",
-    donate_eye: "Communaut\u00e9",
-    donate_title: "Soutiens la Taverne",
-    donate_desc: "TaverneDuClash est un projet communautaire gratuit. Les dons nous aident \u00e0 couvrir les frais d'h\u00e9bergement, d'API et \u00e0 continuer \u00e0 d\u00e9velopper de nouvelles fonctionnalit\u00e9s.",
-    donate_label_pseudo: "Ton pseudo",
-    donate_label_amount: "Montant",
-    donate_btn: "Faire un don",
-    ticker_empty: "Sois le premier \u00e0 soutenir la Taverne !",
-    toast_title: "Merci pour ton soutien !",
-    toast_msg: "Ton don aide la Taverne \u00e0 continuer de grandir. Tu es un vrai champion.",
-    toast_close: "Fermer",
-    footer_text: "Construit avec l'API Riot Games<br><em>TaverneDuClash n'est pas affili\u00e9 \u00e0 Riot Games.</em>",
-    footer_copy: "\u00a9 2026 TaverneDuClash \u2014 Tes donn\u00e9es ne sont jamais partag\u00e9es."
-  },
-  en: {
-    nav_features: "Features",
-    nav_join: "Join",
-    nav_access: "Access the tool",
-    nav_support: "Support",
-    nav_discord: "Join our Discord!",
-    nav_join_mobile: "Join the Waitlist",
-    hero_badge: "In development",
-    hero_w1: "DOMINATE",
-    hero_w2: "EVERY",
-    hero_w3: "DRAFT",
-    hero_w4: "CLASH",
-    hero_sub: "The ultimate draft tool for League of Legends Clash. Live stats, AI coach, enemy scouting, and WhatsApp reminders.",
-    hero_cta_join: "Join the Waitlist",
-    hero_cta_more: "Learn more",
-    hero_registered: "registered",
-    carousel_draft_header: "Draft in progress",
-    carousel_scout_title: "\uD83D\uDD0D Scout Enemy Team",
-    carousel_scout_desc: "Analyze the opponents' favorite champions to get the best bans.",
-    carousel_scout_bans: "RECOMMENDED BANS",
-    carousel_chat_status: "Online \u2014 LoL Coach",
-    carousel_chat_q1: "What's the best counter to Garen top?",
-    carousel_chat_a1: 'The best counters to Garen top are <strong>Vayne</strong> (kites hard), <strong>Kayle</strong> (scales better) and <strong>Camille</strong> (short trades). Ban Darius if you\'re facing a Garen OTP.',
-    carousel_chat_q2: "What about builds?",
-    carousel_chat_a2: 'Against Garen, rush <strong>Black Cleaver</strong> for the armor shred. Then <strong>Death\'s Dance</strong> to survive his ult. Runes: Conqueror is mandatory.',
-    carousel_chat_placeholder: "Ask your question...",
-    nerobot_tip: "Pick Aatrox \u2014 S-tier meta!",
-    features_eye: "Features",
-    features_title: "A complete arsenal<br>for your draft",
-    features_desc: "Every feature was designed to give you a decisive advantage in Clash.",
-    feat1_title: "Live Stats",
-    feat1_desc: "Rank, winrate, LP and top 5 champions retrieved in real time via the Riot Games API for each player.",
-    feat2_title: "NEROBOT \u2014 AI Coach",
-    feat2_desc: "A virtual coach specialized in LoL that reacts to each pick in real time. Matchup and build advice.",
-    feat3_title: "Smart Draft",
-    feat3_desc: "Composition analysis, synergy score, counterpicks and suggestions based on player mastery.",
-    feat4_title: "Enemy Scout",
-    feat4_desc: "Analyze opponents' favorite champions and suggest optimal bans for each Clash.",
-    feat5_title: "WhatsApp Reminders",
-    feat5_desc: "Automatic notifications 2 days before each Clash. Confirm your participation and role directly.",
-    feat6_title: "German & Carry",
-    feat6_desc: "Weekly awards: German of the week (worst KDA) and Carry of the week (best KDA).",
-    testimonials_eye: "They talk about it",
-    testimonials_title: "What our players say",
-    testimonial1_text: "We banned the 5 OTPs of the enemy team thanks to the scout. Result: 3-0 in Clash. The tool is legal cheating.",
-    testimonial1_role: "Jungle \u2014 Regular Clash player",
-    testimonial2_text: "NEROBOT suggested a counter I would never have picked myself. I solo carried the game. The AI coach is a game changer.",
-    testimonial2_role: "Mid \u2014 Tryhard Clash",
-    testimonial3_text: "The WhatsApp reminders are amazing. Nobody forgets Clash anymore, and we know who plays which role before we even log in.",
-    testimonial3_role: "Support \u2014 Team captain",
-    faq_eye: "FAQ",
-    faq_title: "Everything you want to know",
-    faq1_q: "What is TaverneDuClash exactly?",
-    faq1_a: "It's a web tool designed for Clash teams on League of Legends. It combines a smart draft system, opponent scouting, an AI coach (NEROBOT) and automatic WhatsApp reminders to help you dominate every tournament.",
-    faq2_q: "Is it free?",
-    faq2_a: "Yes, TaverneDuClash will be free. The goal is to help the Clash community, not to monetize. Sign up for the waitlist to be notified at launch.",
-    faq3_q: "Which servers does it work on? (EUW, EUNE, etc.)",
-    faq3_a: "The tool works with all servers supported by the Riot Games API, including EUW, EUNE, NA, KR, and all others.",
-    faq4_q: "Is it allowed by Riot Games?",
-    faq4_a: "Yes. TaverneDuClash uses the official Riot Games API in compliance with their terms of use. No private data is collected beyond what the API provides publicly.",
-    faq5_q: "Do I need a Riot account to use the tool?",
-    faq5_a: "No, you don't need to link your Riot account. You simply enter the players' usernames and the tool retrieves info via the public API.",
-    waitlist_eye: "Coming soon",
-    waitlist_title: "Join the waiting list",
-    waitlist_desc: "Be the first to know when TaverneDuClash is available for all teams.",
-    waitlist_btn: "Join the Waitlist",
-    waitlist_privacy: "No spam. Unsubscribe in one click.",
-    waitlist_counter_label: "already registered",
-    waitlist_success_title: "Registration confirmed",
-    waitlist_success_desc: "You're on the list. We'll notify you at launch.",
-    donate_eye: "Community",
-    donate_title: "Support the Taverne",
-    donate_desc: "TaverneDuClash is a free community project. Donations help us cover hosting costs, API fees, and continue developing new features.",
-    donate_label_pseudo: "Your username",
-    donate_label_amount: "Amount",
-    donate_btn: "Make a donation",
-    ticker_empty: "Be the first to support the Taverne!",
-    toast_title: "Thanks for your support!",
-    toast_msg: "Your donation helps the Taverne keep growing. You're a true champion.",
-    toast_close: "Close",
-    footer_text: "Built with the Riot Games API<br><em>TaverneDuClash is not affiliated with Riot Games.</em>",
-    footer_copy: "\u00a9 2026 TaverneDuClash \u2014 Your data is never shared."
-  }
-};
-
-let currentLang = localStorage.getItem('taverne-lang') || 'fr';
-
-function setLang(lang) {
-  currentLang = lang;
-  localStorage.setItem('taverne-lang', lang);
-  document.documentElement.lang = lang;
-  const t = translations[lang];
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (t[key] !== undefined) {
-      el.innerHTML = t[key];
-    }
-  });
-  // Update lang button display
-  document.querySelectorAll('.nav-lang-btn').forEach(btn => {
-    if (lang === 'fr') {
-      btn.innerHTML = '<span class="active-lang">FR</span> | EN';
-    } else {
-      btn.innerHTML = 'FR | <span class="active-lang">EN</span>';
-    }
-  });
-}
-
-function toggleLang() {
-  setLang(currentLang === 'fr' ? 'en' : 'fr');
-}
-
-
-// ── FAQ TOGGLE WITH ARIA ──
-function toggleFaq(el) {
-  const isOpen = el.classList.toggle('open');
-  el.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-}
-
 // ── DATA DRAGON VERSION ──
 let lolVer = '14.10.1';
 const DDR = () => `https://ddragon.leagueoflegends.com/cdn/${lolVer}/img/champion/`;
@@ -1091,8 +878,6 @@ function initParticles() {
   const canvas = document.getElementById('particleCanvas');
   const ctx = canvas.getContext('2d');
   let w, h, particles = [], scrollSpeed = 0, lastScroll = 0;
-  const isMobile = window.innerWidth < 768;
-  const particleCount = isMobile ? 25 : 80;
   function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
   resize();
   window.addEventListener('resize', resize);
@@ -1129,7 +914,7 @@ function initParticles() {
       ctx.fill(); ctx.shadowBlur = 0;
     }
   }
-  for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+  for (let i = 0; i < 80; i++) particles.push(new Particle());
   function animate() {
     ctx.clearRect(0, 0, w, h);
     scrollSpeed *= 0.92;
@@ -1151,7 +936,7 @@ function initParticles() {
   animate();
 }
 
-// ── SCROLL REVEAL (re-trigger on scroll) ──
+// ── SCROLL REVEAL ──
 function initReveal() {
   const obs = new IntersectionObserver(entries => entries.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
@@ -1175,23 +960,16 @@ async function submitWaitlist(e) {
     document.getElementById('waitlistForm').style.display = 'none';
   } catch(err) {
     const errDiv = document.getElementById('waitlistSuccess');
-    errDiv.innerHTML = '<h3 style="color:#ff6b6b">Une erreur est survenue</h3><p>V\u00e9rifie ton email et r\u00e9essaie.</p>';
+    errDiv.innerHTML = '<h3 style="color:#ff6b6b">Une erreur est survenue</h3><p>Vérifie ton email et réessaie.</p>';
     errDiv.classList.add('show');
   }
-  btn.disabled = false; btn.textContent = translations[currentLang].waitlist_btn;
+  btn.disabled = false; btn.textContent = "Rejoindre la Waitlist";
 }
 
 // ── HAMBURGER MENU ──
 function toggleMobileMenu() {
   document.getElementById('hamburgerBtn').classList.toggle('open');
   document.getElementById('mobileMenu').classList.toggle('open');
-}
-
-// ── SHOW MOBILE UTIL BUTTONS ──
-function updateMobileUtils() {
-  const isMobile = window.innerWidth <= 600;
-  document.getElementById('langToggleMobile').style.display = isMobile ? 'inline-block' : 'none';
-  document.getElementById('themeToggleMobile').style.display = isMobile ? 'inline-block' : 'none';
 }
 
 // ── DONATION SYSTEM ──
@@ -1232,14 +1010,14 @@ async function submitDonation(e) {
     if (data.url) {
       window.location.href = data.url;
     } else {
-      alert(data.error || 'Erreur lors de la cr\u00e9ation du paiement.');
+      alert(data.error || 'Erreur lors de la création du paiement.');
     }
   } catch (err) {
-    alert('Erreur r\u00e9seau. R\u00e9essaie.');
+    alert('Erreur réseau. Réessaie.');
   }
 
   btn.disabled = false;
-  btn.textContent = translations[currentLang].donate_btn;
+  btn.textContent = 'Faire un don';
 }
 
 // ── DONOR TICKER ──
@@ -1250,7 +1028,7 @@ async function loadDonorTicker() {
     const ticker = document.getElementById('donorTicker');
 
     if (!donations || donations.length === 0) {
-      ticker.innerHTML = `<span class="donor-ticker-empty" data-i18n="ticker_empty">${translations[currentLang].ticker_empty}</span>`;
+      ticker.innerHTML = '<span class="donor-ticker-empty">Sois le premier \u00e0 soutenir la Taverne !</span>';
       return;
     }
 
@@ -1296,20 +1074,243 @@ function closeDonationToast() {
   document.getElementById('donationOverlay').classList.remove('show');
 }
 
+// ── LANGUAGE SYSTEM ──
+const translations = {
+  fr: {
+    // Nav
+    nav_features: 'Fonctionnalités',
+    nav_join: 'Rejoindre',
+    nav_access: "Accéder à l'outil",
+    nav_support: 'Soutenir',
+    nav_discord: 'Rejoins notre Discord !',
+    mobile_join_waitlist: 'Rejoindre la Waitlist',
+    // Hero
+    hero_badge: 'En développement',
+    hero_sub: "L'outil de draft ultime pour League of Legends Clash. Stats en direct, coach IA, scout ennemi et rappels WhatsApp.",
+    hero_cta_join: 'Rejoindre la Waitlist',
+    hero_cta_more: 'En savoir plus',
+    hero_registered: 'inscrits',
+    // Carousel
+    draft_header: 'Draft en cours',
+    scout_title: '🔍 Scout Équipe Ennemie',
+    scout_desc: 'Analyse les champions favoris des adversaires pour obtenir les meilleurs bans.',
+    scout_bans: 'BANS RECOMMANDÉS',
+    chat_status: 'En ligne — Coach LoL',
+    chat_user_1: "C'est quoi le meilleur counter de Garen top ?",
+    chat_bot_1: 'Les meilleurs counters de Garen top sont <strong>Vayne</strong> (le kite hard), <strong>Kayle</strong> (scale mieux) et <strong>Camille</strong> (trades courts). Ban Darius si tu joues contre un OTP Garen.',
+    chat_user_2: 'Et en build ?',
+    chat_bot_2: 'Contre Garen, rush <strong>Couperet noir</strong> pour l\'armure. Ensuite <strong>Danse de la mort</strong> pour survivre son ult. Runes: Conquérant obligatoire.',
+    chat_placeholder: 'Pose ta question...',
+    nerobot_msg: 'Pick Aatrox — meta S-tier !',
+    // Features
+    feat_eye: 'Fonctionnalités',
+    feat_heading: 'Un arsenal complet<br>pour ta draft',
+    feat_desc: 'Chaque fonctionnalité a été pensée pour te donner un avantage décisif en Clash.',
+    feat_stats_title: 'Stats en Direct',
+    feat_stats_desc: 'Rang, winrate, LP et top 5 champions récupérés en temps réel via l\'API Riot Games pour chaque joueur.',
+    feat_coach_title: 'NEROBOT — Coach IA',
+    feat_coach_desc: 'Un coach virtuel spécialisé LoL qui réagit à chaque pick en temps réel. Conseils de matchup et de build.',
+    feat_draft_title: 'Draft Intelligente',
+    feat_draft_desc: 'Analyse de composition, score de synergie, counterpicks et suggestions basées sur la maîtrise des joueurs.',
+    feat_scout_title: 'Scout Ennemi',
+    feat_scout_desc: 'Analyse les champions favoris des adversaires et suggère les bans optimaux pour chaque Clash.',
+    feat_whatsapp_title: 'Rappels WhatsApp',
+    feat_whatsapp_desc: 'Notifications automatiques 2 jours avant chaque Clash. Confirme ta participation et ton rôle directement.',
+    feat_awards_title: 'German & Carry',
+    feat_awards_desc: 'Awards hebdomadaires : German de la semaine (pire KDA) et Carry de la semaine (meilleur KDA).',
+    // Testimonials
+    testimonials_eye: 'Ils en parlent',
+    testimonials_title: "Ce qu'en disent nos joueurs",
+    testimonial_1_text: "On a ban les 5 OTP de l'équipe adverse grâce au scout. Résultat : 3-0 en Clash. L'outil est une vraie triche légale.",
+    testimonial_1_role: 'Jungle — Clash régulier',
+    testimonial_2_text: "NEROBOT m'a conseillé un counter que j'aurais jamais pick moi-même. J'ai solo carry la game. Le coach IA c'est un game changer.",
+    testimonial_2_role: 'Mid — Tryhard Clash',
+    testimonial_3_text: "Les rappels WhatsApp c'est génial. Plus personne oublie le Clash, et on sait qui joue quel rôle avant même de se co.",
+    testimonial_3_role: "Support — Capitaine d'équipe",
+    // FAQ
+    faq_eye: 'Questions fréquentes',
+    faq_title: 'Tout ce que tu veux savoir',
+    faq_q1: "C'est quoi TaverneDuClash exactement ?",
+    faq_a1: "C'est un outil web conçu pour les équipes de Clash sur League of Legends. Il combine un système de draft intelligent, un scout des adversaires, un coach IA (NEROBOT) et des rappels WhatsApp automatiques pour t'aider à dominer chaque tournoi.",
+    faq_q2: "C'est gratuit ?",
+    faq_a2: "Oui, TaverneDuClash sera gratuit. L'objectif c'est d'aider la communauté Clash, pas de monétiser. Inscris-toi à la waitlist pour être prévenu du lancement.",
+    faq_q3: 'Ça marche sur quel serveur ? (EUW, EUNE, etc.)',
+    faq_a3: "L'outil fonctionne avec tous les serveurs supportés par l'API Riot Games, dont EUW, EUNE, NA, KR, et tous les autres.",
+    faq_q4: "C'est autorisé par Riot Games ?",
+    faq_a4: "Oui. TaverneDuClash utilise l'API officielle de Riot Games dans le respect de leurs conditions d'utilisation. Aucune donnée privée n'est collectée en dehors de ce que l'API fournit publiquement.",
+    faq_q5: "Il faut un compte Riot pour utiliser l'outil ?",
+    faq_a5: "Non, pas besoin de connecter ton compte Riot. Tu entres simplement les pseudos des joueurs et l'outil récupère les infos via l'API publique.",
+    // Waitlist
+    waitlist_eye: 'Bientôt disponible',
+    waitlist_title: "Rejoins la liste d'attente",
+    waitlist_desc: 'Sois le premier informé quand TaverneDuClash sera disponible pour toutes les équipes.',
+    waitlist_btn: 'Rejoindre la Waitlist',
+    waitlist_privacy: 'Aucun spam. Désabonnement en un clic.',
+    waitlist_already: 'déjà inscrits',
+    waitlist_success_title: 'Inscription confirmée',
+    waitlist_success_desc: 'Tu fais partie de la liste. On te prévient dès le lancement.',
+    // Donate
+    donate_eye: 'Communauté',
+    donate_title: 'Soutiens la Taverne',
+    donate_desc: "TaverneDuClash est un projet communautaire gratuit. Les dons nous aident à couvrir les frais d'hébergement, d'API et à continuer à développer de nouvelles fonctionnalités.",
+    donate_pseudo_label: 'Ton pseudo',
+    donate_amount_label: 'Montant',
+    donate_btn: 'Faire un don',
+    // Ticker
+    ticker_empty: 'Sois le premier à soutenir la Taverne !',
+    // Toast
+    toast_title: 'Merci pour ton soutien !',
+    toast_msg: 'Ton don aide la Taverne à continuer de grandir. Tu es un vrai champion.',
+    toast_close: 'Fermer',
+    // Footer
+    footer_riot: "Construit avec l'API Riot Games<br><em>TaverneDuClash n'est pas affilié à Riot Games.</em>",
+    footer_contact: 'Contact',
+    footer_copy: '© 2026 TaverneDuClash — Tes données ne sont jamais partagées.'
+  },
+  en: {
+    // Nav
+    nav_features: 'Features',
+    nav_join: 'Join',
+    nav_access: 'Access the Tool',
+    nav_support: 'Support',
+    nav_discord: 'Join our Discord!',
+    mobile_join_waitlist: 'Join the Waitlist',
+    // Hero
+    hero_badge: 'In Development',
+    hero_sub: 'The ultimate draft tool for League of Legends Clash. Live stats, AI coach, enemy scouting and WhatsApp reminders.',
+    hero_cta_join: 'Join the Waitlist',
+    hero_cta_more: 'Learn More',
+    hero_registered: 'registered',
+    // Carousel
+    draft_header: 'Draft in Progress',
+    scout_title: '🔍 Scout Enemy Team',
+    scout_desc: 'Analyze your opponents\' favorite champions to get the best bans.',
+    scout_bans: 'RECOMMENDED BANS',
+    chat_status: 'Online — LoL Coach',
+    chat_user_1: 'What\'s the best counter for Garen top?',
+    chat_bot_1: 'The best counters for Garen top are <strong>Vayne</strong> (hard kite), <strong>Kayle</strong> (outscales) and <strong>Camille</strong> (short trades). Ban Darius if you\'re facing a Garen OTP.',
+    chat_user_2: 'What about the build?',
+    chat_bot_2: 'Against Garen, rush <strong>Black Cleaver</strong> for armor shred. Then <strong>Death\'s Dance</strong> to survive his ult. Runes: Conqueror is a must.',
+    chat_placeholder: 'Ask your question...',
+    nerobot_msg: 'Pick Aatrox — S-tier meta!',
+    // Features
+    feat_eye: 'Features',
+    feat_heading: 'A complete arsenal<br>for your draft',
+    feat_desc: 'Every feature is designed to give you a decisive edge in Clash.',
+    feat_stats_title: 'Live Stats',
+    feat_stats_desc: 'Rank, winrate, LP and top 5 champions fetched in real time via the Riot Games API for every player.',
+    feat_coach_title: 'NEROBOT — AI Coach',
+    feat_coach_desc: 'A LoL-specialized virtual coach that reacts to every pick in real time. Matchup and build advice.',
+    feat_draft_title: 'Smart Draft',
+    feat_draft_desc: 'Composition analysis, synergy score, counterpicks and suggestions based on player mastery.',
+    feat_scout_title: 'Enemy Scout',
+    feat_scout_desc: 'Analyze your opponents\' favorite champions and suggest optimal bans for every Clash.',
+    feat_whatsapp_title: 'WhatsApp Reminders',
+    feat_whatsapp_desc: 'Automatic notifications 2 days before every Clash. Confirm your participation and role directly.',
+    feat_awards_title: 'German & Carry',
+    feat_awards_desc: 'Weekly awards: German of the Week (worst KDA) and Carry of the Week (best KDA).',
+    // Testimonials
+    testimonials_eye: 'Testimonials',
+    testimonials_title: 'What our players say',
+    testimonial_1_text: 'We banned all 5 OTPs from the enemy team thanks to the scout. Result: 3-0 in Clash. This tool is basically legal cheating.',
+    testimonial_1_role: 'Jungle — Regular Clash player',
+    testimonial_2_text: 'NEROBOT suggested a counter I would never have picked myself. I solo carried the game. The AI coach is a real game changer.',
+    testimonial_2_role: 'Mid — Tryhard Clash',
+    testimonial_3_text: 'The WhatsApp reminders are amazing. Nobody forgets Clash anymore, and we know who plays what role before we even log on.',
+    testimonial_3_role: 'Support — Team Captain',
+    // FAQ
+    faq_eye: 'FAQ',
+    faq_title: 'Everything you need to know',
+    faq_q1: 'What exactly is TaverneDuClash?',
+    faq_a1: 'It\'s a web tool built for League of Legends Clash teams. It combines a smart draft system, opponent scouting, an AI coach (NEROBOT) and automatic WhatsApp reminders to help you dominate every tournament.',
+    faq_q2: 'Is it free?',
+    faq_a2: 'Yes, TaverneDuClash will be free. The goal is to help the Clash community, not to monetize. Sign up for the waitlist to be notified at launch.',
+    faq_q3: 'Which servers does it work on? (EUW, EUNE, etc.)',
+    faq_a3: 'The tool works with all servers supported by the Riot Games API, including EUW, EUNE, NA, KR, and all others.',
+    faq_q4: 'Is it allowed by Riot Games?',
+    faq_a4: 'Yes. TaverneDuClash uses the official Riot Games API in compliance with their terms of service. No private data is collected beyond what the API provides publicly.',
+    faq_q5: 'Do I need a Riot account to use the tool?',
+    faq_a5: 'No, you don\'t need to connect your Riot account. Just enter the player names and the tool fetches the info via the public API.',
+    // Waitlist
+    waitlist_eye: 'Coming Soon',
+    waitlist_title: 'Join the Waitlist',
+    waitlist_desc: 'Be the first to know when TaverneDuClash is available for all teams.',
+    waitlist_btn: 'Join the Waitlist',
+    waitlist_privacy: 'No spam. Unsubscribe in one click.',
+    waitlist_already: 'already registered',
+    waitlist_success_title: 'Registration confirmed',
+    waitlist_success_desc: "You're on the list. We'll let you know as soon as we launch.",
+    // Donate
+    donate_eye: 'Community',
+    donate_title: 'Support the Taverne',
+    donate_desc: 'TaverneDuClash is a free community project. Donations help us cover hosting, API costs and continue developing new features.',
+    donate_pseudo_label: 'Your username',
+    donate_amount_label: 'Amount',
+    donate_btn: 'Donate',
+    // Ticker
+    ticker_empty: 'Be the first to support the Taverne!',
+    // Toast
+    toast_title: 'Thanks for your support!',
+    toast_msg: 'Your donation helps the Taverne keep growing. You are a true champion.',
+    toast_close: 'Close',
+    // Footer
+    footer_riot: "Built with the Riot Games API<br><em>TaverneDuClash is not affiliated with Riot Games.</em>",
+    footer_contact: 'Contact',
+    footer_copy: '© 2026 TaverneDuClash — Your data is never shared.'
+  }
+};
+
+let currentLang = localStorage.getItem('taverne-lang') || 'fr';
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('taverne-lang', lang);
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (translations[lang] && translations[lang][key] !== undefined) {
+      el.innerHTML = translations[lang][key];
+    }
+  });
+  // Update the toggle button display
+  const btn = document.getElementById('langToggle');
+  if (btn) {
+    if (lang === 'fr') {
+      btn.innerHTML = '<span class="active-lang">FR</span> | EN';
+    } else {
+      btn.innerHTML = 'FR | <span class="active-lang">EN</span>';
+    }
+  }
+  // Update placeholder for waitlist input
+  const emailInput = document.getElementById('waitlistEmail');
+  if (emailInput) {
+    emailInput.placeholder = lang === 'fr' ? 'ton.email@exemple.com' : 'your.email@example.com';
+  }
+  // Update placeholder for donor name input
+  const donorInput = document.getElementById('donorName');
+  if (donorInput) {
+    donorInput.placeholder = lang === 'fr' ? 'Ton pseudo' : 'Your username';
+  }
+  // Update placeholder for custom amount
+  const customInput = document.getElementById('donateCustom');
+  if (customInput) {
+    customInput.placeholder = lang === 'fr' ? 'Autre montant' : 'Other amount';
+  }
+}
+
+function toggleLang() {
+  setLang(currentLang === 'fr' ? 'en' : 'fr');
+}
+
 // ── INIT ──
 document.addEventListener('DOMContentLoaded', () => {
-  // Apply saved language
-  setLang(currentLang);
-  // Show/hide mobile util buttons
-  updateMobileUtils();
-  window.addEventListener('resize', updateMobileUtils);
-
   initParticles();
   initReveal();
   initImages();
   resetAutoSlide();
   loadDonorTicker();
   checkDonationSuccess();
+  setLang(currentLang);
 });
 </script>
 </body>
