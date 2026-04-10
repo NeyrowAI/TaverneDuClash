@@ -253,27 +253,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 3
 .slot-search-results::-webkit-scrollbar{width:3px}
 .slot-search-results::-webkit-scrollbar-thumb{background:var(--borderv);border-radius:2px}
 
-/* AI LIVE SUGGESTIONS PANEL */
-.draft-ai-panel{border-top:1px solid var(--borderv);background:linear-gradient(180deg,rgba(14,8,24,0.9),rgba(7,3,15,0.95));padding:1rem 1.5rem;min-height:80px}
-.ai-panel-header{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.7rem}
-.ai-panel-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:aiDot 1.5s ease-in-out infinite}
-@keyframes aiDot{0%,100%{opacity:1}50%{opacity:0.3}}
-.ai-panel-title{font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--violet)}
-.ai-panel-status{font-size:0.62rem;color:var(--muted);font-style:italic;margin-left:auto}
-.ai-suggestions{display:flex;gap:0.8rem;overflow-x:auto;padding-bottom:0.3rem}
-.ai-suggestions::-webkit-scrollbar{height:3px}
-.ai-suggestions::-webkit-scrollbar-thumb{background:var(--borderv);border-radius:2px}
-.ai-sugg-card{background:rgba(10,5,20,0.9);border:1px solid var(--border);border-radius:6px;padding:0.7rem;min-width:180px;max-width:220px;flex-shrink:0;transition:all 0.25s}
-.ai-sugg-card:hover{border-color:var(--violet);transform:translateY(-2px)}
-.ai-sugg-card.counter{border-left:3px solid var(--red)}
-.ai-sugg-card.synergy{border-left:3px solid var(--green)}
-.ai-sugg-card.flex{border-left:3px solid var(--gold)}
-.ai-sugg-head{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.4rem}
-.ai-sugg-head img{width:32px;height:32px;border-radius:4px;object-fit:cover;border:1px solid var(--border)}
-.ai-sugg-name{font-family:'Cinzel',serif;font-size:0.72rem;color:var(--text)}
-.ai-sugg-role{font-size:0.55rem;color:var(--violet);text-transform:uppercase;letter-spacing:0.08em}
-.ai-sugg-reason{font-size:0.65rem;color:var(--muted);font-style:italic;line-height:1.4;margin-top:0.3rem}
-.ai-sugg-empty{text-align:center;color:var(--muted);font-style:italic;font-size:0.8rem;padding:1rem;width:100%}
+
 
 /* TOP BAR: saved drafts + roles */
 .draft-topbar{display:flex;align-items:center;gap:0.6rem;padding:0.5rem 1.5rem;background:linear-gradient(180deg,rgba(14,8,24,0.95),rgba(7,3,15,0.8));border-bottom:1px solid var(--border);flex-wrap:wrap}
@@ -1058,7 +1038,6 @@ footer p{font-style:italic;opacity:0.45;line-height:1.8}
 
           <!-- Action buttons -->
           <div class="draft-actions">
-            <button class="sugg-trigger" id="suggBtn" onclick="getSuggestions()" data-i18n="analyze_draft">Analyser Draft</button>
             <button class="scout-trigger" onclick="document.getElementById('scoutPanel').classList.toggle('open')" data-i18n="scout_enemy">Scout Ennemi</button>
           </div>
         </div>
@@ -1067,18 +1046,6 @@ footer p{font-style:italic;opacity:0.45;line-height:1.8}
         <div class="draft-side red">
           <div class="draft-side-title enemy"><span class="t-dot"></span><span data-i18n="enemy_team">Équipe Ennemie</span></div>
           <div class="picks" id="enemyPicks"></div>
-        </div>
-      </div>
-
-      <!-- AI LIVE SUGGESTIONS -->
-      <div class="draft-ai-panel" id="draftAiPanel">
-        <div class="ai-panel-header">
-          <div class="ai-panel-dot"></div>
-          <div class="ai-panel-title" data-i18n="ai_live">NEROBOT — Suggestions Live</div>
-          <div class="ai-panel-status" id="aiStatus" data-i18n="ai_waiting">En attente de picks...</div>
-        </div>
-        <div class="ai-suggestions" id="aiSuggestions">
-          <div class="ai-sugg-empty" data-i18n="ai_empty_msg">Ajoute des picks ennemis pour recevoir des suggestions en temps réel</div>
         </div>
       </div>
 
@@ -1497,18 +1464,19 @@ function selectSlotChamp(team,role,champId){
     ourPicks[role]=c;
     renderOurSlots();
     triggerNeroProactive('our',{champ:c,role});
+    autoAnalyzeDraft();
   } else {
     enemyPicks[role]=c;
     renderEnemySlots();
     triggerNeroProactive('enemy',{champ:c,role});
-    triggerAiSuggestions();
+    autoAnalyzeDraft();
   }
   updateCompAnalyzer();
   // Close search
   document.querySelectorAll('.slot-search.open').forEach(s=>s.classList.remove('open'));
 }
-function removeOurPick(role){ourPicks[role]=null;renderOurSlots();updateCompAnalyzer();}
-function removeEnemyPick(role){enemyPicks[role]=null;renderEnemySlots();updateCompAnalyzer();triggerAiSuggestions();}
+function removeOurPick(role){ourPicks[role]=null;renderOurSlots();updateCompAnalyzer();autoAnalyzeDraft();}
+function removeEnemyPick(role){enemyPicks[role]=null;renderEnemySlots();updateCompAnalyzer();autoAnalyzeDraft();}
 
 // Helper: convert slot picks to array for backward compat
 function ourPicksArr(){return ROLES.map(r=>ourPicks[r]?{champ:ourPicks[r],role:r,player:roleAssign[r]||''}:null).filter(Boolean);}
@@ -1521,55 +1489,12 @@ document.addEventListener('click',e=>{
   }
 });
 
-// ── AI LIVE SUGGESTIONS ──
-function triggerAiSuggestions(){
+// ── AUTO DRAFT ANALYSIS ──
+function autoAnalyzeDraft(){
   if(aiSuggTimeout) clearTimeout(aiSuggTimeout);
-  const enemies=enemyPicksArr();
-  if(!enemies.length){
-    document.getElementById('aiSuggestions').innerHTML=`<div class="ai-sugg-empty">${t('ai_empty_msg')}</div>`;
-    document.getElementById('aiStatus').textContent=t('ai_waiting');
-    return;
-  }
-  document.getElementById('aiStatus').textContent=t('ai_analyzing');
-  aiSuggTimeout=setTimeout(async()=>{
-    try{
-      const enemyStr=enemies.map(p=>`${p.champ.name} (${p.role})`).join(', ');
-      const ourStr=ourPicksArr().map(p=>`${p.champ.name} (${p.role})`).join(', ')||'aucun';
-      const rolesOpen=ROLES.filter(r=>!ourPicks[r]);
-      const prompt=`Ennemis: ${enemyStr}\nNos picks: ${ourStr}\nRôles libres: ${rolesOpen.join(', ')}\n\nDonne 4-6 suggestions de counter-picks/synergies. Réponds UNIQUEMENT en JSON:\n{"suggestions":[{"champion":"","role":"","type":"counter|synergy|flex","reason":"max 15 mots"}]}`;
-      const d=await aiFetch({model:'claude-sonnet-4-20250514',max_tokens:500,system:'Tu es expert LoL Clash. JSON only. Patch 26.7.',messages:[{role:'user',content:prompt}]});
-      const text=d.content[0].text.trim().replace(/```json|```/g,'').trim();
-      const data=JSON.parse(text);
-      renderAiSuggestions(data.suggestions||[]);
-      document.getElementById('aiStatus').textContent=t('ai_updated')+' '+new Date().toLocaleTimeString().slice(0,5);
-    }catch(e){
-      document.getElementById('aiStatus').textContent='Erreur';
-      console.error('AI suggestions fail',e);
-    }
-  },1200);
-}
-function renderAiSuggestions(suggestions){
-  const el=document.getElementById('aiSuggestions');
-  if(!suggestions.length){el.innerHTML=`<div class="ai-sugg-empty">${t('ai_empty_msg')}</div>`;return;}
-  el.innerHTML=suggestions.map(s=>{
-    const c=champData.find(x=>x.name.toLowerCase()===s.champion.toLowerCase());
-    const type=s.type||'flex';
-    return `<div class="ai-sugg-card ${type}" onclick="quickAddSuggestion('${s.champion}','${s.role}')">
-      <div class="ai-sugg-head">${c?`<img src="${c.img}" alt="${s.champion}">`:''}
-        <div><div class="ai-sugg-name">${s.champion}</div><div class="ai-sugg-role">${s.role||''}</div></div>
-      </div>
-      <div class="ai-sugg-reason">${s.reason||''}</div>
-    </div>`;
-  }).join('');
-}
-function quickAddSuggestion(champName,role){
-  const c=champData.find(x=>x.name.toLowerCase()===champName.toLowerCase());
-  if(!c||!role) return;
-  if(!ourPicks[role]){
-    ourPicks[role]=c;
-    renderOurSlots();updateCompAnalyzer();
-    triggerNeroProactive('our',{champ:c,role});
-  }
+  const ours=ourPicksArr(),enemies=enemyPicksArr();
+  if(!ours.length&&!enemies.length) return;
+  aiSuggTimeout=setTimeout(()=>getSuggestions(),1500);
 }
 
 // ── CANVAS PARTICLES ──
@@ -2221,8 +2146,8 @@ function addScoutBan(champId){
 
 // ── AI SUGGESTIONS ──
 async function getSuggestions(){
-  const btn=document.getElementById('suggBtn');
-  btn.disabled=true;btn.textContent='⏳ Analyse en cours...';
+  if(window._draftAnalyzing) return;
+  window._draftAnalyzing=true;
   const ours=ourPicksArr(),enemies=enemyPicksArr();
   const ourC=ours.map(p=>`${p.champ.name} (${p.role||'?'}, ${p.player||'?'})`).join(', ')||'aucun';
   const enemyC=enemies.map(p=>`${p.champ.name} (${p.role||'?'})`).join(', ')||'aucun';
@@ -2239,7 +2164,7 @@ async function getSuggestions(){
     document.getElementById('suggAnalysis1').textContent='Erreur — vérifie que la clé API est configurée dans Vercel.';
     document.getElementById('suggRes').classList.add('vis');
   }
-  btn.disabled=false;btn.textContent=t('analyze_draft');
+  window._draftAnalyzing=false;
 }
 function renderSuggestions(d){
   function cards(picks){
