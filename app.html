@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TaverneDuClash — Draft Clash LoL v6</title>
+<meta name="description" content="L'outil de draft ultime pour League of Legends Clash. Stats en direct, coach IA, scout ennemi.">
+<meta property="og:title" content="TaverneDuClash — Draft Clash LoL">
+<meta property="og:description" content="Stats en direct, coach IA, scout ennemi pour dominer chaque Clash.">
+<meta property="og:image" content="/logox.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/jpeg" href="/logox.png">
+<meta name="theme-color" content="#07030f">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -80,6 +88,30 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 3
 .nav-discord svg{width:22px;height:22px;fill:#7289da}
 .nav-discord span{font-size:0.6rem;color:var(--muted);display:flex;align-items:center;gap:0.25rem;font-family:'Cinzel',serif}
 .online-dot{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 4px var(--green)}
+
+/* NAV TOOLS (lang + theme) */
+.nav-tools{display:flex;align-items:center;gap:0.3rem;margin-left:auto;margin-right:1rem}
+.lang-btn{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.08em;padding:0.2rem 0.45rem;background:transparent;border:1px solid var(--border);color:var(--muted);cursor:pointer;border-radius:2px;transition:all 0.2s}
+.lang-btn.active{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.08)}
+.lang-btn:hover{border-color:var(--gold);color:var(--gold)}
+.theme-toggle{background:transparent;border:1px solid var(--border);color:var(--gold);cursor:pointer;font-size:0.85rem;padding:0.15rem 0.4rem;border-radius:2px;transition:all 0.2s;line-height:1}
+.theme-toggle:hover{border-color:var(--gold);background:rgba(201,168,76,0.08)}
+
+/* LIGHT MODE */
+html.light{--void:#f0eaf8;--dark:#e8e0f3;--mid:#ddd4ee;--text:#1a1025;--muted:#5a4d6e;--border:rgba(100,70,140,0.2);--borderv:rgba(168,85,247,0.25);--gold:#9a7b30;--gl:#6d5520}
+html.light body{background:var(--void);color:var(--text)}
+html.light nav{background:rgba(240,234,248,0.95)}
+html.light .draft-start-btn{background:linear-gradient(135deg,rgba(168,85,247,0.15),rgba(124,58,237,0.1));color:#3d1a6e}
+html.light .pick-slot,html.light .ban-slot{background:rgba(240,234,248,0.7)}
+html.light .comp-panel,html.light .scout-box,html.light .sugg-box{background:rgba(240,234,248,0.8)}
+html.light .draft-ai-panel{background:linear-gradient(180deg,rgba(240,234,248,0.95),rgba(232,224,243,0.95))}
+html.light .ai-sugg-card{background:rgba(245,240,255,0.95)}
+html.light .c-search,html.light .scout-input,html.light .role-sel,html.light .role-pick-sel{background:rgba(255,255,255,0.8);color:var(--text)}
+html.light .slot-search{background:rgba(245,240,255,0.99)}
+html.light .p-card{background:rgba(245,240,255,0.9)}
+
+/* FOCUS VISIBLE (accessibility) */
+*:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
 
 /* PAGES */
 .page{display:none;min-height:calc(100vh - 90px);position:relative;z-index:1}
@@ -179,8 +211,84 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 3
 .aw-modal.german .aw-modal-badge{background:rgba(255,107,107,0.1);border:1px solid rgba(255,107,107,0.3);color:var(--red)}
 .aw-modal.carry .aw-modal-badge{background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);color:var(--gold)}
 
+/* TEAM STATS */
+.team-stats-wrap{margin-top:2rem;padding:1.2rem;background:rgba(14,8,24,0.5);border:1px solid var(--border);border-radius:6px}
+.team-stats-header{display:flex;align-items:baseline;gap:0.8rem;margin-bottom:0.8rem}
+.team-stats-title{font-family:'Cinzel',serif;font-size:0.85rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase}
+.team-stats-sub{font-size:0.7rem;color:var(--muted);font-style:italic}
+.stat-card{background:rgba(7,3,15,0.6);border:1px solid var(--border);border-radius:4px;padding:0.8rem;text-align:center}
+.stat-val{font-family:'Cinzel',serif;font-size:1.3rem;font-weight:900;color:var(--gl);margin-bottom:0.2rem}
+.stat-lbl{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+
 /* DRAFT PAGE — LoL CLIENT STYLE */
 .draft-page{position:relative;z-index:1;display:flex;flex-direction:column;min-height:calc(100vh - 90px)}
+
+/* START DRAFT SCREEN */
+.draft-start-screen{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 120px);gap:1.5rem}
+.draft-start-btn{font-family:'Cinzel',serif;font-size:1.1rem;letter-spacing:0.2em;text-transform:uppercase;padding:1.2rem 3.5rem;background:linear-gradient(135deg,rgba(61,26,110,0.6),rgba(124,58,237,0.4));border:2px solid var(--violet);color:var(--gl);cursor:pointer;border-radius:4px;position:relative;overflow:hidden;transition:all 0.4s;animation:btnPulse 2.5s ease-in-out infinite}
+.draft-start-btn::before{content:'';position:absolute;inset:-2px;border-radius:6px;background:linear-gradient(90deg,transparent,rgba(168,85,247,0.6),rgba(240,208,128,0.4),transparent);background-size:300% 100%;animation:shimmer 3s linear infinite;z-index:-1}
+.draft-start-btn::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(168,85,247,0.1),transparent 70%);animation:glowPulse 2s ease-in-out infinite alternate}
+.draft-start-btn:hover{transform:scale(1.05);box-shadow:0 0 40px rgba(168,85,247,0.5),0 0 80px rgba(168,85,247,0.2);border-color:var(--gl)}
+@keyframes shimmer{0%{background-position:100% 0}100%{background-position:-100% 0}}
+@keyframes btnPulse{0%,100%{box-shadow:0 0 20px rgba(168,85,247,0.3)}50%{box-shadow:0 0 40px rgba(168,85,247,0.5),0 0 60px rgba(124,58,237,0.2)}}
+@keyframes glowPulse{0%{opacity:0.3}100%{opacity:0.7}}
+.draft-start-sub{font-family:'Crimson Pro',serif;font-size:0.9rem;color:var(--muted);font-style:italic;letter-spacing:0.05em}
+
+/* DRAFT INTERFACE (hidden until start) */
+.draft-interface{display:none;flex-direction:column;flex:1;animation:draftReveal 0.8s cubic-bezier(0.16,1,0.3,1) forwards}
+.draft-interface.active{display:flex}
+@keyframes draftReveal{from{opacity:0;transform:scale(0.95) translateY(20px)}to{opacity:1;transform:none}}
+
+/* SLOT-BASED PICKS */
+.pick-slot{display:flex;align-items:center;gap:0.5rem;background:rgba(7,3,15,0.5);border:1px solid rgba(168,85,247,0.06);border-radius:3px;padding:0.45rem 0.55rem;min-height:54px;transition:all 0.25s;position:relative;cursor:default}
+.pick-slot.filled{border-color:rgba(30,144,255,0.2);background:linear-gradient(90deg,rgba(30,90,160,0.08),rgba(7,3,15,0.5));animation:slotFill 0.4s ease}
+.pick-slot.efilled{border-color:rgba(192,57,43,0.2);background:linear-gradient(270deg,rgba(160,30,30,0.08),rgba(7,3,15,0.5));animation:slotFill 0.4s ease}
+@keyframes slotFill{from{transform:scale(1.03);box-shadow:0 0 15px rgba(168,85,247,0.3)}to{transform:scale(1);box-shadow:none}}
+.slot-role-icon{width:20px;height:20px;object-fit:contain;filter:brightness(0.85) sepia(0.3) hue-rotate(220deg) saturate(2);flex-shrink:0}
+.slot-role-icon.enemy{filter:sepia(1) hue-rotate(300deg) saturate(2) brightness(0.9)}
+.slot-role-name{font-family:'Cinzel',serif;font-size:0.58rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;min-width:45px;flex-shrink:0}
+.slot-add{width:36px;height:36px;border-radius:4px;background:rgba(168,85,247,0.04);border:1px dashed rgba(168,85,247,0.15);display:flex;align-items:center;justify-content:center;color:var(--violet);font-size:1rem;cursor:pointer;transition:all 0.25s;flex-shrink:0;margin-left:auto}
+.slot-add:hover{border-color:var(--violet);background:rgba(168,85,247,0.1);transform:scale(1.1)}
+.slot-champ-img{width:40px;height:40px;border-radius:4px;object-fit:cover;border:2px solid rgba(30,90,160,0.3);flex-shrink:0}
+.pick-slot.filled .slot-champ-img{border-color:rgba(30,144,255,0.4)}
+.pick-slot.efilled .slot-champ-img{border-color:rgba(192,57,43,0.4)}
+.slot-info{flex:1;min-width:0}
+.slot-cname{font-family:'Cinzel',serif;font-size:0.7rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.slot-player{font-size:0.6rem;color:var(--muted);font-style:italic}
+.slot-rm{background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.7rem;transition:color 0.2s;flex-shrink:0}
+.slot-rm:hover{color:var(--red)}
+
+/* INLINE SEARCH (opens inside slot) */
+.slot-search{position:absolute;left:0;right:0;top:100%;z-index:70;background:rgba(12,6,22,0.99);border:1px solid var(--borderv);border-radius:0 0 6px 6px;padding:0.4rem;display:none;box-shadow:0 8px 24px rgba(0,0,0,0.5)}
+.slot-search.open{display:block;animation:searchDrop 0.25s ease}
+@keyframes searchDrop{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+.slot-search input{width:100%;background:rgba(7,3,15,0.8);border:1px solid var(--borderv);color:var(--text);padding:0.35rem 0.6rem;font-family:'Crimson Pro',serif;font-size:0.82rem;border-radius:3px;outline:none}
+.slot-search input:focus{border-color:var(--violet)}
+.slot-search-results{max-height:180px;overflow-y:auto;margin-top:0.3rem}
+.slot-search-results::-webkit-scrollbar{width:3px}
+.slot-search-results::-webkit-scrollbar-thumb{background:var(--borderv);border-radius:2px}
+
+/* AI LIVE SUGGESTIONS PANEL */
+.draft-ai-panel{border-top:1px solid var(--borderv);background:linear-gradient(180deg,rgba(14,8,24,0.9),rgba(7,3,15,0.95));padding:1rem 1.5rem;min-height:80px}
+.ai-panel-header{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.7rem}
+.ai-panel-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:aiDot 1.5s ease-in-out infinite}
+@keyframes aiDot{0%,100%{opacity:1}50%{opacity:0.3}}
+.ai-panel-title{font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--violet)}
+.ai-panel-status{font-size:0.62rem;color:var(--muted);font-style:italic;margin-left:auto}
+.ai-suggestions{display:flex;gap:0.8rem;overflow-x:auto;padding-bottom:0.3rem}
+.ai-suggestions::-webkit-scrollbar{height:3px}
+.ai-suggestions::-webkit-scrollbar-thumb{background:var(--borderv);border-radius:2px}
+.ai-sugg-card{background:rgba(10,5,20,0.9);border:1px solid var(--border);border-radius:6px;padding:0.7rem;min-width:180px;max-width:220px;flex-shrink:0;transition:all 0.25s}
+.ai-sugg-card:hover{border-color:var(--violet);transform:translateY(-2px)}
+.ai-sugg-card.counter{border-left:3px solid var(--red)}
+.ai-sugg-card.synergy{border-left:3px solid var(--green)}
+.ai-sugg-card.flex{border-left:3px solid var(--gold)}
+.ai-sugg-head{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.4rem}
+.ai-sugg-head img{width:32px;height:32px;border-radius:4px;object-fit:cover;border:1px solid var(--border)}
+.ai-sugg-name{font-family:'Cinzel',serif;font-size:0.72rem;color:var(--text)}
+.ai-sugg-role{font-size:0.55rem;color:var(--violet);text-transform:uppercase;letter-spacing:0.08em}
+.ai-sugg-reason{font-size:0.65rem;color:var(--muted);font-style:italic;line-height:1.4;margin-top:0.3rem}
+.ai-sugg-empty{text-align:center;color:var(--muted);font-style:italic;font-size:0.8rem;padding:1rem;width:100%}
 
 /* TOP BAR: saved drafts + roles */
 .draft-topbar{display:flex;align-items:center;gap:0.6rem;padding:0.5rem 1.5rem;background:linear-gradient(180deg,rgba(14,8,24,0.95),rgba(7,3,15,0.8));border-bottom:1px solid var(--border);flex-wrap:wrap}
@@ -693,12 +801,17 @@ footer p{font-style:italic;opacity:0.45;line-height:1.8}
 <nav>
   <a class="nav-logo" href="#" onclick="showPage('home')"><em>Taverne</em>DuClash</a>
   <ul class="nav-links">
-    <li><a href="#" onclick="showPage('home')" id="nav-home" class="active">Accueil</a></li>
-    <li><a href="#" onclick="showPage('roster')" id="nav-roster">Roster</a></li>
-    <li><a href="#" onclick="showPage('draft')" id="nav-draft">Draft</a></li>
-    <li><a href="#" onclick="showPage('clash')" id="nav-clash">Clash</a></li>
-    <li><a href="#" onclick="showPage('features')" id="nav-features">Fonctionnalités</a></li>
+    <li><a href="#" onclick="showPage('home')" id="nav-home" class="active" data-i18n="nav_home">Accueil</a></li>
+    <li><a href="#" onclick="showPage('roster')" id="nav-roster" data-i18n="nav_roster">Roster</a></li>
+    <li><a href="#" onclick="showPage('draft')" id="nav-draft" data-i18n="nav_draft">Draft</a></li>
+    <li><a href="#" onclick="showPage('clash')" id="nav-clash" data-i18n="nav_clash">Clash</a></li>
+    <li><a href="#" onclick="showPage('features')" id="nav-features" data-i18n="nav_features">Fonctionnalités</a></li>
   </ul>
+  <div class="nav-tools">
+    <button class="lang-btn active" data-lang="fr" onclick="setLang('fr')" aria-label="Français">FR</button>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')" aria-label="English">EN</button>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode" id="themeBtn">☀</button>
+  </div>
   <a class="nav-discord" href="https://discord.gg/axgmKnGPw" target="_blank" rel="noopener">
     <svg viewBox="0 0 71 55" xmlns="http://www.w3.org/2000/svg"><path d="M60.1 4.9A58.5 58.5 0 0 0 45.5.4a.2.2 0 0 0-.2.1 40.8 40.8 0 0 0-1.8 3.7 54 54 0 0 0-16.2 0A37.5 37.5 0 0 0 25.5.5a.2.2 0 0 0-.2-.1A58.4 58.4 0 0 0 10.7 4.9a.2.2 0 0 0-.1.1C1.6 18.1-.9 31 .3 43.6a.2.2 0 0 0 .1.2 58.8 58.8 0 0 0 17.7 8.9.2.2 0 0 0 .2-.1 42 42 0 0 0 3.6-5.9.2.2 0 0 0-.1-.3 38.7 38.7 0 0 1-5.5-2.6.2.2 0 0 1 0-.4l1.1-.8a.2.2 0 0 1 .2 0c11.5 5.3 24 5.3 35.4 0a.2.2 0 0 1 .2 0l1.1.8a.2.2 0 0 1 0 .4 36.1 36.1 0 0 1-5.5 2.6.2.2 0 0 0-.1.3 47.1 47.1 0 0 0 3.6 5.9.2.2 0 0 0 .2.1 58.7 58.7 0 0 0 17.8-8.9.2.2 0 0 0 .1-.2C73 29.1 69.5 16.3 60.2 5a.2.2 0 0 0-.1-.1zM23.7 36.4c-3.5 0-6.4-3.2-6.4-7.2s2.8-7.2 6.4-7.2c3.6 0 6.5 3.3 6.4 7.2 0 4-2.8 7.2-6.4 7.2zm23.7 0c-3.5 0-6.4-3.2-6.4-7.2s2.8-7.2 6.4-7.2c3.6 0 6.5 3.3 6.4 7.2 0 4-2.8 7.2-6.4 7.2z"/></svg>
     <span><span class="online-dot"></span><span id="discordCount">Discord</span></span>
@@ -708,13 +821,13 @@ footer p{font-style:italic;opacity:0.45;line-height:1.8}
 <!-- PAGE: HOME -->
 <div class="page active" id="page-home">
   <section class="hero">
-    <p class="hero-eye">Outil de Draft — Clash League of Legends</p>
-    <h1 class="reveal"><span class="l1">DOMINATE</span><span class="l2">the draft</span></h1>
-    <p class="hero-sub reveal reveal-delay-1">Optimise chaque draft Clash avec des suggestions basées sur les picks ennemis, les rôles et le pool de champions de ton équipe.</p>
+    <p class="hero-eye" data-i18n="hero_tool">Outil de Draft — Clash League of Legends</p>
+    <h1 class="reveal"><span class="l1" data-i18n="hero_h1_1">DOMINATE</span><span class="l2" data-i18n="hero_h1_2">the draft</span></h1>
+    <p class="hero-sub reveal reveal-delay-1" data-i18n="hero_sub">Optimise chaque draft Clash avec des suggestions basées sur les picks ennemis, les rôles et le pool de champions de ton équipe.</p>
     <div class="hero-div reveal reveal-delay-2"></div>
     <div class="hero-cta reveal reveal-delay-3">
-      <button class="btn-p" onclick="showPage('draft')">Lancer la Draft</button>
-      <button class="btn-s" onclick="showPage('roster')">Voir le Roster</button>
+      <button class="btn-p" onclick="showPage('draft')" data-i18n="btn_draft">Lancer la Draft</button>
+      <button class="btn-s" onclick="showPage('roster')" data-i18n="btn_roster">Voir le Roster</button>
     </div>
     <!-- HERO STATS BAR -->
     <div class="hero-stats reveal reveal-delay-4" id="heroStats">
@@ -852,10 +965,10 @@ footer p{font-style:italic;opacity:0.45;line-height:1.8}
 <div class="page" id="page-roster">
   <section class="sec">
     <div class="sec-header">
-      <p class="sec-eye reveal">Notre Équipe</p>
-      <h2 class="sec-title reveal reveal-delay-1">Le Roster</h2>
+      <p class="sec-eye reveal" data-i18n="sec_team">Notre Équipe</p>
+      <h2 class="sec-title reveal reveal-delay-1" data-i18n="sec_roster">Le Roster</h2>
       <div class="sec-line reveal reveal-delay-2"></div>
-      <p class="sec-desc reveal reveal-delay-3">Stats en direct — Saison 2026 EUW</p>
+      <p class="sec-desc reveal reveal-delay-3" data-i18n="sec_roster_sub">Stats en direct — Saison 2026 EUW</p>
     </div>
     <div class="carousel-wrap reveal">
       <div class="carousel-track" id="carouselTrack"></div>
@@ -879,143 +992,144 @@ footer p{font-style:italic;opacity:0.45;line-height:1.8}
         <div class="aw-stat">Meilleur KDA du Clash</div>
       </div>
     </div>
+    <!-- TEAM STATS -->
+    <div class="team-stats-wrap reveal reveal-delay-3">
+      <div class="team-stats-header">
+        <h3 class="team-stats-title" data-i18n="team_stats_title">Stats d'Équipe</h3>
+        <span class="team-stats-sub" data-i18n="team_stats_sub">Performance collective</span>
+      </div>
+      <div id="teamStatsPanel"></div>
+    </div>
   </section>
 </div>
 
 <!-- PAGE: DRAFT -->
 <div class="page" id="page-draft">
   <div class="draft-page">
-    <!-- TOP BAR: saved drafts -->
-    <div class="draft-topbar" id="savedDraftsBar">
-      <span class="sd-title">Drafts Sauvegardées</span>
-      <div class="sd-list" id="sdList"></div>
-      <button class="sd-save" onclick="saveDraft()">Sauvegarder</button>
+    <!-- START SCREEN -->
+    <div class="draft-start-screen" id="draftStartScreen">
+      <button class="draft-start-btn" data-i18n="start_draft" onclick="startDraft()">Commencer la Draft</button>
+      <div class="draft-start-sub" data-i18n="start_draft_sub">Analyse, picks et bans — comme dans le vrai client</div>
     </div>
 
-    <!-- BAN BAR -->
-    <div class="draft-ban-bar">
-      <div class="ban-side blue" id="ourBansRow"></div>
-      <div class="ban-vs">BANS</div>
-      <div class="ban-side red" id="enemyBansRow"></div>
-    </div>
-
-    <!-- MAIN ARENA: 3 columns -->
-    <div class="draft-arena">
-      <!-- BLUE SIDE (our team) -->
-      <div class="draft-side blue">
-        <div class="draft-side-title our"><span class="t-dot"></span>Notre Équipe</div>
-        <div class="picks" id="ourPicks"></div>
-        <div class="draft-add">
-          <div class="c-search-wrap">
-            <input class="c-search" id="ourSearch" placeholder="Rechercher un champion..." autocomplete="off">
-            <div class="c-drop" id="ourDrop"></div>
-          </div>
-          <select class="role-pick-sel" id="ourRoleSel">
-            <option value="">— Rôle —</option>
-            <option value="Top">Top</option><option value="Jungle">Jungle</option>
-            <option value="Mid">Mid</option><option value="ADC">ADC</option><option value="Support">Support</option>
-          </select>
-          <button class="add-btn" onclick="addOurPick()">+ Ajouter Pick</button>
-        </div>
+    <!-- DRAFT INTERFACE (hidden) -->
+    <div class="draft-interface" id="draftInterface">
+      <!-- TOP BAR: saved drafts -->
+      <div class="draft-topbar" id="savedDraftsBar">
+        <span class="sd-title" data-i18n="saved_drafts">Drafts Sauvegardées</span>
+        <div class="sd-list" id="sdList"></div>
+        <button class="sd-save" onclick="saveDraft()" data-i18n="save">Sauvegarder</button>
       </div>
 
-      <!-- CENTER PANEL -->
-      <div class="draft-center">
-        <!-- Role assignments -->
-        <div class="role-bar" id="rolesGrid">
-          <div class="role-bar-title">Assigner les Rôles</div>
+      <!-- BAN BAR -->
+      <div class="draft-ban-bar">
+        <div class="ban-side blue" id="ourBansRow"></div>
+        <div class="ban-vs">BANS</div>
+        <div class="ban-side red" id="enemyBansRow"></div>
+      </div>
+
+      <!-- MAIN ARENA: 3 columns -->
+      <div class="draft-arena">
+        <!-- BLUE SIDE (our team) -->
+        <div class="draft-side blue">
+          <div class="draft-side-title our"><span class="t-dot"></span><span data-i18n="our_team">Notre Équipe</span></div>
+          <div class="picks" id="ourPicks"></div>
         </div>
 
-        <!-- Synergy ring -->
-        <div class="synergy-ring-wrap">
-          <div class="synergy-ring">
-            <svg width="80" height="80" viewBox="0 0 80 80">
-              <circle class="bg-ring" cx="40" cy="40" r="35"/>
-              <circle class="score-ring" id="synergyArc" cx="40" cy="40" r="35" stroke-dasharray="219.91" stroke-dashoffset="219.91"/>
-            </svg>
-            <div class="synergy-val">
-              <div class="synergy-num" id="synergyNum">—</div>
-              <div class="synergy-label">Synergie</div>
+        <!-- CENTER PANEL -->
+        <div class="draft-center">
+          <!-- Role assignments -->
+          <div class="role-bar" id="rolesGrid"></div>
+
+          <!-- Synergy ring -->
+          <div class="synergy-ring-wrap">
+            <div class="synergy-ring">
+              <svg width="80" height="80" viewBox="0 0 80 80">
+                <circle class="bg-ring" cx="40" cy="40" r="35"/>
+                <circle class="score-ring" id="synergyArc" cx="40" cy="40" r="35" stroke-dasharray="219.91" stroke-dashoffset="219.91"/>
+              </svg>
+              <div class="synergy-val">
+                <div class="synergy-num" id="synergyNum">—</div>
+                <div class="synergy-label" data-i18n="synergy">Synergie</div>
+              </div>
+            </div>
+            <div class="synergy-verdict" id="synergyVerdict"></div>
+          </div>
+
+          <!-- Comp analyzer -->
+          <div class="comp-analyzer" id="compAnalyzer">
+            <div class="comp-row">
+              <div class="comp-panel" id="compPanelOur">
+                <div class="comp-panel-title" data-i18n="our_comp">Notre Comp</div>
+                <div class="comp-tags" id="compTagsOur"></div>
+                <div class="comp-detail" id="compDetailOur"><em style="opacity:0.4" data-i18n="add_picks_analyze">Ajoute des picks pour analyser</em></div>
+              </div>
+              <div class="comp-panel" id="compPanelEnemy">
+                <div class="comp-panel-title" style="color:var(--red)" data-i18n="enemy_comp">Comp Ennemie</div>
+                <div class="comp-tags" id="compTagsEnemy"></div>
+                <div class="comp-detail" id="compDetailEnemy"><em style="opacity:0.4" data-i18n="add_enemy_picks">Ajoute des picks ennemis</em></div>
+              </div>
             </div>
           </div>
-          <div class="synergy-verdict" id="synergyVerdict"></div>
+
+          <!-- Action buttons -->
+          <div class="draft-actions">
+            <button class="sugg-trigger" id="suggBtn" onclick="getSuggestions()" data-i18n="analyze_draft">Analyser Draft</button>
+            <button class="scout-trigger" onclick="document.getElementById('scoutPanel').classList.toggle('open')" data-i18n="scout_enemy">Scout Ennemi</button>
+          </div>
         </div>
 
-        <!-- Comp analyzer -->
-        <div class="comp-analyzer" id="compAnalyzer">
-          <div class="comp-row">
-            <div class="comp-panel" id="compPanelOur">
-              <div class="comp-panel-title">Notre Comp</div>
-              <div class="comp-tags" id="compTagsOur"></div>
-              <div class="comp-detail" id="compDetailOur"><em style="opacity:0.4">Ajoute des picks pour analyser</em></div>
+        <!-- RED SIDE (enemy team) -->
+        <div class="draft-side red">
+          <div class="draft-side-title enemy"><span class="t-dot"></span><span data-i18n="enemy_team">Équipe Ennemie</span></div>
+          <div class="picks" id="enemyPicks"></div>
+        </div>
+      </div>
+
+      <!-- AI LIVE SUGGESTIONS -->
+      <div class="draft-ai-panel" id="draftAiPanel">
+        <div class="ai-panel-header">
+          <div class="ai-panel-dot"></div>
+          <div class="ai-panel-title" data-i18n="ai_live">NEROBOT — Suggestions Live</div>
+          <div class="ai-panel-status" id="aiStatus" data-i18n="ai_waiting">En attente de picks...</div>
+        </div>
+        <div class="ai-suggestions" id="aiSuggestions">
+          <div class="ai-sugg-empty" data-i18n="ai_empty_msg">Ajoute des picks ennemis pour recevoir des suggestions en temps réel</div>
+        </div>
+      </div>
+
+      <!-- BOTTOM PANELS -->
+      <div class="draft-bottom-panels">
+        <div class="scout-box" id="scoutPanel">
+          <div class="scout-title" data-i18n="scout_title">Scout Équipe Ennemie</div>
+          <p class="scout-desc" data-i18n="scout_desc">Entre les pseudos adverses (Pseudo#Tag) pour analyser leurs champions favoris et obtenir des suggestions de bans.</p>
+          <div class="scout-inputs" id="scoutInputs">
+            <input class="scout-input" placeholder="Pseudo#Tag ennemi 1" aria-label="Enemy pseudo 1">
+            <input class="scout-input" placeholder="Pseudo#Tag ennemi 2" aria-label="Enemy pseudo 2">
+            <input class="scout-input" placeholder="Pseudo#Tag ennemi 3" aria-label="Enemy pseudo 3">
+            <input class="scout-input" placeholder="Pseudo#Tag ennemi 4" aria-label="Enemy pseudo 4">
+            <input class="scout-input" placeholder="Pseudo#Tag ennemi 5" aria-label="Enemy pseudo 5">
+          </div>
+          <button class="scout-btn" id="scoutBtn" onclick="scoutEnemies()" data-i18n="scout_analyze">Analyser l'équipe ennemie</button>
+          <div id="scoutRes"></div>
+        </div>
+
+        <div class="sugg-box">
+          <div class="sugg-title" data-i18n="draft_analysis">Analyse de Draft</div>
+          <p class="sugg-desc" data-i18n="draft_analysis_desc">L'analyse croise les matchups théoriques, les synergies et la maîtrise des joueurs pour proposer la draft optimale.</p>
+          <div class="sugg-res" id="suggRes">
+            <div class="sugg-bloc">
+              <div class="sugg-bloc-title" data-i18n="top3_counter">Top 3 — Counterpicks & Synergies</div>
+              <div class="sugg-cards" id="suggCards1"></div>
+              <div class="sugg-analysis" id="suggAnalysis1"></div>
             </div>
-            <div class="comp-panel" id="compPanelEnemy">
-              <div class="comp-panel-title" style="color:var(--red)">Comp Ennemie</div>
-              <div class="comp-tags" id="compTagsEnemy"></div>
-              <div class="comp-detail" id="compDetailEnemy"><em style="opacity:0.4">Ajoute des picks ennemis</em></div>
+            <div class="sugg-bloc">
+              <div class="sugg-bloc-title" data-i18n="top3_mastery">Top 3 — Selon la Maîtrise de l'Équipe</div>
+              <div class="sugg-cards" id="suggCards2"></div>
+              <div class="sugg-analysis" id="suggAnalysis2"></div>
             </div>
+            <div class="build-box" id="buildBox" style="display:none"></div>
           </div>
-        </div>
-
-        <!-- Action buttons -->
-        <div class="draft-actions">
-          <button class="sugg-trigger" id="suggBtn" onclick="getSuggestions()">Analyser Draft</button>
-          <button class="scout-trigger" onclick="document.getElementById('scoutPanel').classList.toggle('open')">Scout Ennemi</button>
-        </div>
-      </div>
-
-      <!-- RED SIDE (enemy team) -->
-      <div class="draft-side red">
-        <div class="draft-side-title enemy"><span class="t-dot"></span>Équipe Ennemie</div>
-        <div class="picks" id="enemyPicks"></div>
-        <div class="draft-add">
-          <div class="c-search-wrap">
-            <input class="c-search" id="enemySearch" placeholder="Rechercher un champion ennemi..." autocomplete="off">
-            <div class="c-drop" id="enemyDrop"></div>
-          </div>
-          <select class="role-pick-sel" id="enemyRoleSel">
-            <option value="">— Rôle ennemi —</option>
-            <option value="Top">Top</option><option value="Jungle">Jungle</option>
-            <option value="Mid">Mid</option><option value="ADC">ADC</option><option value="Support">Support</option>
-          </select>
-          <button class="add-btn e" onclick="addEnemyPick()">+ Ajouter Pick Ennemi</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- BOTTOM PANELS -->
-    <div class="draft-bottom-panels">
-      <!-- Scout panel (toggleable) -->
-      <div class="scout-box" id="scoutPanel">
-        <div class="scout-title">Scout Équipe Ennemie</div>
-        <p class="scout-desc">Entre les pseudos adverses (Pseudo#Tag) pour analyser leurs champions favoris et obtenir des suggestions de bans.</p>
-        <div class="scout-inputs" id="scoutInputs">
-          <input class="scout-input" placeholder="Pseudo#Tag ennemi 1">
-          <input class="scout-input" placeholder="Pseudo#Tag ennemi 2">
-          <input class="scout-input" placeholder="Pseudo#Tag ennemi 3">
-          <input class="scout-input" placeholder="Pseudo#Tag ennemi 4">
-          <input class="scout-input" placeholder="Pseudo#Tag ennemi 5">
-        </div>
-        <button class="scout-btn" id="scoutBtn" onclick="scoutEnemies()">Analyser l'équipe ennemie</button>
-        <div id="scoutRes"></div>
-      </div>
-
-      <!-- Suggestions panel -->
-      <div class="sugg-box">
-        <div class="sugg-title">Analyse de Draft</div>
-        <p class="sugg-desc">L'analyse croise les matchups théoriques, les synergies et la maîtrise des joueurs pour proposer la draft optimale.</p>
-        <div class="sugg-res" id="suggRes">
-          <div class="sugg-bloc">
-            <div class="sugg-bloc-title">Top 3 — Counterpicks & Synergies</div>
-            <div class="sugg-cards" id="suggCards1"></div>
-            <div class="sugg-analysis" id="suggAnalysis1"></div>
-          </div>
-          <div class="sugg-bloc">
-            <div class="sugg-bloc-title">Top 3 — Selon la Maîtrise de l'Équipe</div>
-            <div class="sugg-cards" id="suggCards2"></div>
-            <div class="sugg-analysis" id="suggAnalysis2"></div>
-          </div>
-          <div class="build-box" id="buildBox" style="display:none"></div>
         </div>
       </div>
     </div>
@@ -1186,6 +1300,76 @@ footer p{font-style:italic;opacity:0.45;line-height:1.8}
 </div>
 
 <script>
+// ── i18n SYSTEM ──
+const LANG={
+  fr:{
+    start_draft:'Commencer la Draft',start_draft_sub:'Analyse, picks et bans — comme dans le vrai client',
+    saved_drafts:'Drafts Sauvegardées',save:'Sauvegarder',our_team:'Notre Équipe',enemy_team:'Équipe Ennemie',
+    synergy:'Synergie',our_comp:'Notre Comp',enemy_comp:'Comp Ennemie',
+    add_picks_analyze:'Ajoute des picks pour analyser',add_enemy_picks:'Ajoute des picks ennemis',
+    analyze_draft:'Analyser Draft',scout_enemy:'Scout Ennemi',
+    ai_live:'NEROBOT — Suggestions Live',ai_waiting:'En attente de picks...',
+    ai_empty_msg:'Ajoute des picks ennemis pour recevoir des suggestions en temps réel',
+    ai_analyzing:'Analyse en cours...',ai_updated:'Mis à jour',
+    scout_title:'Scout Équipe Ennemie',scout_desc:'Entre les pseudos adverses (Pseudo#Tag) pour analyser leurs champions favoris et obtenir des suggestions de bans.',
+    scout_analyze:"Analyser l'équipe ennemie",
+    draft_analysis:'Analyse de Draft',draft_analysis_desc:"L'analyse croise les matchups théoriques, les synergies et la maîtrise des joueurs pour proposer la draft optimale.",
+    top3_counter:'Top 3 — Counterpicks & Synergies',top3_mastery:"Top 3 — Selon la Maîtrise de l'Équipe",
+    nav_home:'Accueil',nav_roster:'Roster',nav_draft:'Draft',nav_clash:'Clash',nav_features:'Fonctionnalités',
+    hero_tool:'Outil de Draft — Clash League of Legends',hero_h1_1:'DOMINATE',hero_h1_2:'the draft',
+    hero_sub:'Optimise chaque draft Clash avec des suggestions basées sur les picks ennemis, les rôles et le pool de champions de ton équipe.',
+    btn_draft:'Lancer la Draft',btn_roster:'Voir le Roster',
+    stat_players:'Joueurs Actifs',stat_drafts:'Drafts Créées',stat_clashes:'Clashs Joués',
+    sec_team:'Notre Équipe',sec_roster:'Le Roster',sec_roster_sub:'Stats en direct — Saison 2026 EUW',
+    german_label:'German de la semaine',carry_label:'Carry de la semaine',german_stat:'KDA le plus bas du Clash',carry_stat:'Meilleur KDA du Clash',
+    select_champ:'Sélectionne un champion',select_enemy_champ:'Sélectionne un champion ennemi',
+    search_champ:'Rechercher un champion...',search_enemy:'Rechercher un champion ennemi...',
+    player_label:'— Joueur —',error_api:'Erreur de connexion — Réessaye dans quelques secondes',
+    error_api_detail:'Impossible de charger les données. Vérifie ta connexion.',
+    team_stats_title:'Stats d\'Équipe',team_stats_sub:'Performance collective',
+    avg_kda:'KDA Moyen',total_games:'Parties Jouées',avg_wr:'Winrate Moyen',best_duo:'Meilleur Duo'
+  },
+  en:{
+    start_draft:'Start Draft',start_draft_sub:'Analysis, picks and bans — like the real client',
+    saved_drafts:'Saved Drafts',save:'Save',our_team:'Our Team',enemy_team:'Enemy Team',
+    synergy:'Synergy',our_comp:'Our Comp',enemy_comp:'Enemy Comp',
+    add_picks_analyze:'Add picks to analyze',add_enemy_picks:'Add enemy picks',
+    analyze_draft:'Analyze Draft',scout_enemy:'Scout Enemy',
+    ai_live:'NEROBOT — Live Suggestions',ai_waiting:'Waiting for picks...',
+    ai_empty_msg:'Add enemy picks to get real-time suggestions',
+    ai_analyzing:'Analyzing...',ai_updated:'Updated',
+    scout_title:'Scout Enemy Team',scout_desc:'Enter enemy summoner names (Name#Tag) to analyze their favorite champions and get ban suggestions.',
+    scout_analyze:'Analyze enemy team',
+    draft_analysis:'Draft Analysis',draft_analysis_desc:'The analysis cross-references theoretical matchups, synergies and player mastery to suggest the optimal draft.',
+    top3_counter:'Top 3 — Counterpicks & Synergies',top3_mastery:'Top 3 — Based on Team Mastery',
+    nav_home:'Home',nav_roster:'Roster',nav_draft:'Draft',nav_clash:'Clash',nav_features:'Features',
+    hero_tool:'Draft Tool — League of Legends Clash',hero_h1_1:'DOMINATE',hero_h1_2:'the draft',
+    hero_sub:'Optimize every Clash draft with suggestions based on enemy picks, roles and your team\'s champion pool.',
+    btn_draft:'Launch Draft',btn_roster:'View Roster',
+    stat_players:'Active Players',stat_drafts:'Drafts Created',stat_clashes:'Clashes Played',
+    sec_team:'Our Team',sec_roster:'The Roster',sec_roster_sub:'Live Stats — Season 2026 EUW',
+    german_label:'German of the week',carry_label:'Carry of the week',german_stat:'Lowest KDA in Clash',carry_stat:'Best KDA in Clash',
+    select_champ:'Select a champion',select_enemy_champ:'Select an enemy champion',
+    search_champ:'Search champion...',search_enemy:'Search enemy champion...',
+    player_label:'— Player —',error_api:'Connection error — Retrying in a few seconds',
+    error_api_detail:'Could not load data. Check your connection.',
+    team_stats_title:'Team Stats',team_stats_sub:'Collective Performance',
+    avg_kda:'Average KDA',total_games:'Games Played',avg_wr:'Average Winrate',best_duo:'Best Duo'
+  }
+};
+let currentLang=localStorage.getItem('taverne-lang')||'fr';
+function t(key){return LANG[currentLang]?.[key]||LANG.fr[key]||key;}
+function setLang(lang){
+  currentLang=lang;localStorage.setItem('taverne-lang',lang);
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k=el.getAttribute('data-i18n');
+    if(LANG[lang]?.[k]) el.textContent=LANG[lang][k];
+  });
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  // Re-render dynamic content
+  renderOurSlots();renderEnemySlots();renderRolesGrid();
+}
+
 // ── CONSTANTS ──
 const PLAYERS = [
   {name:'Theelk',   riotId:'Theelk#EUW'},
@@ -1239,11 +1423,170 @@ const CHAMP_ARCHETYPES = {
 let champData=[], playerStats={}, playerMastery={}, playerPuuids={}, playerIcons={};
 let itemData={};
 let roleAssign={Top:'',Jungle:'',Mid:'',ADC:'',Support:''};
-let ourPicks=[], enemyPicks=[], ourBans=Array(5).fill(null), enemyBans=Array(5).fill(null);
+let ourPicks={Top:null,Jungle:null,Mid:null,ADC:null,Support:null};
+let enemyPicks={Top:null,Jungle:null,Mid:null,ADC:null,Support:null};
+let ourBans=Array(5).fill(null), enemyBans=Array(5).fill(null);
 let selOur=null, selEnemy=null;
 let carIdx=0, lolVer='14.10.1';
 let neroOpen=false, neroHistory=[], isMuted=false;
 let neroProactiveTimeout=null;
+let aiSuggTimeout=null;
+let draftStarted=false;
+
+// ── DRAFT START ──
+function startDraft(){
+  draftStarted=true;
+  document.getElementById('draftStartScreen').style.display='none';
+  const di=document.getElementById('draftInterface');
+  di.classList.add('active');
+  renderOurSlots();renderEnemySlots();renderBans();renderRolesGrid();
+}
+
+// ── SLOT-BASED PICKS ──
+function renderOurSlots(){
+  const el=document.getElementById('ourPicks');
+  if(!el) return;
+  el.innerHTML=ROLES.map(role=>{
+    const p=ourPicks[role];
+    if(p){
+      return `<div class="pick-slot filled" data-role="${role}">
+        <img class="slot-role-icon" src="${ROLE_ICONS[role]}" alt="${role}" onerror="this.style.display='none'">
+        <img class="slot-champ-img" src="${p.img}" alt="${p.name}">
+        <div class="slot-info"><div class="slot-cname">${p.name}</div><div class="slot-player">${roleAssign[role]||role}</div></div>
+        <button class="slot-rm" onclick="removeOurPick('${role}')">✕</button>
+      </div>`;
+    }
+    return `<div class="pick-slot" data-role="${role}">
+      <img class="slot-role-icon" src="${ROLE_ICONS[role]}" alt="${role}" onerror="this.style.display='none'">
+      <span class="slot-role-name">${role}</span>
+      <button class="slot-add" onclick="openSlotSearch(this,'our','${role}')">+</button>
+      <div class="slot-search" id="search-our-${role}">
+        <input type="text" placeholder="${t('search_champ')}" autocomplete="off" oninput="filterSlotSearch(this,'our','${role}')" aria-label="Search champion for ${role}">
+        <div class="slot-search-results"></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function renderEnemySlots(){
+  const el=document.getElementById('enemyPicks');
+  if(!el) return;
+  el.innerHTML=ROLES.map(role=>{
+    const p=enemyPicks[role];
+    if(p){
+      return `<div class="pick-slot efilled" data-role="${role}">
+        <img class="slot-role-icon enemy" src="${ROLE_ICONS[role]}" alt="${role}" onerror="this.style.display='none'">
+        <img class="slot-champ-img" src="${p.img}" alt="${p.name}" style="border-color:rgba(192,57,43,0.4)">
+        <div class="slot-info"><div class="slot-cname">${p.name}</div><div class="slot-player">${role}</div></div>
+        <button class="slot-rm" onclick="removeEnemyPick('${role}')">✕</button>
+      </div>`;
+    }
+    return `<div class="pick-slot" data-role="${role}">
+      <img class="slot-role-icon enemy" src="${ROLE_ICONS[role]}" alt="${role}" onerror="this.style.display='none'">
+      <span class="slot-role-name">${role}</span>
+      <button class="slot-add" onclick="openSlotSearch(this,'enemy','${role}')">+</button>
+      <div class="slot-search" id="search-enemy-${role}">
+        <input type="text" placeholder="${t('search_enemy')}" autocomplete="off" oninput="filterSlotSearch(this,'enemy','${role}')" aria-label="Search enemy champion for ${role}">
+        <div class="slot-search-results"></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function openSlotSearch(btn,team,role){
+  // Close all other open searches
+  document.querySelectorAll('.slot-search.open').forEach(s=>s.classList.remove('open'));
+  const search=document.getElementById(`search-${team}-${role}`);
+  search.classList.add('open');
+  const inp=search.querySelector('input');
+  inp.value='';inp.focus();
+  filterSlotSearch(inp,team,role);
+}
+function filterSlotSearch(inp,team,role){
+  const q=inp.value.toLowerCase().trim();
+  const results=inp.closest('.slot-search').querySelector('.slot-search-results');
+  const filtered=q?champData.filter(c=>c.name.toLowerCase().includes(q)).slice(0,8):champData.slice(0,8);
+  results.innerHTML=filtered.map(c=>`<div class="c-opt" onclick="selectSlotChamp('${team}','${role}','${c.id}')"><img src="${c.img}" alt="${c.name}"><span>${c.name}</span></div>`).join('');
+}
+function selectSlotChamp(team,role,champId){
+  const c=champData.find(x=>x.id===champId);
+  if(!c) return;
+  if(team==='our'){
+    ourPicks[role]=c;
+    renderOurSlots();
+    triggerNeroProactive('our',{champ:c,role});
+  } else {
+    enemyPicks[role]=c;
+    renderEnemySlots();
+    triggerNeroProactive('enemy',{champ:c,role});
+    triggerAiSuggestions();
+  }
+  updateCompAnalyzer();
+  // Close search
+  document.querySelectorAll('.slot-search.open').forEach(s=>s.classList.remove('open'));
+}
+function removeOurPick(role){ourPicks[role]=null;renderOurSlots();updateCompAnalyzer();}
+function removeEnemyPick(role){enemyPicks[role]=null;renderEnemySlots();updateCompAnalyzer();triggerAiSuggestions();}
+
+// Helper: convert slot picks to array for backward compat
+function ourPicksArr(){return ROLES.map(r=>ourPicks[r]?{champ:ourPicks[r],role:r,player:roleAssign[r]||''}:null).filter(Boolean);}
+function enemyPicksArr(){return ROLES.map(r=>enemyPicks[r]?{champ:enemyPicks[r],role:r}:null).filter(Boolean);}
+
+// Close slot search on outside click
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.slot-search')&&!e.target.closest('.slot-add')){
+    document.querySelectorAll('.slot-search.open').forEach(s=>s.classList.remove('open'));
+  }
+});
+
+// ── AI LIVE SUGGESTIONS ──
+function triggerAiSuggestions(){
+  if(aiSuggTimeout) clearTimeout(aiSuggTimeout);
+  const enemies=enemyPicksArr();
+  if(!enemies.length){
+    document.getElementById('aiSuggestions').innerHTML=`<div class="ai-sugg-empty">${t('ai_empty_msg')}</div>`;
+    document.getElementById('aiStatus').textContent=t('ai_waiting');
+    return;
+  }
+  document.getElementById('aiStatus').textContent=t('ai_analyzing');
+  aiSuggTimeout=setTimeout(async()=>{
+    try{
+      const enemyStr=enemies.map(p=>`${p.champ.name} (${p.role})`).join(', ');
+      const ourStr=ourPicksArr().map(p=>`${p.champ.name} (${p.role})`).join(', ')||'aucun';
+      const rolesOpen=ROLES.filter(r=>!ourPicks[r]);
+      const prompt=`Ennemis: ${enemyStr}\nNos picks: ${ourStr}\nRôles libres: ${rolesOpen.join(', ')}\n\nDonne 4-6 suggestions de counter-picks/synergies. Réponds UNIQUEMENT en JSON:\n{"suggestions":[{"champion":"","role":"","type":"counter|synergy|flex","reason":"max 15 mots"}]}`;
+      const d=await aiFetch({model:'claude-sonnet-4-20250514',max_tokens:500,system:'Tu es expert LoL Clash. JSON only. Patch 26.7.',messages:[{role:'user',content:prompt}]});
+      const text=d.content[0].text.trim().replace(/```json|```/g,'').trim();
+      const data=JSON.parse(text);
+      renderAiSuggestions(data.suggestions||[]);
+      document.getElementById('aiStatus').textContent=t('ai_updated')+' '+new Date().toLocaleTimeString().slice(0,5);
+    }catch(e){
+      document.getElementById('aiStatus').textContent='Erreur';
+      console.error('AI suggestions fail',e);
+    }
+  },1200);
+}
+function renderAiSuggestions(suggestions){
+  const el=document.getElementById('aiSuggestions');
+  if(!suggestions.length){el.innerHTML=`<div class="ai-sugg-empty">${t('ai_empty_msg')}</div>`;return;}
+  el.innerHTML=suggestions.map(s=>{
+    const c=champData.find(x=>x.name.toLowerCase()===s.champion.toLowerCase());
+    const type=s.type||'flex';
+    return `<div class="ai-sugg-card ${type}" onclick="quickAddSuggestion('${s.champion}','${s.role}')">
+      <div class="ai-sugg-head">${c?`<img src="${c.img}" alt="${s.champion}">`:''}
+        <div><div class="ai-sugg-name">${s.champion}</div><div class="ai-sugg-role">${s.role||''}</div></div>
+      </div>
+      <div class="ai-sugg-reason">${s.reason||''}</div>
+    </div>`;
+  }).join('');
+}
+function quickAddSuggestion(champName,role){
+  const c=champData.find(x=>x.name.toLowerCase()===champName.toLowerCase());
+  if(!c||!role) return;
+  if(!ourPicks[role]){
+    ourPicks[role]=c;
+    renderOurSlots();updateCompAnalyzer();
+    triggerNeroProactive('our',{champ:c,role});
+  }
+}
 
 // ── CANVAS PARTICLES ──
 function initParticles(){
@@ -1271,7 +1614,9 @@ function initParticles(){
       ctx.fillStyle=`rgba(${this.color},${this.alpha})`;ctx.fill();
     }
   }
-  for(let i=0;i<60;i++)particles.push(new Particle());
+  const isMobile=window.innerWidth<768;
+  const particleCount=isMobile?20:60;
+  for(let i=0;i<particleCount;i++)particles.push(new Particle());
   function animate(){
     ctx.clearRect(0,0,w,h);
     particles.forEach(p=>{p.update();p.draw();});
@@ -1318,16 +1663,17 @@ function showPage(id){
   setTimeout(initReveal,100);
 }
 
-// ── SCROLL REVEAL ──
+// ── SCROLL REVEAL (re-triggers on every visit) ──
 function initReveal(){
   const obs = new IntersectionObserver(entries=>entries.forEach(e=>{
-    if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
+    if(e.isIntersecting){ e.target.classList.add('visible'); }
+    else { e.target.classList.remove('visible'); }
   }), {threshold:0.08});
-  document.querySelectorAll('.reveal:not(.visible)').forEach(el=>obs.observe(el));
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-  // Zigzag feature rows — reveal on scroll
   const featObs = new IntersectionObserver(entries=>entries.forEach(e=>{
-    if(e.isIntersecting){ e.target.classList.add('visible'); featObs.unobserve(e.target); }
+    if(e.isIntersecting){ e.target.classList.add('visible'); }
+    else { e.target.classList.remove('visible'); }
   }), {threshold:0.15});
   document.querySelectorAll('.feat-row').forEach(el=>featObs.observe(el));
 
@@ -1351,7 +1697,7 @@ async function rFetch(path, retries=2){
       if(!r.ok) throw new Error(r.status);
       return await r.json();
     }catch(e){
-      if(i===retries) throw e;
+      if(i===retries){showError(t('error_api'));throw e;}
       await new Promise(ok=>setTimeout(ok,1000*(i+1)));
     }
   }
@@ -1393,7 +1739,7 @@ async function loadPlayer(p){
     renderCarousel();
   }
 }
-async function loadAllPlayers(){ await Promise.all(PLAYERS.map(loadPlayer)); }
+async function loadAllPlayers(){ await Promise.all(PLAYERS.map(loadPlayer)); renderTeamStats(); }
 
 // ── MATCH HISTORY ──
 let playerHistory = {};
@@ -1647,9 +1993,8 @@ async function loadChamps(){
     lolVer=ver[0];
     const d=await fetch(`https://ddragon.leagueoflegends.com/cdn/${lolVer}/data/fr_FR/champion.json`).then(r=>r.json());
     champData=Object.values(d.data).map(c=>({id:c.id,key:c.key,name:c.name,img:`https://ddragon.leagueoflegends.com/cdn/${lolVer}/img/champion/${c.id}.png`}));
-    setupSearch('ourSearch','ourDrop','our');
-    setupSearch('enemySearch','enemyDrop','enemy');
     renderBans();
+    renderOurSlots();renderEnemySlots();
     // Load items
     const items=await fetch(`https://ddragon.leagueoflegends.com/cdn/${lolVer}/data/fr_FR/item.json`).then(r=>r.json());
     itemData={};
@@ -1673,68 +2018,9 @@ function findItemImg(name){
   const match=keys.find(k=>k.includes(lower)||lower.includes(k));
   return match ? itemData[match].img : null;
 }
-function setupSearch(inId,dropId,team){
-  const inp=document.getElementById(inId), drop=document.getElementById(dropId);
-  if(!inp||!drop) return;
-  inp.addEventListener('input',()=>{
-    const q=inp.value.toLowerCase().trim();
-    if(!q){drop.classList.remove('open');return;}
-    const m=champData.filter(c=>c.name.toLowerCase().includes(q)).slice(0,8);
-    drop.innerHTML=m.map(c=>`<div class="c-opt" onclick="selChamp('${team}','${c.id}')"><img src="${c.img}" alt="${c.name}"><span>${c.name}</span></div>`).join('');
-    drop.classList.toggle('open',m.length>0);
-  });
-  document.addEventListener('click',e=>{if(!inp.contains(e.target)&&!drop.contains(e.target))drop.classList.remove('open');});
-}
-function selChamp(team,id){
-  const c=champData.find(x=>x.id===id);
-  if(team==='our'){selOur=c;document.getElementById('ourSearch').value=c.name;document.getElementById('ourDrop').classList.remove('open');}
-  else{selEnemy=c;document.getElementById('enemySearch').value=c.name;document.getElementById('enemyDrop').classList.remove('open');}
-}
-
-// ── PICKS ──
-function roleImg(r,isEnemy=false){
-  if(!r||!ROLE_ICONS[r]) return '<span style="font-size:0.8rem">⚔</span>';
-  const f=isEnemy?'filter:sepia(1) hue-rotate(300deg) saturate(2) brightness(0.85)':'filter:brightness(0.85) sepia(0.3) hue-rotate(220deg) saturate(2)';
-  return `<img class="pick-role-img" src="${ROLE_ICONS[r]}" alt="${r}" style="${f}">`;
-}
-function addOurPick(){
-  if(!selOur){alert('Sélectionne un champion');return;}
-  if(ourPicks.length>=5){alert('Max 5 picks');return;}
-  const role=document.getElementById('ourRoleSel').value;
-  const player=role?roleAssign[role]||'':'';
-  ourPicks.push({champ:selOur,role,player});
-  selOur=null;document.getElementById('ourSearch').value='';
-  renderOurPicks();
-  updateCompAnalyzer();
-  triggerNeroProactive('our',ourPicks[ourPicks.length-1]);
-}
-function addEnemyPick(){
-  if(!selEnemy){alert('Sélectionne un champion ennemi');return;}
-  if(enemyPicks.length>=5){alert('Max 5 picks');return;}
-  const role=document.getElementById('enemyRoleSel').value;
-  enemyPicks.push({champ:selEnemy,role});
-  selEnemy=null;document.getElementById('enemySearch').value='';
-  renderEnemyPicks();
-  updateCompAnalyzer();
-  triggerNeroProactive('enemy',enemyPicks[enemyPicks.length-1]);
-}
-function renderOurPicks(){
-  const el=document.getElementById('ourPicks');
-  if(!el) return;
-  el.innerHTML=ourPicks.map((p,i)=>`<div class="pick filled">${pickHTML(i+1,p.champ,p.role,p.player,false,i,'our')}</div>`).join('')
-    +(ourPicks.length<5?`<div class="pick"><span class="pick-num">${ourPicks.length+1}</span><div class="pick-ph">+</div><div class="pick-info"><div class="pick-player" style="opacity:0.35;font-style:italic">Sélectionne un champion</div></div></div>`:'');
-}
-function renderEnemyPicks(){
-  const el=document.getElementById('enemyPicks');
-  if(!el) return;
-  el.innerHTML=enemyPicks.map((p,i)=>`<div class="pick efilled">${pickHTML(i+1,p.champ,p.role,'',true,i,'enemy')}</div>`).join('')
-    +(enemyPicks.length<5?`<div class="pick"><span class="pick-num">${enemyPicks.length+1}</span><div class="pick-ph">+</div><div class="pick-info"><div class="pick-player" style="opacity:0.35;font-style:italic">Sélectionne un champion</div></div></div>`:'');
-}
-function pickHTML(num,champ,role,player,isEnemy,idx,team){
-  return `<span class="pick-num">${num}</span>${roleImg(role,isEnemy)}<img class="pick-champ-img" src="${champ.img}" alt="${champ.name}"><div class="pick-info"><div class="pick-cname">${champ.name}</div><div class="pick-player">${player||role||'—'}</div></div><button class="pick-rm" onclick="${team==='our'?`removeOur(${idx})`:`removeEnemy(${idx})`}">✕</button>`;
-}
-function removeOur(i){ourPicks.splice(i,1);renderOurPicks();updateCompAnalyzer();}
-function removeEnemy(i){enemyPicks.splice(i,1);renderEnemyPicks();updateCompAnalyzer();}
+// ── PICKS (backward compat wrappers) ──
+function renderOurPicks(){renderOurSlots();}
+function renderEnemyPicks(){renderEnemySlots();}
 
 // ── BANS (with images) ──
 function renderBans(){
@@ -1789,33 +2075,29 @@ function getCompType(picks){
   return {tags,strengths,weaknesses};
 }
 function calcSynergy(){
-  if(ourPicks.length<2) return 0;
+  const picks=ourPicksArr();
+  if(picks.length<2) return 0;
   let score=50;
-  const comp=getCompType(ourPicks);
-  // Bonus for coherent comp
+  const comp=getCompType(picks);
   if(comp.tags.length>=2) score+=10;
-  // Roles covered
-  const roles=ourPicks.map(p=>p.role).filter(Boolean);
-  const uniqueRoles=new Set(roles);
-  score+=uniqueRoles.size*5;
-  // AD/AP balance
+  const roles=picks.map(p=>p.role).filter(Boolean);
+  score+=new Set(roles).size*5;
   const adChamps=['marksman','bruiser','assassin'];
   const apChamps=['mage','control','protect'];
-  const ad=ourPicks.filter(p=>adChamps.includes(CHAMP_ARCHETYPES[p.champ.id]||'')).length;
-  const ap=ourPicks.filter(p=>apChamps.includes(CHAMP_ARCHETYPES[p.champ.id]||'')).length;
+  const ad=picks.filter(p=>adChamps.includes(CHAMP_ARCHETYPES[p.champ.id]||'')).length;
+  const ap=picks.filter(p=>apChamps.includes(CHAMP_ARCHETYPES[p.champ.id]||'')).length;
   if(ad>0&&ap>0) score+=10;
-  // Frontline check
-  const frontline=ourPicks.filter(p=>['tank','engage','bruiser'].includes(CHAMP_ARCHETYPES[p.champ.id]||'')).length;
+  const frontline=picks.filter(p=>['tank','engage','bruiser'].includes(CHAMP_ARCHETYPES[p.champ.id]||'')).length;
   if(frontline>=1) score+=5;
   if(frontline>=2) score+=5;
   return Math.min(100,Math.max(0,score));
 }
 function updateCompAnalyzer(){
-  // Our comp
-  const ourComp=getCompType(ourPicks);
+  const ours=ourPicksArr(), enemies=enemyPicksArr();
+  const ourComp=getCompType(ours);
   const tagsEl=document.getElementById('compTagsOur');
   const detailEl=document.getElementById('compDetailOur');
-  if(ourPicks.length>=1){
+  if(ours.length>=1){
     tagsEl.innerHTML=ourComp.tags.map(t=>`<span class="comp-tag ${t}">${t.charAt(0).toUpperCase()+t.slice(1)}</span>`).join('');
     let detail='';
     if(ourComp.strengths.length) detail+=`<strong>Forces:</strong> ${ourComp.strengths.join(', ')}`;
@@ -1823,35 +2105,33 @@ function updateCompAnalyzer(){
     detailEl.innerHTML=detail||'<em style="opacity:0.4">Ajoutez plus de picks</em>';
   } else {
     tagsEl.innerHTML='';
-    detailEl.innerHTML='<em style="opacity:0.4">Ajoute des picks pour analyser la comp</em>';
+    detailEl.innerHTML=`<em style="opacity:0.4">${t('add_picks_analyze')}</em>`;
   }
-  // Enemy comp
-  const enemyComp=getCompType(enemyPicks);
+  const enemyComp=getCompType(enemies);
   const eTagsEl=document.getElementById('compTagsEnemy');
   const eDetailEl=document.getElementById('compDetailEnemy');
-  if(enemyPicks.length>=1){
-    eTagsEl.innerHTML=enemyComp.tags.map(t=>`<span class="comp-tag ${t}">${t.charAt(0).toUpperCase()+t.slice(1)}</span>`).join('');
+  if(enemies.length>=1){
+    eTagsEl.innerHTML=enemyComp.tags.map(tg=>`<span class="comp-tag ${tg}">${tg.charAt(0).toUpperCase()+tg.slice(1)}</span>`).join('');
     let detail='';
     if(enemyComp.strengths.length) detail+=`<strong>Forces:</strong> ${enemyComp.strengths.join(', ')}`;
     if(enemyComp.weaknesses.length) detail+=`<br><strong>Faiblesses:</strong> ${enemyComp.weaknesses.join(', ')}`;
     eDetailEl.innerHTML=detail||'';
   } else {
     eTagsEl.innerHTML='';
-    eDetailEl.innerHTML='<em style="opacity:0.4">Ajoute des picks ennemis pour analyser</em>';
+    eDetailEl.innerHTML=`<em style="opacity:0.4">${t('add_enemy_picks')}</em>`;
   }
-  // Synergy ring
   const score=calcSynergy();
   const arc=document.getElementById('synergyArc');
   const numEl=document.getElementById('synergyNum');
   const verdictEl=document.getElementById('synergyVerdict');
   const circumference=2*Math.PI*35;
-  if(ourPicks.length>=2){
+  if(ours.length>=2){
     arc.style.strokeDashoffset=circumference*(1-score/100);
     numEl.textContent=score;
-    if(score>=80){arc.style.stroke='var(--green)';verdictEl.textContent='Excellente synergie !';}
-    else if(score>=60){arc.style.stroke='var(--gold)';verdictEl.textContent='Bonne composition';}
-    else if(score>=40){arc.style.stroke='var(--violet)';verdictEl.textContent='Comp correcte';}
-    else{arc.style.stroke='var(--red)';verdictEl.textContent='Synergie faible';}
+    if(score>=80){arc.style.stroke='var(--green)';verdictEl.textContent=currentLang==='en'?'Excellent synergy!':'Excellente synergie !';}
+    else if(score>=60){arc.style.stroke='var(--gold)';verdictEl.textContent=currentLang==='en'?'Good composition':'Bonne composition';}
+    else if(score>=40){arc.style.stroke='var(--violet)';verdictEl.textContent=currentLang==='en'?'Decent comp':'Comp correcte';}
+    else{arc.style.stroke='var(--red)';verdictEl.textContent=currentLang==='en'?'Weak synergy':'Synergie faible';}
   } else {
     arc.style.strokeDashoffset=circumference;
     numEl.textContent='—';
@@ -1871,14 +2151,15 @@ function renderSavedDrafts(drafts){
   el.innerHTML=drafts.map((d,i)=>`<div class="sd-chip" onclick="loadDraft(${i})"><span>${d.name}</span><span class="sd-x" onclick="event.stopPropagation();deleteDraft(${i})">✕</span></div>`).join('');
 }
 function saveDraft(){
-  const name=prompt('Nom de cette draft :');
+  const name=prompt(currentLang==='en'?'Draft name:':'Nom de cette draft :');
   if(!name) return;
   const drafts=JSON.parse(localStorage.getItem('taverneDrafts')||'[]');
+  const ourSave={},enemySave={};
+  ROLES.forEach(r=>{if(ourPicks[r]) ourSave[r]=ourPicks[r].id;});
+  ROLES.forEach(r=>{if(enemyPicks[r]) enemySave[r]=enemyPicks[r].id;});
   drafts.push({
-    name,
-    date:new Date().toISOString(),
-    ourPicks:ourPicks.map(p=>({champId:p.champ.id,role:p.role,player:p.player})),
-    enemyPicks:enemyPicks.map(p=>({champId:p.champ.id,role:p.role})),
+    name, date:new Date().toISOString(),
+    ourPicks:ourSave, enemyPicks:enemySave,
     ourBans:ourBans.map(b=>b?b.id:null),
     enemyBans:enemyBans.map(b=>b?b.id:null),
     roleAssign:{...roleAssign}
@@ -1890,12 +2171,26 @@ function saveDraft(){
 function loadDraft(idx){
   const drafts=JSON.parse(localStorage.getItem('taverneDrafts')||'[]');
   const d=drafts[idx];if(!d) return;
+  if(!draftStarted) startDraft();
   roleAssign=d.roleAssign||{Top:'',Jungle:'',Mid:'',ADC:'',Support:''};
-  ourPicks=d.ourPicks.map(p=>{const c=champData.find(x=>x.id===p.champId);return c?{champ:c,role:p.role,player:p.player}:null;}).filter(Boolean);
-  enemyPicks=d.enemyPicks.map(p=>{const c=champData.find(x=>x.id===p.champId);return c?{champ:c,role:p.role}:null;}).filter(Boolean);
-  ourBans=d.ourBans.map(id=>{if(!id) return null;return champData.find(x=>x.id===id)||null;});
-  enemyBans=d.enemyBans.map(id=>{if(!id) return null;return champData.find(x=>x.id===id)||null;});
-  renderRolesGrid();renderOurPicks();renderEnemyPicks();renderBans();updateCompAnalyzer();
+  // Support both old array and new object formats
+  if(Array.isArray(d.ourPicks)){
+    ourPicks={Top:null,Jungle:null,Mid:null,ADC:null,Support:null};
+    d.ourPicks.forEach(p=>{const c=champData.find(x=>x.id===p.champId);if(c&&p.role) ourPicks[p.role]=c;});
+  } else {
+    ROLES.forEach(r=>{ourPicks[r]=d.ourPicks[r]?champData.find(x=>x.id===d.ourPicks[r])||null:null;});
+  }
+  if(Array.isArray(d.enemyPicks)){
+    enemyPicks={Top:null,Jungle:null,Mid:null,ADC:null,Support:null};
+    d.enemyPicks.forEach(p=>{const c=champData.find(x=>x.id===p.champId);if(c&&p.role) enemyPicks[p.role]=c;});
+  } else {
+    ROLES.forEach(r=>{enemyPicks[r]=d.enemyPicks[r]?champData.find(x=>x.id===d.enemyPicks[r])||null:null;});
+  }
+  ourBans=(d.ourBans||[]).map(id=>id?champData.find(x=>x.id===id)||null:null);
+  enemyBans=(d.enemyBans||[]).map(id=>id?champData.find(x=>x.id===id)||null:null);
+  while(ourBans.length<5) ourBans.push(null);
+  while(enemyBans.length<5) enemyBans.push(null);
+  renderRolesGrid();renderOurSlots();renderEnemySlots();renderBans();updateCompAnalyzer();
 }
 function deleteDraft(idx){
   const drafts=JSON.parse(localStorage.getItem('taverneDrafts')||'[]');
@@ -1944,8 +2239,9 @@ function addScoutBan(champId){
 async function getSuggestions(){
   const btn=document.getElementById('suggBtn');
   btn.disabled=true;btn.textContent='⏳ Analyse en cours...';
-  const ourC=ourPicks.map(p=>`${p.champ.name} (${p.role||'?'}, ${p.player||'?'})`).join(', ')||'aucun';
-  const enemyC=enemyPicks.map(p=>`${p.champ.name} (${p.role||'?'})`).join(', ')||'aucun';
+  const ours=ourPicksArr(),enemies=enemyPicksArr();
+  const ourC=ours.map(p=>`${p.champ.name} (${p.role||'?'}, ${p.player||'?'})`).join(', ')||'aucun';
+  const enemyC=enemies.map(p=>`${p.champ.name} (${p.role||'?'})`).join(', ')||'aucun';
   const rolesStr=Object.entries(roleAssign).filter(([,v])=>v).map(([k,v])=>{
     const s=playerStats[v];const m=(playerMastery[v]||[]).slice(0,3).map(c=>{const ch=champData.find(x=>x.key==c.championId);return ch?ch.name:''}).filter(Boolean);
     return `${k}:${v}(${s?s.tier+' '+s.div:'?'},WR${s?s.wr+'%':'?'},top:${m.join('/')||'?'})`;
@@ -1959,7 +2255,7 @@ async function getSuggestions(){
     document.getElementById('suggAnalysis1').textContent='Erreur — vérifie que la clé API est configurée dans Vercel.';
     document.getElementById('suggRes').classList.add('vis');
   }
-  btn.disabled=false;btn.textContent='Analyser & Générer la Meilleure Draft';
+  btn.disabled=false;btn.textContent=t('analyze_draft');
 }
 function renderSuggestions(d){
   function cards(picks){
@@ -2025,7 +2321,8 @@ async function sendNero(){
   neroHistory.push({role:'user',content:msg});
   const loading=addNeroLoading();
   // Include draft context
-  const draftCtx=ourPicks.length||enemyPicks.length?`\n[DRAFT ACTUELLE: Nos picks: ${ourPicks.map(p=>p.champ.name+'('+p.role+')').join(',')||'aucun'} | Ennemis: ${enemyPicks.map(p=>p.champ.name+'('+p.role+')').join(',')||'aucun'}]`:'';
+  const _ours=ourPicksArr(),_enemies=enemyPicksArr();
+  const draftCtx=_ours.length||_enemies.length?`\n[DRAFT ACTUELLE: Nos picks: ${_ours.map(p=>p.champ.name+'('+p.role+')').join(',')||'aucun'} | Ennemis: ${_enemies.map(p=>p.champ.name+'('+p.role+')').join(',')||'aucun'}]`:'';
   try{
     const d=await aiFetch({model:'claude-sonnet-4-20250514',max_tokens:400,system:`Tu es NEROBOT, coach expert League of Legends niveau Diamant/Master, spécialisé Clash EUW. Tu parles UNIQUEMENT en français. Tu utilises TOUJOURS les noms français des items et des runes.
 
@@ -2206,22 +2503,69 @@ async function loadClashParticipation(){
   }
 }
 
+// ── THEME TOGGLE ──
+function toggleTheme(){
+  const isLight=document.documentElement.classList.toggle('light');
+  localStorage.setItem('taverne-theme',isLight?'light':'dark');
+  document.getElementById('themeBtn').textContent=isLight?'☾':'☀';
+}
+function loadTheme(){
+  const theme=localStorage.getItem('taverne-theme');
+  if(theme==='light'){document.documentElement.classList.add('light');document.getElementById('themeBtn').textContent='☾';}
+}
+
+// ── ERROR TOAST ──
+function showError(msg){
+  let toast=document.getElementById('errorToast');
+  if(!toast){
+    toast=document.createElement('div');
+    toast.id='errorToast';
+    toast.style.cssText='position:fixed;bottom:6rem;left:50%;transform:translateX(-50%);background:rgba(255,107,107,0.15);border:1px solid rgba(255,107,107,0.4);color:#ff9090;padding:0.6rem 1.2rem;border-radius:4px;font-family:Cinzel,serif;font-size:0.7rem;z-index:300;backdrop-filter:blur(10px);transition:opacity 0.3s;pointer-events:none';
+    document.body.appendChild(toast);
+  }
+  toast.textContent=msg;toast.style.opacity='1';
+  setTimeout(()=>{toast.style.opacity='0';},4000);
+}
+
+// ── TEAM STATS DASHBOARD ──
+function renderTeamStats(){
+  const el=document.getElementById('teamStatsPanel');
+  if(!el) return;
+  const stats=Object.entries(playerStats).filter(([,s])=>s&&s.tier!=='UNRANKED');
+  if(!stats.length){el.innerHTML=`<div style="color:var(--muted);font-style:italic;font-size:0.8rem;text-align:center;padding:1rem">${t('ai_waiting')}</div>`;return;}
+  const avgWr=Math.round(stats.reduce((a,[,s])=>a+s.wr,0)/stats.length);
+  const totalGames=stats.reduce((a,[,s])=>a+s.wins+s.losses,0);
+  const avgKda='—';
+  const bestPlayer=stats.reduce((a,b)=>b[1].wr>a[1].wr?b:a);
+  el.innerHTML=`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:0.6rem">
+    <div class="stat-card"><div class="stat-val">${avgWr}%</div><div class="stat-lbl">${t('avg_wr')}</div></div>
+    <div class="stat-card"><div class="stat-val">${totalGames}</div><div class="stat-lbl">${t('total_games')}</div></div>
+    <div class="stat-card"><div class="stat-val">${bestPlayer[0]}</div><div class="stat-lbl">${t('best_duo')}</div></div>
+  </div>`;
+}
+
 // ── INIT ──
 document.addEventListener('DOMContentLoaded',async()=>{
+  // Load preferences
+  loadTheme();
+  const savedLang=localStorage.getItem('taverne-lang');
+  if(savedLang&&savedLang!=='fr') setLang(savedLang);
+
   initParticles();
   initEnergyLines();
   initReveal();
   skeletonCarousel();
   renderRolesGrid();
-  renderOurPicks();
-  renderEnemyPicks();
   loadSavedDrafts();
   updateHeroStats();
   initMusic();
-  await loadChamps();
-  loadAllPlayers();
+  try{
+    await loadChamps();
+  }catch(e){showError(t('error_api'));}
+  try{
+    loadAllPlayers();
+  }catch(e){showError(t('error_api'));}
   loadDiscord();
-  renderBans();
   loadClashParticipation();
   setInterval(loadClashParticipation,30000);
 });
