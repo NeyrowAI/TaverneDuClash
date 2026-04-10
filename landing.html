@@ -422,6 +422,7 @@ button,a,.faq-item,.carousel-dot{touch-action:manipulation}
 <script type="module">
 import * as amplitude from 'https://cdn.jsdelivr.net/npm/@amplitude/unified/+esm';
 amplitude.initAll('8105dcdb74b110fba47cb45ec3c3eeb4', {"serverZone":"EU","analytics":{"autocapture":true},"sessionReplay":{"sampleRate":1}});
+window.amplitude = amplitude;
 </script>
 </head>
 <body>
@@ -963,6 +964,7 @@ async function submitWaitlist(e) {
     });
     document.getElementById('waitlistSuccess').classList.add('show');
     document.getElementById('waitlistForm').style.display = 'none';
+    if(window.amplitude) window.amplitude.track('Email Subscribed', { email, source: 'waitlist' });
   } catch(err) {
     const errDiv = document.getElementById('waitlistSuccess');
     errDiv.innerHTML = '<h3 style="color:#ff6b6b">Une erreur est survenue</h3><p>Vérifie ton email et réessaie.</p>';
@@ -1013,6 +1015,7 @@ async function submitDonation(e) {
     });
     const data = await resp.json();
     if (data.url) {
+      if(window.amplitude) window.amplitude.track('Donation Initiated', { amount: selectedDonateAmount, currency: 'EUR' });
       window.location.href = data.url;
     } else {
       alert(data.error || 'Erreur lors de la création du paiement.');
@@ -1065,6 +1068,7 @@ function checkDonationSuccess() {
       `Merci ${name} ! Ton don aide la Taverne \u00e0 continuer de grandir. Tu es un vrai champion.`;
     document.getElementById('donationToast').classList.add('show');
     document.getElementById('donationOverlay').classList.add('show');
+    if(window.amplitude) window.amplitude.track('Donation Completed', { amount: parseFloat(params.get('amount'))||0, currency: 'EUR' });
 
     // Clean URL
     const url = new URL(window.location);
