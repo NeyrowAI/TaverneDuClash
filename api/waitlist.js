@@ -1,4 +1,5 @@
 const { kv } = require('@vercel/kv');
+const { sendConfirmEmail } = require('./send-waitlist-confirm');
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -42,6 +43,10 @@ module.exports = async function handler(req, res) {
       }));
 
       const newCount = emails.length + 1;
+
+      // Send confirmation email (non-blocking)
+      sendConfirmEmail(email).catch(() => {});
+
       return res.status(200).json({ message: 'Inscrit !', count: newCount });
     } catch(e) {
       return res.status(500).json({ error: e.message });

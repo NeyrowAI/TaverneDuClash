@@ -141,7 +141,6 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0.5rem
 .hero-inscrits-num{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:900;color:var(--gl)}
 .hero-inscrits-label{font-size:0.82rem;color:var(--muted)}
 .hero-inscrits-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px rgba(80,200,120,0.5)}
-.hero-gragas{position:absolute;bottom:2rem;right:2rem;width:180px;pointer-events:none;z-index:10;filter:drop-shadow(0 4px 20px rgba(0,0,0,0.5))}
 
 /* HERO RIGHT — PREVIEW CAROUSEL */
 .hero-right{position:relative;display:flex;justify-content:center}
@@ -153,38 +152,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0.5rem
 .carousel-slide.active{opacity:1;transform:scale(1);pointer-events:auto}
 
 /* Slide 1: Draft — LoL style */
-.draft-slide{position:relative;background:#010a13!important}
-.draft-slide .map-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:35%;opacity:0.25;pointer-events:none;z-index:0;filter:brightness(0.7) saturate(0.8)}
-.draft-header{background:linear-gradient(90deg,rgba(10,30,50,0.9),rgba(201,168,76,0.12),rgba(10,30,50,0.9));padding:0.55rem;text-align:center;border-bottom:1px solid rgba(201,168,76,0.15);position:relative;z-index:1}
-.draft-header span{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.25em;color:var(--gold);text-transform:uppercase}
-.draft-timer{text-align:center;padding:0.5rem 0 0.3rem;position:relative;z-index:1}
-.draft-timer-num{font-family:'Cinzel',serif;font-size:1.8rem;font-weight:900;color:var(--gl);text-shadow:0 0 20px rgba(240,208,128,0.3)}
-.draft-timer-bar{width:35%;height:4px;margin:0.3rem auto;background:rgba(30,40,60,0.6);border-radius:2px;overflow:hidden}
-.draft-timer-fill{width:65%;height:100%;border-radius:2px;background:linear-gradient(90deg,var(--gold),var(--red))}
-.draft-body{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);flex:1;padding:0.6rem 0.4rem;position:relative;z-index:1;gap:0}
-.draft-team{display:flex;flex-direction:column;gap:0.3rem}
-.draft-pick{display:flex;align-items:center;gap:0.6rem;padding:0.5rem 0.7rem;background:linear-gradient(90deg,rgba(1,10,19,0.85),rgba(1,10,19,0.5));border-radius:2px;border-left:3px solid transparent;min-height:54px;transition:all 0.3s}
-.draft-pick.our{border-left-color:rgba(30,90,160,0.5)}
-.draft-pick.our.active{border-left-color:#1e90ff;background:linear-gradient(90deg,rgba(30,90,160,0.15),rgba(1,10,19,0.6));box-shadow:inset 0 0 20px rgba(30,90,160,0.05)}
-.draft-pick.enemy{border-left:none;border-right:3px solid rgba(160,30,30,0.4);flex-direction:row-reverse;text-align:right;background:linear-gradient(270deg,rgba(1,10,19,0.85),rgba(1,10,19,0.5))}
-.draft-pick.enemy.active{border-right-color:#c0392b;background:linear-gradient(270deg,rgba(160,30,30,0.12),rgba(1,10,19,0.6))}
-.draft-pick-img{width:44px;height:44px;border-radius:4px;object-fit:cover;flex-shrink:0}
-.draft-pick.our .draft-pick-img{border:2px solid rgba(30,90,160,0.4)}
-.draft-pick.our.active .draft-pick-img{border-color:rgba(30,144,255,0.7);box-shadow:0 0 8px rgba(30,144,255,0.2)}
-.draft-pick.enemy .draft-pick-img{border:2px solid rgba(160,30,30,0.35)}
-.draft-pick.enemy.active .draft-pick-img{border-color:rgba(192,57,43,0.6);box-shadow:0 0 8px rgba(192,57,43,0.2)}
-.draft-pick-info{flex:1;min-width:0}
-.draft-pick-role{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;opacity:0.7}
-.draft-pick.our .draft-pick-role{color:#5dade2}
-.draft-pick.enemy .draft-pick-role{color:#e74c3c}
-.draft-pick-name{font-family:'Cinzel',serif;font-size:0.8rem;color:#ddd;font-weight:600}
-.draft-pick-player{font-size:0.62rem;color:#7f8c8d;font-style:italic}
-.draft-vs{display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:1.3rem;color:rgba(200,200,200,0.2);padding:0 0.3rem;text-shadow:0 0 15px rgba(200,200,200,0.05)}
-.draft-battle-text{font-family:'Cinzel',serif;font-size:0.5rem;letter-spacing:0.12em;text-transform:uppercase;text-align:center;background:linear-gradient(90deg,#c9a84c,#7c3aed,#c9a84c,#7c3aed);background-size:300% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:draftBattleShimmer 4s linear infinite;line-height:1.4}
-@keyframes draftBattleShimmer{0%{background-position:100% 0}100%{background-position:-100% 0}}
-.draft-player-sel{background:rgba(7,3,15,0.8);border:1px solid rgba(60,50,80,0.4);color:#7f8c8d;padding:0.1rem 0.25rem;font-family:'Crimson Pro',serif;font-size:0.55rem;border-radius:2px;max-width:70px;pointer-events:none;appearance:none;-webkit-appearance:none}
-.draft-bottom{background:linear-gradient(90deg,rgba(1,10,19,0.95),rgba(10,20,35,0.95));padding:0.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(30,90,160,0.15);position:relative;z-index:1}
-.draft-bottom span{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.1em;color:#5d6d7e}
+.draft-slide{position:relative;background:rgba(7,3,15,0.95)!important;overflow:hidden;border-radius:8px}
 
 /* Slide 2: Scout */
 .scout-slide{padding:1.5rem;background:linear-gradient(160deg,#0f0820 0%,#1a0e30 40%,#120822 100%)!important}
@@ -511,29 +479,13 @@ window.amplitude = amplitude;
     </div>
   </div>
 
-  <video class="hero-gragas" autoplay loop muted playsinline><source src="/gragas.webm" type="video/webm"></video>
-
   <div class="hero-right reveal from-right reveal-delay-2">
     <div class="preview-card">
       <div class="carousel-container" id="previewCarousel">
 
-        <!-- SLIDE 1: Draft LoL style -->
+        <!-- SLIDE 1: Draft Screenshot -->
         <div class="carousel-slide draft-slide active">
-          <img class="map-bg" src="/map.png" alt="" width="300" height="300">
-          <div class="draft-header"><span data-i18n="draft_header">Draft en cours</span></div>
-          <div class="draft-timer">
-            <div class="draft-timer-num">26</div>
-            <div class="draft-timer-bar"><div class="draft-timer-fill"></div></div>
-          </div>
-          <div class="draft-body">
-            <div class="draft-team" id="draftOur"></div>
-            <div class="draft-vs"><span class="draft-battle-text" data-i18n="draft_battle">Préparez-vous pour la bataille !</span></div>
-            <div class="draft-team" id="draftEnemy"></div>
-          </div>
-          <div class="draft-bottom">
-            <span>5v5 CLASH</span>
-            <span>TAVERNE DU CLASH</span>
-          </div>
+          <img src="/draft-preview.png" alt="Draft Tool Preview" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
         </div>
 
         <!-- SLIDE 2: Scout ennemi -->
@@ -825,27 +777,6 @@ async function initImages() {
     {champ:'Leona', role:'SUP', player:'Enemy 5'}
   ];
 
-  const draftOur = document.getElementById('draftOur');
-  const draftEnemy = document.getElementById('draftEnemy');
-
-  draftOur.innerHTML = ourPicks.map((p,i) => `
-    <div class="draft-pick our${i===0?' active':''}">
-      <img class="draft-pick-img" src="${DDR()}${p.champ}.png" alt="${p.champ}">
-      <div class="draft-pick-info">
-        <div class="draft-pick-name">${p.champ}</div>
-        <select class="draft-player-sel"><option>${p.player}</option></select>
-      </div>
-    </div>`).join('');
-
-  draftEnemy.innerHTML = enemyPicks.map((p,i) => `
-    <div class="draft-pick enemy${i===0?' active':''}">
-      <img class="draft-pick-img" src="${DDR()}${p.champ}.png" alt="${p.champ}">
-      <div class="draft-pick-info">
-        <div class="draft-pick-name">${p.champ}</div>
-        <div class="draft-pick-player">${p.player}</div>
-      </div>
-    </div>`).join('');
-
   // Scout slide
   const scoutChamps = ['Yasuo','Zed','Katarina','Vayne','LeeSin'];
   document.getElementById('scoutResults').innerHTML = scoutChamps.map(c =>
@@ -1103,8 +1034,10 @@ const translations = {
     hero_cta_more: 'En savoir plus',
     hero_registered: 'inscrits',
     // Carousel
-    draft_header: 'Draft en cours',
+    draft_our: 'Notre Équipe',
+    draft_enemy: 'Équipe Ennemie',
     draft_battle: 'Préparez-vous pour la bataille !',
+    synergy: 'Synergie',
     scout_title: '🔍 Scout Équipe Ennemie',
     scout_desc: 'Analyse les champions favoris des adversaires pour obtenir les meilleurs bans.',
     scout_bans: 'BANS RECOMMANDÉS',
@@ -1195,8 +1128,10 @@ const translations = {
     hero_cta_more: 'Learn More',
     hero_registered: 'registered',
     // Carousel
-    draft_header: 'Draft in Progress',
+    draft_our: 'Our Team',
+    draft_enemy: 'Enemy Team',
     draft_battle: 'Prepare for battle!',
+    synergy: 'Synergy',
     scout_title: '🔍 Scout Enemy Team',
     scout_desc: 'Analyze your opponents\' favorite champions to get the best bans.',
     scout_bans: 'RECOMMENDED BANS',
