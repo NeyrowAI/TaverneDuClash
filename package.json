@@ -4,7 +4,6 @@
   "description": "Outil de Draft Clash League of Legends — Stats live, Scout ennemi, IA Coach",
   "private": true,
   "dependencies": {
-    "@amplitude/unified": "^1.0.16",
     "@vercel/kv": "^3.0.0",
     "resend": "^4.0.0",
     "stripe": "^17.0.0",

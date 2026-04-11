@@ -3,7 +3,7 @@
 const PLAYERS = [
   { name: 'Theelk',    riotId: 'Theelk#EUW',       phone: '' },
   { name: 'Jey',       riotId: 'Jey#2321',          phone: '' },
-  { name: 'Celadon',   riotId: 'Celadon#Crabe',     phone: '' },
+  { name: 'Celadon',   riotId: 'Celadon#Crabe',     phone: '+33781558471' },
   { name: 'Nero',      riotId: 'Nero#oreN',         phone: '+32496060604' },
   { name: 'Timotix',   riotId: 'Timotix#1234',      phone: '' },
   { name: 'Eracci',    riotId: 'Eracci#EUW',        phone: '' },
